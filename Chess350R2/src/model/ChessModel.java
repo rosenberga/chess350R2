@@ -545,17 +545,18 @@ public final class ChessModel implements IChessModel {
 		if (!inCheck(board)) {
 			int sumOfPieces = 0;
 			for (int m = 0; m < board.numRows(); m++) {
-				for (int n = 0; n < board.numColumns(); n++){
+				for (int n = 0; n < board.numColumns(); n++) {
 					IChessPiece piece = pieceAt(board, m, n);
-					if(piece != null) {
+					if (piece != null) {
 						sumOfPieces++;
 					}
 				}
 			}
-			if(sumOfPieces == 2)
-				return true;
-			else
+			if (sumOfPieces == 2) {
+				return true; 
+			} else {
 				return checkForNoLegalMoves(board);
+			}
 		}
 		return false;
 	}

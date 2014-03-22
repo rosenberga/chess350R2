@@ -59,7 +59,7 @@ public final class ChessGame {
 	
 	
 	/*****************************************************************
-	 * Gets model.
+	 * Sets Board.
 	 * 
 	 * @param newBoard a new IChessBoard to set this.board to
 	 *****************************************************************/
@@ -67,17 +67,30 @@ public final class ChessGame {
 		board = newBoard;
 	}
 
-
+	/*****************************************************************
+	 * Gets move.
+	 * 
+	 * @return move the move in ChessGame
+	 *****************************************************************/
 	public Move getMove() {
 		return move;
 	}
 
-
-	public void setMove(Move move) {
-		this.move = move;
+	/*****************************************************************
+	 * Sets Move.
+	 * 
+	 * @param move1 a new move to set in the game
+	 *****************************************************************/
+	public void setMove(final Move move1) {
+		this.move = move1;
 	}
 	
-	public void setMove(int[] coords){
+	/*****************************************************************
+	 * Sets Move given coordinates instead of a Move.
+	 * 
+	 * @param coords a new move to set in the game
+	 *****************************************************************/
+	public void setMove(final int[] coords) {
 		Move m = new Move(coords);
 		setMove(m);
 	}

@@ -8,31 +8,61 @@ import javax.swing.JButton;
 import model.*;
 import view.*;
 
+/*****************************************************************
+ * A Presenter of information to the Model and View.
+ *
+ * @author Adam Rosenberg
+ * @version 1.0
+ *****************************************************************/
 public class ChessPresenter implements IChessPresenter {
 
+	/** The standard row number. */
 	private IChessView view;
+	/** The standard row number. */
 	private ChessGame game;
+	/** The standard row number. */
 	private static final int PV = 0;
+	/** The standard row number. */
 	private static final int BV = 1;
+	/** The standard row number. */
 	private static final int NV = 2;
+	/** The standard row number. */
 	private static final int RV = 3;
+	/** The standard row number. */
 	private static final int QV = 4;
+	/** The standard row number. */
 	private static final int KV = 5;
+	/** The standard row number. */
 	private static final int BLV = 0;
+	/** The standard row number. */
 	private static final int WHV = 1;
+	/** The standard row number. */
 	private static final int OWNER = 0;
+	/** The standard row number. */
 	private static final int TYPE = 1;
+	/** The standard row number. */
 	private static final int PIECE_INFO = 2;
+	/** The standard row number. */
 	private static final int NULL_OWNER = -1;
+	/** The standard row number. */
 	private static final int NULL_TYPE = -1;
+	/** The standard row number. */
 	private static final int COORDS = 4;
+	/** The standard row number. */
 	private static final int fr = 0;
+	/** The standard row number. */
 	private static final int fc = 1;
+	/** The standard row number. */
 	private static final int tr = 2;
+	/** The standard row number. */
 	private static final int tc = 3;
+	/** The standard row number. */
 	private boolean firstClick;
+	/** The standard row number. */
 	private int[] coords;
+	/** The standard row number. */
 	private static final int ROW = 0;
+	/** The standard row number. */
 	private static final int COL = 1;
 
 	public ChessPresenter(ChessGame g, IChessView v) {

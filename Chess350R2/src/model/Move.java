@@ -11,6 +11,16 @@ public final class Move {
 
 	/** The row and column the piece is moving from and moving to. */
 	private int fromRow, fromColumn, toRow, toColumn;
+	/** A coordinate in array for move. */
+	private final int zero = 0;
+	/** A coordinate in array for move. */
+	private final int one = 1;
+	/** A coordinate in array for move. */
+	private final int two = 2;
+	/** A coordinate in array for move. */
+	private final int three = 3;
+	/** A length of array for move. */
+	private final int four = 4;
 
 	/*****************************************************************
 	 * Constructs a new Move.
@@ -32,14 +42,18 @@ public final class Move {
 		this.setToColumn(tC);
 	}
 	
-	public Move(int[] coords){
-		if(coords.length == 4){
-			this.setFromRow(coords[0]);
-			this.setFromColumn(coords[1]);
-			this.setToRow(coords[2]);
-			this.setToColumn(coords[3]);
-		}
-		else {
+	/*****************************************************************
+	 * Constructor for the Move class given coordinates.
+	 * 
+	 * @param coords the coordinates for the move
+	 *****************************************************************/
+	public Move(final int[] coords) {
+		if (coords.length == four) {
+			this.setFromRow(coords[zero]);
+			this.setFromColumn(coords[one]);
+			this.setToRow(coords[two]);
+			this.setToColumn(coords[three]);
+		} else {
 			this.setFromRow(-1);
 			this.setFromColumn(-1);
 			this.setToRow(-1);
