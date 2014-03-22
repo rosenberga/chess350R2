@@ -228,8 +228,6 @@ public class ChessPresenter implements IChessPresenter {
 
 			game.setMove(coords); // set the move to be made
 
-			if (!game.getModel().isValidMove(game.getMove(), game.getBoard())) {
-				// do nothing
 				if (game.getModel()
 						.isValidMove(game.getMove(), game.getBoard())) {
 					game.getModel().move(game.getMove(), game.getBoard());
@@ -250,7 +248,6 @@ public class ChessPresenter implements IChessPresenter {
 					view.showMessage("Stalemate.");
 					view.disable(a);
 				}
-			}
 		} catch (Exception e) {
 			view.showMessage(e.getMessage());
 		}
