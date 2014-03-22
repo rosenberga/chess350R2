@@ -3,6 +3,7 @@ package view;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.GridLayout;
+import java.awt.Toolkit;
 import java.awt.event.*;
 
 import javax.swing.*;
@@ -85,7 +86,11 @@ public class ChessView implements IChessView{
 		frame.getContentPane().add(panel);
 		frame.setJMenuBar(menus);
 		
-		frame.setPreferredSize(new Dimension(700,700));
+		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+		double height = screenSize.getHeight();
+		int h = (int) (height * .83);
+		
+		frame.setPreferredSize(new Dimension(h, h));
 		frame.pack();
 		frame.setResizable(false);
 		frame.setVisible(true);
