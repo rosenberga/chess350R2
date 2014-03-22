@@ -117,7 +117,6 @@ public class ChessPresenter implements IChessPresenter {
 						game = new ChessGame();
 						view = new ChessView(game.getBoard().numRows(), game
 								.getBoard().numColumns());
-						view.getFrame().dispose();
 						new ChessPresenter(game, view);
 					}
 
