@@ -37,7 +37,7 @@ public class SettingsDialog extends JDialog implements ActionListener{
 		okButton.addActionListener(this);
 		// set Dialog Settings
 		setTitle("Chess350 Settings");
-		setSize(150,150);
+		setSize(100,100);
 		setVisible (true);	
 	}
 
