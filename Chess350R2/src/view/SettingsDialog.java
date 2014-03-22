@@ -31,14 +31,13 @@ public class SettingsDialog extends JDialog implements ActionListener{
 		panel.setLayout(new GridLayout(1,1));
 		panel.add(showLegal);
 		panel.add(okButton);
-		
 		getContentPane().add(panel, BorderLayout.CENTER);
 		getContentPane().add(okButton, BorderLayout.SOUTH);
 		okButton.addActionListener(this);
 		// set Dialog Settings
 		setTitle("Chess350 Settings");
 		setSize(100,100);
-		setVisible (true);	
+		setVisible(true);
 	}
 
 	/******************************************************************
@@ -46,9 +45,8 @@ public class SettingsDialog extends JDialog implements ActionListener{
 	 * 
 	 * @param e the action event that was just fired
 	 ******************************************************************/
-	public void actionPerformed(ActionEvent e) {
-	
-		if(showLegal.isSelected()){
+	public final void actionPerformed(final ActionEvent e) {
+		if (showLegal.isSelected()) {
 			view.setShowLegal(true);
 		} else {
 			view.setShowLegal(false);

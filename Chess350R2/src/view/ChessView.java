@@ -63,7 +63,6 @@ public class ChessView implements IChessView{
 		newGame();
 		showLegal = true;
 	}
-	
 	   public boolean isShowLegal() {
 			return showLegal;
 		}
@@ -71,7 +70,6 @@ public class ChessView implements IChessView{
 		public void setShowLegal(boolean showLegal) {
 			this.showLegal = showLegal;
 		}
-	
 	private void newGame(){
 		frame.dispose();
 		setUpBase();

@@ -59,12 +59,14 @@ public class ChessPresenter implements IChessPresenter {
 						firstClick(pos);
 					} else {
 						firstClick = true;
-						if(game.getBoard().pieceAt(pos[ROW],pos[COL]) == null){
+						if (game.getBoard().pieceAt(pos[ROW], pos[COL]) == null) {
 							legalMove(pos, this);
-						} else{
-							if(game.getBoard().pieceAt(pos[ROW],pos[COL]).player() != game.getModel().currentPlayer()){
+						} else {
+							if (game.getBoard().pieceAt(pos[ROW], pos[COL])
+									.player() != game.getModel()
+									.currentPlayer()) {
 								legalMove(pos, this);
-							} else{
+							} else {
 								updateView();
 								firstClick(pos);
 							}
@@ -72,26 +74,24 @@ public class ChessPresenter implements IChessPresenter {
 					}
 				} else {
 					// they clicked a menu item
-					if(view.getExitItem() == e.getSource()) {
+					if (view.getExitItem() == e.getSource()) {
 						System.exit(0);
 					}
 
-
-					if(view.getSettingItem() == e.getSource()) {
-						new SettingsDialog(view.getFrame(),view);
+					if (view.getSettingItem() == e.getSource()) {
+						new SettingsDialog(view.getFrame(), view);
 					}
 
-
-					if(view.getNewGameItem() == e.getSource()) {
+					if (view.getNewGameItem() == e.getSource()) {
 						view.close();
 						game = new ChessGame();
-					    view = new ChessView(game.getBoard().numRows(), game.getBoard().numColumns());
+						view = new ChessView(game.getBoard().numRows(), game
+								.getBoard().numColumns());
 						view.getFrame().dispose();
-					    new ChessPresenter(game,view);
+						new ChessPresenter(game, view);
 					}
 
-
-					if(view.getAboutItem() == e.getSource()) {
+					if (view.getAboutItem() == e.getSource()) {
 						view.showMessage("This chess game is in the top percentage of chess games.");
 					}
 
@@ -99,48 +99,49 @@ public class ChessPresenter implements IChessPresenter {
 			}
 		});
 	}
-	
-	private void legalMove(int[] pos, ActionListener e){
+
+	private void legalMove(int[] pos, ActionListener e) {
 		coords[tr] = pos[ROW];
 		coords[tc] = pos[COL];
 		onInput(e);
 	}
-	
-	private void firstClick(int[] pos){
+
+	private void firstClick(int[] pos) {
 		if (game.getBoard().pieceAt(pos[ROW], pos[COL]) != null) {
-			if (game.getBoard().pieceAt(pos[ROW], pos[COL])
-					.player() == game.getModel()
-					.currentPlayer()) {
+			if (game.getBoard().pieceAt(pos[ROW], pos[COL]).player() == game
+					.getModel().currentPlayer()) {
 				int count = getAndShowLegalMoves(pos[ROW], pos[COL]);
-				if(count != 0){
+				if (count != 0) {
 					firstClick = false;
 					coords[fr] = pos[ROW];
 					coords[fc] = pos[COL];
-					if(view.isShowLegal()){
-					view.showSelected(pos[ROW],pos[COL],sendPiece(pos[ROW], pos[COL]));
-					}
+					view.showSelected(pos[ROW], pos[COL],
+							sendPiece(pos[ROW], pos[COL]));
 				}
-			} else{
+			} else {
 				view.showMessage("You do not own this piece");
 			}
-		} 
+		}
 	}
 
 	private int getAndShowLegalMoves(int row, int col) {
 		int count = 0;
+		boolean legal = view.isShowLegal();
 		for (int i = 0; i < game.getBoard().numRows(); i++) {
 			for (int j = 0; j < game.getBoard().numColumns(); j++) {
 				Move m = new Move(row, col, i, j);
 				if (game.getModel().isValidMove(m, game.getBoard())) {
-					view.paintLegalMove(i, j);
+					if (legal) {
+						view.paintLegalMove(i, j);
+					}
 					count++;
 				}
 			}
 		}
 		return count;
 	}
-	
-	private void updateView(){
+
+	private void updateView() {
 		for (int i = 0; i < game.getBoard().numRows(); i++) {
 			for (int j = 0; j < game.getBoard().numColumns(); j++) {
 				view.setData(i, j, sendPiece(i, j));
@@ -158,22 +159,22 @@ public class ChessPresenter implements IChessPresenter {
 			} else { // acceptable move
 				game.getModel().move(game.getMove(), game.getBoard());
 			}
-				updateView();
-				if (game.getModel().isComplete(game.getBoard()) && !game.getModel().inStaleMate(game.getBoard())) {
-					String winner;
-					if(game.getModel().currentPlayer() == Player.BLACK){
-						winner = "WHITE";
-					} else{
-						winner = "BLACK";
-					}
-					view.showMessage(winner
-							+ " wins!");
-					view.disable(a);
+			updateView();
+			if (game.getModel().isComplete(game.getBoard())
+					&& !game.getModel().inStaleMate(game.getBoard())) {
+				String winner;
+				if (game.getModel().currentPlayer() == Player.BLACK) {
+					winner = "WHITE";
+				} else {
+					winner = "BLACK";
 				}
-				if(game.getModel().inStaleMate(game.getBoard())) {
-					view.showMessage("Stalemate.");
-					view.disable(a);
-				}
+				view.showMessage(winner + " wins!");
+				view.disable(a);
+			}
+			if (game.getModel().inStaleMate(game.getBoard())) {
+				view.showMessage("Stalemate.");
+				view.disable(a);
+			}
 		}
 
 		catch (Exception e) {
