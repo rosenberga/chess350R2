@@ -202,11 +202,15 @@ public class ChessView implements IChessView{
 		JOptionPane.showMessageDialog(frame, m);
 	}
 	
-	public void paintLegalMove(int row, int col){
-		ImageIcon icon = (ImageIcon) pieceLabels[row][col].getIcon();
-		ImageIcon legal = new ImageIcon(LEGAL);
-		Icon after = new CustomIcon(icon,legal);
-		pieceLabels[row][col].setIcon(after);
+	public void paintLegalMove(int row, int col,int[] pieceID){
+		ImageIcon icon;
+		try{
+		icon = pieceImages[pieceID[OWNER]][pieceID[TYPE]];
+		} catch(Exception e){
+			icon = new ImageIcon(EMPTY, EMPTY);
+		}
+		icon = new CustomIcon(LEGAL, icon);
+		pieceLabels[row][col].setIcon(icon);
 	}
 
 	public void showSelected(int row, int col, int[] pieceID) {
