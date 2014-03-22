@@ -66,7 +66,13 @@ public class ChessPresenter implements IChessPresenter {
 	/** The standard row number. */
 	private static final int COL = 1;
 
-	public ChessPresenter(ChessGame g, IChessView v) {
+	/*****************************************************************
+	 * A constructor for the Presenter.
+	 *
+	 * @param g the game variable
+	 * @param v the view variable
+	 *****************************************************************/
+	public ChessPresenter(final ChessGame g, final IChessView v) {
 		game = g;
 		view = v;
 		firstClick = true;
@@ -90,8 +96,9 @@ public class ChessPresenter implements IChessPresenter {
 						firstClick(pos);
 					} else {
 						firstClick = true;
-						if (game.getBoard().pieceAt(pos[ROW], pos[COL]) == null) {
-							legalMove(pos, this);
+						if (game.getBoard().pieceAt(pos[ROW], 
+								pos[COL]) == null) {
+									legalMove(pos, this);
 						} else {
 							if (game.getBoard().pieceAt(pos[ROW], pos[COL])
 									.player() != game.getModel()
@@ -134,13 +141,24 @@ public class ChessPresenter implements IChessPresenter {
 		});
 	}
 
-	private void legalMove(int[] pos, ActionListener e) {
+	/*****************************************************************
+	 * Calls for the action.
+	 *
+	 * @param pos the array for position of the piece
+	 * @param e the action listener giving functionality
+	 *****************************************************************/
+	private void legalMove(final int[] pos, final ActionListener e) {
 		coords[tr] = pos[ROW];
 		coords[tc] = pos[COL];
 		onInput(e);
 	}
 
-	private void firstClick(int[] pos) {
+	/*****************************************************************
+	 * Called after the first click on the board.
+	 *
+	 * @param pos the array for position of the piece
+	 *****************************************************************/
+	private void firstClick(final int[] pos) {
 		if (game.getBoard().pieceAt(pos[ROW], pos[COL]) != null) {
 			if (game.getBoard().pieceAt(pos[ROW], pos[COL]).player() == game
 					.getModel().currentPlayer()) {
@@ -158,7 +176,15 @@ public class ChessPresenter implements IChessPresenter {
 		}
 	}
 
-	private int getAndShowLegalMoves(int row, int col) {
+	/*****************************************************************
+	 * Shows legal moves on the board.
+	 *
+	 * @param row the row available
+	 * @param col the column available
+	 * 
+	 * @return count
+	 *****************************************************************/
+	private int getAndShowLegalMoves(final int row, final int col) {
 		int count = 0;
 		boolean legal = view.isShowLegal();
 		for (int i = 0; i < game.getBoard().numRows(); i++) {
@@ -175,6 +201,10 @@ public class ChessPresenter implements IChessPresenter {
 		return count;
 	}
 
+	/*****************************************************************
+	 * Calls for the action.
+	 *
+	 *****************************************************************/
 	private void updateView() {
 		for (int i = 0; i < game.getBoard().numRows(); i++) {
 			for (int j = 0; j < game.getBoard().numColumns(); j++) {
@@ -183,12 +213,18 @@ public class ChessPresenter implements IChessPresenter {
 		}
 	}
 
-	public void onInput(ActionListener a) {
+	/*****************************************************************
+	 * Calls for the action.
+	 *
+	 * @param a the action listener
+	 *****************************************************************/
+	public final void onInput(final ActionListener a) {
 		try {
 
 			game.setMove(coords); // set the move to be made
 
-			if (game.getModel().isValidMove(game.getMove(), game.getBoard()) == false) {
+			if (!game.getModel().isValidMove(game.getMove(), 
+					game.getBoard())) {
 				view.showMessage("Not a valid move.");
 			} else { // acceptable move
 				game.getModel().move(game.getMove(), game.getBoard());
@@ -209,14 +245,20 @@ public class ChessPresenter implements IChessPresenter {
 				view.showMessage("Stalemate.");
 				view.disable(a);
 			}
-		}
-
-		catch (Exception e) {
+		} catch (Exception e) {
 			view.showMessage(e.getMessage());
 		}
 	}
 
-	public int[] sendPiece(int row, int column) {
+	/*****************************************************************
+	 * Sends piece to a new position.
+	 *
+	 * @param row the new row position of the piece
+	 * @param column the new column position of the piece
+	 * 
+	 * @return piecenum
+	 *****************************************************************/
+	public final int[] sendPiece(final int row, final int column) {
 		int[] pieceNum = new int[PIECE_INFO];
 		Player p;
 		try {
