@@ -174,8 +174,6 @@ public class ChessPresenter implements IChessPresenter {
 					view.showSelected(pos[ROW], pos[COL],
 							sendPiece(pos[ROW], pos[COL]));
 				}
-			} else {
-				// do nothing
 			}
 		}
 	}
@@ -233,9 +231,7 @@ public class ChessPresenter implements IChessPresenter {
 			if (!game.getModel().isValidMove(game.getMove(), game.getBoard())) {
 				// do nothing
 				if (game.getModel()
-						.isValidMove(game.getMove(), game.getBoard()) == false) {
-					// do nothing
-				} else { // acceptable move
+						.isValidMove(game.getMove(), game.getBoard())) {
 					game.getModel().move(game.getMove(), game.getBoard());
 				}
 				updateView();
