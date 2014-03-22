@@ -11,7 +11,7 @@ import view.*;
 
 /*****************************************************************
  * A Presenter of information to the Model and View.
- *
+ * 
  * @author Adam Rosenberg
  * @version 1.0
  *****************************************************************/
@@ -68,9 +68,11 @@ public class ChessPresenter implements IChessPresenter {
 
 	/*****************************************************************
 	 * A constructor for the Presenter.
-	 *
-	 * @param g the game variable
-	 * @param v the view variable
+	 * 
+	 * @param g
+	 *            the game variable
+	 * @param v
+	 *            the view variable
 	 *****************************************************************/
 	public ChessPresenter(final ChessGame g, final IChessView v) {
 		game = g;
@@ -96,9 +98,8 @@ public class ChessPresenter implements IChessPresenter {
 						firstClick(pos);
 					} else {
 						firstClick = true;
-						if (game.getBoard().pieceAt(pos[ROW], 
-								pos[COL]) == null) {
-									legalMove(pos, this);
+						if (game.getBoard().pieceAt(pos[ROW], pos[COL]) == null) {
+							legalMove(pos, this);
 						} else {
 							if (game.getBoard().pieceAt(pos[ROW], pos[COL])
 									.player() != game.getModel()
@@ -143,9 +144,11 @@ public class ChessPresenter implements IChessPresenter {
 
 	/*****************************************************************
 	 * Calls for the action.
-	 *
-	 * @param pos the array for position of the piece
-	 * @param e the action listener giving functionality
+	 * 
+	 * @param pos
+	 *            the array for position of the piece
+	 * @param e
+	 *            the action listener giving functionality
 	 *****************************************************************/
 	private void legalMove(final int[] pos, final ActionListener e) {
 		coords[tr] = pos[ROW];
@@ -155,8 +158,9 @@ public class ChessPresenter implements IChessPresenter {
 
 	/*****************************************************************
 	 * Called after the first click on the board.
-	 *
-	 * @param pos the array for position of the piece
+	 * 
+	 * @param pos
+	 *            the array for position of the piece
 	 *****************************************************************/
 	private void firstClick(final int[] pos) {
 		if (game.getBoard().pieceAt(pos[ROW], pos[COL]) != null) {
@@ -178,9 +182,11 @@ public class ChessPresenter implements IChessPresenter {
 
 	/*****************************************************************
 	 * Shows legal moves on the board.
-	 *
-	 * @param row the row available
-	 * @param col the column available
+	 * 
+	 * @param row
+	 *            the row available
+	 * @param col
+	 *            the column available
 	 * 
 	 * @return count
 	 *****************************************************************/
@@ -192,7 +198,7 @@ public class ChessPresenter implements IChessPresenter {
 				Move m = new Move(row, col, i, j);
 				if (game.getModel().isValidMove(m, game.getBoard())) {
 					if (legal) {
-						view.paintLegalMove(i, j,sendPiece(i,j));
+						view.paintLegalMove(i, j, sendPiece(i, j));
 					}
 					count++;
 				}
@@ -203,7 +209,7 @@ public class ChessPresenter implements IChessPresenter {
 
 	/*****************************************************************
 	 * Calls for the action.
-	 *
+	 * 
 	 *****************************************************************/
 	private void updateView() {
 		for (int i = 0; i < game.getBoard().numRows(); i++) {
@@ -215,37 +221,39 @@ public class ChessPresenter implements IChessPresenter {
 
 	/*****************************************************************
 	 * Calls for the action.
-	 *
-	 * @param a the action listener
+	 * 
+	 * @param a
+	 *            the action listener
 	 *****************************************************************/
 	public final void onInput(final ActionListener a) {
 		try {
 
 			game.setMove(coords); // set the move to be made
 
-			if (!game.getModel().isValidMove(game.getMove(), 
-					game.getBoard())) {
-				view.showMessage("Not a valid move.");
-			if (game.getModel().isValidMove(game.getMove(), game.getBoard()) == false) {
+			if (!game.getModel().isValidMove(game.getMove(), game.getBoard())) {
 				// do nothing
-			} else { // acceptable move
-				game.getModel().move(game.getMove(), game.getBoard());
-			}
-			updateView();
-			if (game.getModel().isComplete(game.getBoard())
-					&& !game.getModel().inStaleMate(game.getBoard())) {
-				String winner;
-				if (game.getModel().currentPlayer() == Player.BLACK) {
-					winner = "WHITE";
-				} else {
-					winner = "BLACK";
+				if (game.getModel()
+						.isValidMove(game.getMove(), game.getBoard()) == false) {
+					// do nothing
+				} else { // acceptable move
+					game.getModel().move(game.getMove(), game.getBoard());
 				}
-				view.showMessage(winner + " wins!");
-				view.disable(a);
-			}
-			if (game.getModel().inStaleMate(game.getBoard())) {
-				view.showMessage("Stalemate.");
-				view.disable(a);
+				updateView();
+				if (game.getModel().isComplete(game.getBoard())
+						&& !game.getModel().inStaleMate(game.getBoard())) {
+					String winner;
+					if (game.getModel().currentPlayer() == Player.BLACK) {
+						winner = "WHITE";
+					} else {
+						winner = "BLACK";
+					}
+					view.showMessage(winner + " wins!");
+					view.disable(a);
+				}
+				if (game.getModel().inStaleMate(game.getBoard())) {
+					view.showMessage("Stalemate.");
+					view.disable(a);
+				}
 			}
 		} catch (Exception e) {
 			view.showMessage(e.getMessage());
@@ -254,9 +262,11 @@ public class ChessPresenter implements IChessPresenter {
 
 	/*****************************************************************
 	 * Sends piece to a new position.
-	 *
-	 * @param row the new row position of the piece
-	 * @param column the new column position of the piece
+	 * 
+	 * @param row
+	 *            the new row position of the piece
+	 * @param column
+	 *            the new column position of the piece
 	 * 
 	 * @return piecenum
 	 *****************************************************************/
