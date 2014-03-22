@@ -171,7 +171,7 @@ public class ChessPresenter implements IChessPresenter {
 							sendPiece(pos[ROW], pos[COL]));
 				}
 			} else {
-				view.showMessage("You do not own this piece");
+				// do nothing
 			}
 		}
 	}
@@ -192,7 +192,7 @@ public class ChessPresenter implements IChessPresenter {
 				Move m = new Move(row, col, i, j);
 				if (game.getModel().isValidMove(m, game.getBoard())) {
 					if (legal) {
-						view.paintLegalMove(i, j);
+						view.paintLegalMove(i, j,sendPiece(i,j));
 					}
 					count++;
 				}
@@ -226,6 +226,8 @@ public class ChessPresenter implements IChessPresenter {
 			if (!game.getModel().isValidMove(game.getMove(), 
 					game.getBoard())) {
 				view.showMessage("Not a valid move.");
+			if (game.getModel().isValidMove(game.getMove(), game.getBoard()) == false) {
+				// do nothing
 			} else { // acceptable move
 				game.getModel().move(game.getMove(), game.getBoard());
 			}

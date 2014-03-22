@@ -14,10 +14,10 @@ public class CustomIcon extends ImageIcon{
         this.bottom = new ImageIcon(bottom);
     }
     
-    public CustomIcon(ImageIcon before, ImageIcon legal){
+/*    public CustomIcon(ImageIcon before, ImageIcon legal){
     	super(legal.getDescription(),legal.getDescription());
     	this.bottom = before;
-    }
+    }*/
 
     public int getIconHeight() {
         return Math.max(super.getIconHeight(), bottom.getIconHeight());
