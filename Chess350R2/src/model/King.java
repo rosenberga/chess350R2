@@ -61,7 +61,8 @@ public final class King extends ChessPiece {
 			
 			// check if the castle if to the right or is to the left
 			if ((Math.abs(move.getToColumn() 
-					- move.getFromColumn()) == 2) && move.getFromRow() == move.getToRow()) {
+					- move.getFromColumn()) == 2) 
+						&& move.getFromRow() == move.getToRow()) {
 				IChessPiece piece;
 				if (move.getToColumn() > move.getFromColumn()) {
 					
