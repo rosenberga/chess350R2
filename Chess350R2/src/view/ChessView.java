@@ -19,6 +19,7 @@ public class ChessView implements IChessView{
 	private static final String WHITE_SPACE = "whiteSpace.png";
 	private static final String LEGAL = "legal.png";
 	private static final String SELECTED = "selected.png";
+	private static final String EMPTY = "piece-1-1.png";
 	
 	private int cols;
 	private int rows;
@@ -176,12 +177,12 @@ public class ChessView implements IChessView{
 	}
 
 	@Override
-	public void setData(int row, int col, int[] pieceID) {
+	public void setData(final int row, final int col, final int[] pieceID) {
 		ImageIcon icon;
 		try{
 		icon = pieceImages[pieceID[OWNER]][pieceID[TYPE]];
 		} catch (Exception e){
-			icon = new ImageIcon("piece-1-1.png","piece-1-1.png");
+			icon = new ImageIcon(EMPTY, EMPTY);
 		}
 		if((row % 2 == 0 && col % 2 == 0) ||(row % 2 != 0 && col % 2 != 0)){
 			icon = new CustomIcon(WHITE_SPACE, icon);
