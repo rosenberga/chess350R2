@@ -2,6 +2,7 @@ package presenter;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.FileNotFoundException;
 
 import javax.swing.JButton;
 
@@ -80,7 +81,7 @@ public class ChessPresenter implements IChessPresenter {
 
 		view.addButtonListeners(new ActionListener() {
 			@Override
-			public void actionPerformed(ActionEvent e) {
+			public void actionPerformed(final ActionEvent e) {
 
 				// if they clicked a button, then it was a chess position
 				if (e.getSource().getClass() == JButton.class) {
@@ -121,7 +122,11 @@ public class ChessPresenter implements IChessPresenter {
 					}
 
 					if (view.getAboutItem() == e.getSource()) {
-						view.showMessage("This chess game is in the top percentage of chess games.");
+						try {
+							new AboutDialog(view.getFrame());
+						} catch (FileNotFoundException e1) {
+							e1.printStackTrace();
+						}
 					}
 
 				}
