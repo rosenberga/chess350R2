@@ -50,13 +50,13 @@ public class ChessPresenter implements IChessPresenter {
 	/** The standard row number. */
 	private static final int COORDS = 4;
 	/** The standard row number. */
-	private static final int fr = 0;
+	private static final int FR = 0;
 	/** The standard row number. */
-	private static final int fc = 1;
+	private static final int FC = 1;
 	/** The standard row number. */
-	private static final int tr = 2;
+	private static final int TR = 2;
 	/** The standard row number. */
-	private static final int tc = 3;
+	private static final int TC = 3;
 	/** The standard row number. */
 	private boolean firstClick;
 	/** The standard row number. */
@@ -151,8 +151,8 @@ public class ChessPresenter implements IChessPresenter {
 	 *            the action listener giving functionality
 	 *****************************************************************/
 	private void legalMove(final int[] pos, final ActionListener e) {
-		coords[tr] = pos[ROW];
-		coords[tc] = pos[COL];
+		coords[TR] = pos[ROW];
+		coords[TC] = pos[COL];
 		onInput(e);
 	}
 
@@ -169,8 +169,8 @@ public class ChessPresenter implements IChessPresenter {
 				int count = getAndShowLegalMoves(pos[ROW], pos[COL]);
 				if (count != 0) {
 					firstClick = false;
-					coords[fr] = pos[ROW];
-					coords[fc] = pos[COL];
+					coords[FR] = pos[ROW];
+					coords[FC] = pos[COL];
 					view.showSelected(pos[ROW], pos[COL],
 							sendPiece(pos[ROW], pos[COL]));
 				}

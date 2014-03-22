@@ -167,11 +167,11 @@ public class ChessView implements IChessView{
 	}
 
 	@Override
-	public int[] getData(ActionEvent e) {
+	public final int[] getData(final ActionEvent e) {
 		int[] pos = new int[PIECE_INFO];
-		for(int i = 0; i < rows; i++){
-			for(int j = 0; j < cols; j++){
-				if(e.getSource() == pieceLabels[i][j]){
+		for (int i = 0; i < rows; i++) {
+			for (int j = 0; j < cols; j++) {
+				if (e.getSource() == pieceLabels[i][j]) {
 					pos[ROW] = i;
 					pos[COL] = j;
 					break;
@@ -182,31 +182,33 @@ public class ChessView implements IChessView{
 	}
 
 	@Override
-	public void setData(final int row, final int col, final int[] pieceID) {
+	public final void setData(final int row, final int col, 
+			final int[] pieceID) {
 		ImageIcon icon;
-		try{
+		try {
 		icon = pieceImages[pieceID[OWNER]][pieceID[TYPE]];
-		} catch (Exception e){
+		} catch (Exception e) {
 			icon = new ImageIcon(EMPTY, EMPTY);
 		}
-		if((row % 2 == 0 && col % 2 == 0) ||(row % 2 != 0 && col % 2 != 0)){
+		if ((row % 2 == 0 && col % 2 == 0)
+				|| (row % 2 != 0 && col % 2 != 0)) {
 			icon = new CustomIcon(WHITE_SPACE, icon);
 		} else {
-			icon = new CustomIcon(BLACK_SPACE,icon);
+			icon = new CustomIcon(BLACK_SPACE, icon);
 		}
 		pieceLabels[row][col].setIcon(icon);
 	}
 
 	@Override
-	public void showMessage(String m) {
+	public final void showMessage(final String m) {
 		JOptionPane.showMessageDialog(frame, m);
 	}
 	
 	public void paintLegalMove(int row, int col,int[] pieceID){
 		ImageIcon icon;
-		try{
+		try {
 		icon = pieceImages[pieceID[OWNER]][pieceID[TYPE]];
-		} catch(Exception e){
+		} catch (Exception e) {
 			icon = new ImageIcon(EMPTY, EMPTY);
 		}
 		icon = new CustomIcon(LEGAL, icon);
@@ -220,34 +222,34 @@ public class ChessView implements IChessView{
 	}
 
 	@Override
-	public JMenu getSettingsMenu() {
+	public final JMenu getSettingsMenu() {
 		return settingsMenu;
 	}
 
 	@Override
-	public JMenuItem getExitItem() {
+	public final JMenuItem getExitItem() {
 		return exitItem;
 	}
 
 	@Override
-	public JMenuItem getAboutItem() {
+	public final JMenuItem getAboutItem() {
 		return aboutItem;
 	}
 
 	@Override
-	public JMenuItem getSettingItem() {
+	public final JMenuItem getSettingItem() {
 		return settingItem;
 	}
 
 	@Override
-	public JMenuItem getNewGameItem() {
+	public final JMenuItem getNewGameItem() {
 		return newGameItem;
 	}
 
 	@Override
-	public void disable(ActionListener e) {
-		for(int i = 0; i < pieceLabels.length; i++){
-			for(int j = 0; j < pieceLabels[i].length; j++){
+	public final void disable(final ActionListener e) {
+		for (int i = 0; i < pieceLabels.length; i++) {
+			for (int j = 0; j < pieceLabels[i].length; j++) {
 				pieceLabels[i][j].removeActionListener(e);
 			}
 		}
@@ -259,7 +261,7 @@ public class ChessView implements IChessView{
 	}
 
 	@Override
-	public JFrame getFrame() {
+	public final JFrame getFrame() {
 		return frame;
 	}
 
