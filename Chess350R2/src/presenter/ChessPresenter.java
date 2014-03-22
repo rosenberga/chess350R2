@@ -1,19 +1,13 @@
-
-
 package presenter;
-
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.FileNotFoundException;
 
-
 import javax.swing.JButton;
-
 
 import model.*;
 import view.*;
-
 
 /*****************************************************************
  * A Presenter of information to the Model and View.
@@ -22,7 +16,6 @@ import view.*;
  * @version 1.0
  *****************************************************************/
 public class ChessPresenter implements IChessPresenter {
-
 
 	/** The standard row number. */
 	private IChessView view;
@@ -73,7 +66,6 @@ public class ChessPresenter implements IChessPresenter {
 	/** The standard row number. */
 	private static final int COL = 1;
 
-
 	/*****************************************************************
 	 * A constructor for the Presenter.
 	 * 
@@ -88,7 +80,6 @@ public class ChessPresenter implements IChessPresenter {
 		firstClick = true;
 		coords = new int[COORDS];
 
-
 		// set starting data
 		for (int i = 0; i < game.getBoard().numRows(); i++) {
 			for (int j = 0; j < game.getBoard().numColumns(); j++) {
@@ -96,11 +87,9 @@ public class ChessPresenter implements IChessPresenter {
 			}
 		}
 
-
 		view.addButtonListeners(new ActionListener() {
 			@Override
 			public void actionPerformed(final ActionEvent e) {
-
 
 				// if they clicked a button, then it was a chess position
 				if (e.getSource().getClass() == JButton.class) {
@@ -128,11 +117,9 @@ public class ChessPresenter implements IChessPresenter {
 						System.exit(0);
 					}
 
-
 					if (view.getSettingItem() == e.getSource()) {
 						new SettingsDialog(view.getFrame(), view);
 					}
-
 
 					if (view.getNewGameItem() == e.getSource()) {
 						view.close();
@@ -142,7 +129,6 @@ public class ChessPresenter implements IChessPresenter {
 						new ChessPresenter(game, view);
 					}
 
-
 					if (view.getAboutItem() == e.getSource()) {
 						try {
 							new AboutDialog(view.getFrame());
@@ -151,12 +137,10 @@ public class ChessPresenter implements IChessPresenter {
 						}
 					}
 
-
 				}
 			}
 		});
 	}
-
 
 	/*****************************************************************
 	 * Calls for the action.
@@ -171,7 +155,6 @@ public class ChessPresenter implements IChessPresenter {
 		coords[tc] = pos[COL];
 		onInput(e);
 	}
-
 
 	/*****************************************************************
 	 * Called after the first click on the board.
@@ -194,7 +177,6 @@ public class ChessPresenter implements IChessPresenter {
 			}
 		}
 	}
-
 
 	/*****************************************************************
 	 * Shows legal moves on the board.
@@ -223,7 +205,6 @@ public class ChessPresenter implements IChessPresenter {
 		return count;
 	}
 
-
 	/*****************************************************************
 	 * Calls for the action.
 	 * 
@@ -236,7 +217,6 @@ public class ChessPresenter implements IChessPresenter {
 		}
 	}
 
-
 	/*****************************************************************
 	 * Calls for the action.
 	 * 
@@ -246,9 +226,7 @@ public class ChessPresenter implements IChessPresenter {
 	public final void onInput(final ActionListener a) {
 		try {
 
-
 			game.setMove(coords); // set the move to be made
-
 
 				if (game.getModel()
 						.isValidMove(game.getMove(), game.getBoard())) {
@@ -274,7 +252,6 @@ public class ChessPresenter implements IChessPresenter {
 			view.showMessage(e.getMessage());
 		}
 	}
-
 
 	/*****************************************************************
 	 * Sends piece to a new position.
@@ -302,7 +279,6 @@ public class ChessPresenter implements IChessPresenter {
 			pieceNum[OWNER] = BLV;
 		}
 
-
 		String type = game.getBoard().pieceAt(row, column).type();
 		switch (type) {
 		case "Pawn":
@@ -325,12 +301,9 @@ public class ChessPresenter implements IChessPresenter {
 			break;
 		}
 
-
 		return pieceNum;
 
-
 	}
-
 
 	public static void main(String[] args) {
 		ChessGame g = new ChessGame();
