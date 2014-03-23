@@ -8,7 +8,7 @@ import java.awt.event.*;
 
 import javax.swing.*;
 
-public class ChessView implements IChessView{
+public class ChessView implements IChessView {
 	private static final int NUM_COLORS = 2;
 	private static final int NUM_PIECES = 7;
 	private static final int OWNER = 0;
@@ -57,7 +57,7 @@ public class ChessView implements IChessView{
 
 	private boolean showLegal;
 	
-	public ChessView(int rows, int cols){
+	public ChessView(int rows, int cols) {
 		super();
 		this.rows = rows;
 		this.cols = cols;
@@ -72,12 +72,12 @@ public class ChessView implements IChessView{
 		public void setShowLegal(boolean showLegal) {
 			this.showLegal = showLegal;
 		}
-	private void newGame(){
+	private void newGame() {
 		frame.dispose();
 		setUpBase();
 	}
 	
-	private void setUpBase(){
+	private void setUpBase() {
 		frame = new JFrame("Chess350");
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
@@ -96,7 +96,7 @@ public class ChessView implements IChessView{
 		frame.setVisible(true);
 	}
 	
-	private void setUpMenu(){
+	private void setUpMenu() {
 		
 		menus = new JMenuBar();
 		
@@ -120,7 +120,7 @@ public class ChessView implements IChessView{
 		
 	}
 	
-	private void setUpPanels(){
+	private void setUpPanels() {
 		panel = new JPanel();
 		panel.setLayout(new BorderLayout());
 		
@@ -129,22 +129,22 @@ public class ChessView implements IChessView{
 		panel.add(piecePanel, BorderLayout.CENTER);
 	}
 	
-	private void setUpPiecePanel(){
-		piecePanel.setLayout(new GridLayout(rows,cols));
+	private void setUpPiecePanel() {
+		piecePanel.setLayout(new GridLayout(rows, cols));
 		setUpImages();
 	}
 	
-	private void setUpImages(){
+	private void setUpImages() {
 		pieceImages = new ImageIcon[NUM_COLORS][NUM_PIECES];
-		for(int i = 0; i < pieceImages.length; i++){
-			for(int j = 0; j < pieceImages[i].length; j++){
-				pieceImages[i][j] = new ImageIcon("piece"+i+""+j+".png","piece"+i+""+j+".png");
+		for (int i = 0; i < pieceImages.length; i++) {
+			for (int j = 0; j < pieceImages[i].length; j++) {
+				pieceImages[i][j] = new ImageIcon("piece" + i + "" + j + ".png", "piece" + i + "" + j + ".png");
 			}
 		}
 		
 		pieceLabels = new JButton[rows][cols];
-		for(int i = 0; i < pieceLabels.length; i++){
-			for(int j = 0; j < pieceLabels[i].length; j++){
+		for (int i = 0; i < pieceLabels.length; i++) {
+			for (int j = 0; j < pieceLabels[i].length; j++) {
 				pieceLabels[i][j] = new JButton();
 				piecePanel.add(pieceLabels[i][j]);
 			}
@@ -154,8 +154,8 @@ public class ChessView implements IChessView{
 
 	@Override
 	public void addButtonListeners(ActionListener e) {
-		for(int i = 0; i < rows; i++){
-			for(int j = 0; j < cols; j++){
+		for (int i = 0; i < rows; i++) {
+			for (int j = 0; j < cols; j++) {
 				pieceLabels[i][j].addActionListener(e);
 			}
 		}
@@ -182,8 +182,7 @@ public class ChessView implements IChessView{
 	}
 
 	@Override
-	public final void setData(final int row, final int col, 
-			final int[] pieceID) {
+	public final void setData(final int row, final int col, final int[] pieceID) {
 		ImageIcon icon;
 		try {
 		icon = pieceImages[pieceID[OWNER]][pieceID[TYPE]];
@@ -204,7 +203,7 @@ public class ChessView implements IChessView{
 		JOptionPane.showMessageDialog(frame, m);
 	}
 	
-	public void paintLegalMove(int row, int col,int[] pieceID){
+	public void paintLegalMove(int row, int col, int[] pieceID) {
 		ImageIcon icon;
 		try {
 		icon = pieceImages[pieceID[OWNER]][pieceID[TYPE]];

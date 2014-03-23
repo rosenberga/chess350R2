@@ -1,12 +1,13 @@
 package model;
 
-import static org.junit.Assert.*;
+
+import static org.junit.Assert.assertEquals;
 import org.junit.Test;
 
 public class GameTest {
 
 	@Test
-	public void testGame(){
+	public final void testGame() {
 		ChessGame game = new ChessGame();
 		ChessModel model = new ChessModel();
 		ChessBoard board = new ChessBoard();

@@ -3,11 +3,14 @@ package presenter;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.FileNotFoundException;
-
 import javax.swing.JButton;
-
-import model.*;
-import view.*;
+import model.ChessGame;
+import model.Move;
+import model.Player;
+import view.AboutDialog;
+import view.ChessView;
+import view.IChessView;
+import view.SettingsDialog;
 
 /*****************************************************************
  * A Presenter of information to the Model and View.
@@ -91,19 +94,21 @@ public class ChessPresenter implements IChessPresenter {
 			@Override
 			public void actionPerformed(final ActionEvent e) {
 
-				// if they clicked a button, then it was a chess position
+				// if they clicked a button, 
+				// then it was a chess position
 				if (e.getSource().getClass() == JButton.class) {
 					int[] pos = view.getData(e);
 					if (firstClick) {
 						firstClick(pos);
 					} else {
 						firstClick = true;
-						if (game.getBoard().pieceAt(pos[ROW], pos[COL]) == null) {
+						if (game.getBoard().pieceAt(pos[ROW], pos[COL]) 
+								== null) {
 							legalMove(pos, this);
 						} else {
-							if (game.getBoard().pieceAt(pos[ROW], pos[COL])
-									.player() != game.getModel()
-									.currentPlayer()) {
+							if (game.getBoard().pieceAt(pos[ROW], 
+									pos[COL]).player() != game
+										.getModel().currentPlayer()) {
 								legalMove(pos, this);
 							} else {
 								updateView();

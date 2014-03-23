@@ -10,7 +10,7 @@ public class CustomIcon extends ImageIcon{
     private Icon bottom;
 
     public CustomIcon(String bottom, ImageIcon icon) {
-    	super(icon.getDescription(),icon.getDescription());
+    	super(icon.getDescription(), icon.getDescription());
         this.bottom = new ImageIcon(bottom);
     }
     

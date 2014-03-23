@@ -16,8 +16,8 @@ public class TestPresenter1 {
 	@Test
 	public void test() {
 		g = new ChessGame();
-		v = new ChessView(g.getBoard().numColumns(),g.getBoard().numRows());
-		p = new ChessPresenter(g,v);
+		v = new ChessView(g.getBoard().numColumns(), g.getBoard().numRows());
+		p = new ChessPresenter(g, v);
 		fail("Not yet implemented");
 	}
 

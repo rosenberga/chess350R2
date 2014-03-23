@@ -1,26 +1,54 @@
 package view;
 
 import java.awt.BorderLayout;
-import java.awt.GridLayout;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
+import javax.swing.JDialog;
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.JTextArea;
 
-import javax.swing.*;
-
+/*****************************************************************
+ * A Dialog to show about information for a project.
+ *
+ * @author Adam Rosenberg
+ *****************************************************************/
 public class AboutDialog extends JDialog {
+	
+	/** serial information. */
+	private static final long serialVersionUID = 1L;
+
+	/** String containing the about information. */
 	private String about;
-	private static final String aboutFile = "about.txt";
-	public AboutDialog(JFrame parent) throws FileNotFoundException {
+	
+	/** File location for the about information. */
+	private static final String ABOUT_FILE = "about.txt";
+	
+	/*****************************************************************
+	 * Constructs a new AboutDialog.
+	 * 
+	 * @param parent
+	 *            the JFrame that the dialog is related to.
+	 * @throws FileNotFoundException
+	 * 				throws FileNotFoundException if there is no
+	 * 				about.txt file.
+	 *****************************************************************/
+	public AboutDialog(final JFrame parent) throws 
+		FileNotFoundException {
 		
 		// call parent and create a 'modal' dialog
 		super(parent, true);
 		about = "";
-		Scanner s = new Scanner(new File(aboutFile));
-			while (s.hasNextLine()){
-				about += s.nextLine()+"\n";
-			}
 		
+		// get info from file for about
+		Scanner s = new Scanner(new File(ABOUT_FILE));
+			while (s.hasNextLine()) {
+				about += s.nextLine() + "\n";
+			}
+		s.close();
+		
+		// create panel and add a text area to show about
 		JPanel panel = new JPanel();
 		JTextArea aboutText = new JTextArea(about);
 		aboutText.setWrapStyleWord(true);
