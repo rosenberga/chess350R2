@@ -4,12 +4,25 @@
 package view;
 import java.awt.BorderLayout;
 import java.awt.GridLayout;
-import java.awt.event.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import javax.swing.JButton;
+import javax.swing.JCheckBox;
+import javax.swing.JDialog;
+import javax.swing.JFrame;
+import javax.swing.JPanel;
 
-import javax.swing.*;
-
+/*****************************************************************
+ * A SettingsDialog where in game settings can be affected.
+ * 
+ * @version 1.0
+ * @author Adam Rosenberg
+ *****************************************************************/
 public class SettingsDialog extends JDialog implements ActionListener {
 	
+	/** A SerialId. */
+	private static final long serialVersionUID = 171985604033309420L;
+
 	/** A JCheckBox to check to show legal moves. */
 	private JCheckBox showLegal;
 	
@@ -25,6 +38,14 @@ public class SettingsDialog extends JDialog implements ActionListener {
 	/** Number of rows in grid. */
 	private static final int ROWS = 1;
 	
+    /*****************************************************************
+     * Constructs a new SettingsDisalog.
+     * 
+     * @param parent
+     * 			the JFrame that owns this JDialog
+     * @param v
+     * 			an IChessView that this JDialog affects
+     *****************************************************************/
 	public SettingsDialog(final JFrame parent, final IChessView v) {
 		
 		// call parent and create a 'modal' dialog
@@ -58,6 +79,7 @@ public class SettingsDialog extends JDialog implements ActionListener {
 	 * 
 	 * @param e the action event that was just fired
 	 ******************************************************************/
+	@Override
 	public final void actionPerformed(final ActionEvent e) {
 		
 		// get the selected value for showLegal and set the

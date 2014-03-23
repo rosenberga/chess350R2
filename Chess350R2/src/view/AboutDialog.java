@@ -12,6 +12,7 @@ import javax.swing.JTextArea;
 /*****************************************************************
  * A Dialog to show about information for a project.
  *
+ * @version 1.0
  * @author Adam Rosenberg
  *****************************************************************/
 public class AboutDialog extends JDialog {

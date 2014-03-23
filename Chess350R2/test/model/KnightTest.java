@@ -1,14 +1,14 @@
 package model;
 
-import static org.junit.Assert.*;
-
+import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.assertFalse;
 import org.junit.Test;
 
 public class KnightTest {
 
-	ChessModel mainmodel;
-	ChessBoard mainboard;
-	Move move1;
+	private ChessModel mainmodel;
+	private ChessBoard mainboard;
+	private Move move1;
 	
 	//******************************************************Test Knight
 		@Test

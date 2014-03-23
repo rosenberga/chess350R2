@@ -1,20 +1,20 @@
 package model;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
 
 public class QueenTest {
 
-	ChessModel mainmodel = new ChessModel();
-	ChessBoard mainboard = new ChessBoard();
-	Move move1;
+	private ChessModel mainmodel = new ChessModel();
+	private ChessBoard mainboard = new ChessBoard();
+	private Move move1;
 	
 	@Test
 	public final void queensWreakingHavocTest() {
 		ChessModel model = new ChessModel();
 		ChessBoard board = new ChessBoard();
-		Move move;
 		
 		// Move Pawns to free the Queens
 		model.move(new Move(6, 4, 5, 4), board);
