@@ -1,22 +1,25 @@
 package model;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
 
 public class ChessModelTest {
 
-	ChessModel mainmodel, model;
-	ChessBoard mainboard, board;
-	Move move1;
+	private ChessModel mainmodel, model;
+	private ChessBoard mainboard, board;
+	private Move move1;
 	
 	//******************************************************Test Promotion
 	@Test
-	public void testPromotionToRook() {
-		ChessModel mainmodel = new ChessModel();
-		ChessBoard mainboard = new ChessBoard();
+	public final void testPromotionToRook() {
+		mainmodel = new ChessModel();
+		mainboard = new ChessBoard();
 		mainboard.clearBoard();
-		Move move1 = new Move(6, 0, 7, 0);
+		move1 = new Move(6, 0, 7, 0);
 		mainmodel.promotion(mainboard, move1, new Rook(Player.WHITE));
 		assertEquals(mainmodel.pieceAt(mainboard, 7, 0).type(), "Rook");
 		assertEquals(mainmodel.pieceAt(mainboard, 7, 0).player(), Player.WHITE);
@@ -45,23 +48,23 @@ public class ChessModelTest {
 	}
 
 	@Test
-	public void testPromotionToQueen() {
+	public final void testPromotionToQueen() {
 		// promote pawn at space 8 on board
-		ChessModel mainmodel = new ChessModel();
-		ChessBoard mainboard = new ChessBoard();
+		mainmodel = new ChessModel();
+		mainboard = new ChessBoard();
 		mainboard.clearBoard();
-		Move move1 = new Move(6, 0, 7, 0);
+		move1 = new Move(6, 0, 7, 0);
 		mainboard.set(new Pawn(Player.BLACK), 6, 0);
 		mainmodel.move(move1, mainboard);
 		assertEquals(mainmodel.pieceAt(mainboard, 7, 0).type(), "Queen");
 	}
 	
 	@Test
-	public void testPromotionToQueen2() {
-		ChessModel mainmodel = new ChessModel();
-		ChessBoard mainboard = new ChessBoard();
+	public final void testPromotionToQueen2() {
+		mainmodel = new ChessModel();
+		mainboard = new ChessBoard();
 		mainboard.clearBoard();
-		Move move1 = new Move(6, 0, 7, 0);
+		move1 = new Move(6, 0, 7, 0);
 		mainmodel.promotion(mainboard, move1, new Queen(Player.WHITE));
 		assertEquals(mainmodel.pieceAt(mainboard, 7, 0).type(), "Queen");
 		assertEquals(mainmodel.pieceAt(mainboard, 7, 0).player(), Player.WHITE);
@@ -77,7 +80,7 @@ public class ChessModelTest {
 	}
 	//******************************************************Test Check		
 		@Test
-		public void testCheck1() {
+		public final void testCheck1() {
 			// make sure king can be moved
 			mainmodel = new ChessModel();
 			mainboard = new ChessBoard();
@@ -90,7 +93,7 @@ public class ChessModelTest {
 		}
 		
 		@Test
-		public void testCheck2() {
+		public final void testCheck2() {
 			// make sure king must be moved
 			mainmodel = new ChessModel();
 			mainboard = new ChessBoard();
@@ -105,7 +108,7 @@ public class ChessModelTest {
 		}
 
 		@Test
-		public void testCheck3() {
+		public final void testCheck3() {
 			// use black piece to take white piece checking black king
 			mainmodel = new ChessModel();
 			mainboard = new ChessBoard();
@@ -120,7 +123,7 @@ public class ChessModelTest {
 		}
 		
 		@Test
-		public void testCheck4() {
+		public final void testCheck4() {
 			// use black piece to block white piece checking black king
 			mainmodel = new ChessModel();
 			mainboard = new ChessBoard();
@@ -135,7 +138,7 @@ public class ChessModelTest {
 
 		//******************************************************Test Checkmate
 		@Test
-		public void testCheckMate() {
+		public final void testCheckMate() {
 			// test to see if the game is over
 			mainmodel = new ChessModel();
 			mainboard = new ChessBoard();
@@ -145,14 +148,14 @@ public class ChessModelTest {
 			mainmodel.move(move1, mainboard);
 			move1 = new Move(6, 6, 4, 6); // move other white pawn
 			mainmodel.move(move1, mainboard);
-			move1 = new Move(0, 3, 4, 7); // move black queen to checkmate white king
+			move1 = new Move(0, 3, 4, 7); 
 			mainmodel.move(move1, mainboard);
 			assertTrue(mainmodel.isComplete(mainboard));
 			assertFalse(mainmodel.inStaleMate(mainboard));
 		}
 
 		@Test
-		public void testStalemate() {
+		public final void testStalemate() {
 			// player is not in check, but has no legal moves
 			mainmodel = new ChessModel();
 			mainboard = new ChessBoard();
@@ -173,21 +176,23 @@ public class ChessModelTest {
 		}
 		
 		@Test
-		public void testOther(){
+		public final void testOther() {
 			mainmodel = new ChessModel();
 			mainboard = new ChessBoard();
-			assertNotEquals(mainmodel.currentPlayer(), mainmodel.currentPlayer().next());
+			assertNotEquals(mainmodel.currentPlayer(), 
+					mainmodel.currentPlayer().next());
 			mainmodel.setTurns(1);
-			assertNotEquals(mainmodel.currentPlayer(), mainmodel.currentPlayer().next());
+			assertNotEquals(mainmodel.currentPlayer(), 
+					mainmodel.currentPlayer().next());
 			Player[] p = Player.values();
-			assertEquals(p[0]+"", "BLACK");
-			assertEquals(p[1]+"", "WHITE");
+			assertEquals(p[0] + "", "BLACK");
+			assertEquals(p[1] + "", "WHITE");
 			assertEquals(Player.WHITE, Player.valueOf("WHITE"));
 			assertEquals(Player.BLACK, Player.valueOf("BLACK"));
 		}
 		
 		@Test
-		public void testBadEnPassant(){
+		public final void testBadEnPassant() {
 			mainmodel = new ChessModel();
 			mainboard = new ChessBoard();
 			mainboard.clearBoard();
@@ -208,9 +213,9 @@ public class ChessModelTest {
 		}
 		
 		@Test
-		public void simpleStalemate1() {
-			ChessModel model = new ChessModel();
-			ChessBoard board = new ChessBoard();
+		public final void simpleStalemate1() {
+			model = new ChessModel();
+		    board = new ChessBoard();
 			board.clearBoard();
 			
 			// Set up a very simple stalemate. 
@@ -225,7 +230,7 @@ public class ChessModelTest {
 		
 		
 		@Test
-		public void simpleStalemate2() {
+		public final void simpleStalemate2() {
 			model = new ChessModel();
 			board = new ChessBoard();
 			board.clearBoard();
@@ -239,7 +244,7 @@ public class ChessModelTest {
 		}
 		
 		@Test
-		public void simpleStalemate3() {
+		public final void simpleStalemate3() {
 			model = new ChessModel();
 			board = new ChessBoard();
 			board.clearBoard();
@@ -252,7 +257,7 @@ public class ChessModelTest {
 		}
 		
 		@Test
-		public void threeStales(){
+		public final void threeStales() {
 			model = new ChessModel();
 			board = new ChessBoard();
 			board.clearBoard();
@@ -300,7 +305,7 @@ public class ChessModelTest {
 		}
 		
 		@Test
-		public void tenCheckMates(){
+		public final void tenCheckMates() {
 			model = new ChessModel();
 			board = new ChessBoard();
 			board.clearBoard();

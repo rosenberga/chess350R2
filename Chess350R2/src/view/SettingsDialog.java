@@ -8,7 +8,7 @@ import java.awt.event.*;
 
 import javax.swing.*;
 
-public class SettingsDialog extends JDialog implements ActionListener{
+public class SettingsDialog extends JDialog implements ActionListener {
 	
 	/** A JCheckBox to check to show legal moves. */
 	private JCheckBox showLegal;
@@ -25,11 +25,11 @@ public class SettingsDialog extends JDialog implements ActionListener{
 	/** Number of rows in grid. */
 	private static final int ROWS = 1;
 	
-	public SettingsDialog(JFrame parent, IChessView view) {
+	public SettingsDialog(final JFrame parent, final IChessView v) {
 		
 		// call parent and create a 'modal' dialog
 		super(parent, true);
-		this.view = view;
+		this.view = v;
 		
 		okButton = new JButton("Ok");
 		showLegal = new JCheckBox("Show Legal Moves");

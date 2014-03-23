@@ -310,7 +310,13 @@ public class ChessPresenter implements IChessPresenter {
 
 	}
 
-	public static void main(String[] args) {
+	/*****************************************************************
+	 * Main method that starts the chess game.
+	 * 
+	 * @param args 
+	 * 			a String array of arguments passed to the program
+	 *****************************************************************/
+	public static void main(final String[] args) {
 		ChessGame g = new ChessGame();
 		ChessView v = new ChessView(g.getBoard().numRows(), g.getBoard()
 				.numColumns());

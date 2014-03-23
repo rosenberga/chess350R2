@@ -34,7 +34,7 @@ public class KingTest {
 		assertTrue(mainmodel.isValidMove(move1, mainboard));
 	}
 	@Test
-	public void testKing3() {
+	public final void testKing3() {
 		// move the king diagonal 2 spaces
 		mainmodel = new ChessModel();
 		mainboard = new ChessBoard();
@@ -44,7 +44,7 @@ public class KingTest {
 	}
 
 	@Test
-	public void testKing4() {
+	public final void testKing4() {
 		// move the king right 2 spaces
 		mainmodel = new ChessModel();
 		mainboard = new ChessBoard();
@@ -54,7 +54,7 @@ public class KingTest {
 	}
 
 	@Test
-	public void testKing5() {
+	public final void testKing5() {
 		// take a white piece
 		mainmodel = new ChessModel();
 		mainboard = new ChessBoard();
@@ -66,7 +66,7 @@ public class KingTest {
 	}
 
 	@Test
-	public void testKing6() {
+	public final void testKing6() {
 		// attempt to take black piece
 		mainmodel = new ChessModel();
 		mainboard = new ChessBoard();
@@ -78,7 +78,7 @@ public class KingTest {
 	
 	//******************************************************Test Castling
 		@Test
-		public void testCastling1() {
+		public final void testCastling1() {
 			// make sure it can be done
 			mainmodel = new ChessModel();
 			mainboard = new ChessBoard();
@@ -110,7 +110,7 @@ public class KingTest {
 		}
 		
 		@Test
-		public void testCastling3() {
+		public final void testCastling3() {
 			// make sure can't be done if king moved
 			mainmodel = new ChessModel();
 			mainboard = new ChessBoard();
@@ -127,7 +127,7 @@ public class KingTest {
 		}
 		
 		@Test
-		public void testCastling4() {
+		public final void testCastling4() {
 			// make sure can't be done if piece is in the way
 			mainmodel = new ChessModel();
 			mainboard = new ChessBoard();
@@ -140,7 +140,7 @@ public class KingTest {
 		}
 		
 		@Test
-		public void testCastling5() {
+		public final void testCastling5() {
 			// make sure can't be done if piece is in the way
 			mainmodel = new ChessModel();
 			mainboard = new ChessBoard();
@@ -153,7 +153,7 @@ public class KingTest {
 		}
 		
 		@Test
-		public void testCastling6() {
+		public final void testCastling6() {
 			mainmodel = new ChessModel();
 			mainboard = new ChessBoard();
 			mainboard.clearBoard();
@@ -167,7 +167,7 @@ public class KingTest {
 		}
 		
 		@Test
-		public void testCastling7() {
+		public final void testCastling7() {
 			mainmodel = new ChessModel();
 			mainboard = new ChessBoard();
 			mainboard.clearBoard();
@@ -179,7 +179,7 @@ public class KingTest {
 		}
 		
 		@Test
-		public void testCastling8() {
+		public final void testCastling8() {
 			mainmodel = new ChessModel();
 			mainboard = new ChessBoard();
 			mainboard.clearBoard();
@@ -188,11 +188,12 @@ public class KingTest {
 			mainboard.set(new Rook(Player.WHITE), 7, 0);
 			mainboard.set(new Queen(Player.BLACK), 0, 5);
 			mainboard.set(new King(Player.BLACK), 0, 6);
-			assertFalse(mainmodel.isValidMove(new Move(7, 4, 7, 6), mainboard));		
+			assertFalse(mainmodel.isValidMove(
+					new Move(7, 4, 7, 6), mainboard));		
 		}
 
 		@Test
-		public void testCastling9() {
+		public final void testCastling9() {
 			mainmodel = new ChessModel();
 			mainboard = new ChessBoard();
 			mainboard.clearBoard();
@@ -206,7 +207,7 @@ public class KingTest {
 		}
 		
 		@Test
-		public void testCastling10() {
+		public final void testCastling10() {
 			mainmodel = new ChessModel();
 			mainboard = new ChessBoard();
 			mainboard.clearBoard();

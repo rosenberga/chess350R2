@@ -190,7 +190,7 @@ public class PawnTest {
 			mainmodel.move(move1, mainboard); // move black pawn
 			//move1 = new Move(6, 7, 5, 7);
 			//mainmodel.move(move1, mainboard); // move white pawn
-			move1 = new Move(2, 0, 4, 0);		  // move black pawn again 2 spaces
+			move1 = new Move(2, 0, 4, 0); // move black pawn again 2 spaces
 			assertFalse(mainmodel.isValidMove(move1, mainboard));
 		}
 
@@ -290,7 +290,8 @@ public class PawnTest {
 			mainmodel.move(move1, mainboard);
 			//try to prevent cheating of death of doomed white pawn
 			move1 = new Move(4, 7, 5, 6);
-			assertFalse(mainmodel.isValidMove(move1, mainboard)); // en passant not allowed
+			assertFalse(mainmodel.isValidMove(
+					move1, mainboard)); // en passant not allowed
 			
 		}
 }

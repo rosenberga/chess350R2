@@ -6,12 +6,12 @@ import org.junit.Test;
 
 public class RookTest {
 
-	ChessModel mainmodel;
-	ChessBoard mainboard;
-	Move move1;
+	private ChessModel mainmodel;
+	private ChessBoard mainboard;
+	private Move move1;
 	
 	@Test
-	public void testRook1() {
+	public final void testRook1() {
 		// move the rook up 3 spaces
 		mainmodel = new ChessModel();
 		mainboard = new ChessBoard();
@@ -20,24 +20,24 @@ public class RookTest {
 		//System.out.println(mainmodel.pieceAt(mainboard, 2, 0).type());
 		move1 = new Move(2, 0, 5, 0);
 		mainmodel.setTurns(1); // so its black's turn
-		assertTrue(mainmodel.isValidMove(move1, mainboard) == true);
+		assertTrue(mainmodel.isValidMove(move1, mainboard));
 		//mainmodel.move(move1, mainboard);
 		//System.out.println(mainmodel.pieceAt(mainboard, 5, 0).type());
 	}
 
 	@Test
-	public void testRook2() {
+	public final void testRook2() {
 		// move the rook right 2 spaces
 		mainmodel = new ChessModel();
 		mainboard = new ChessBoard();
 		mainboard.set(new Rook(Player.BLACK), 2, 0);
 		move1 = new Move(2, 0, 2, 2);
 		mainmodel.setTurns(1); // so its black's turn
-		assertTrue(mainmodel.isValidMove(move1, mainboard) == true);
+		assertTrue(mainmodel.isValidMove(move1, mainboard));
 	}
 
 	@Test
-	public void testRook3() {
+	public final void testRook3() {
 		// move the rook diagonal 3 spaces
 		mainmodel = new ChessModel();
 		mainboard = new ChessBoard();
@@ -47,7 +47,7 @@ public class RookTest {
 	}
 
 	@Test
-	public void testRook4() {
+	public final void testRook4() {
 		// take a white piece
 		mainmodel = new ChessModel();
 		mainboard = new ChessBoard();
@@ -59,7 +59,7 @@ public class RookTest {
 	}
 
 	@Test
-	public void testRook5() {
+	public final void testRook5() {
 		// attempt to take black piece
 		mainmodel = new ChessModel();
 		mainboard = new ChessBoard();
@@ -70,7 +70,7 @@ public class RookTest {
 	}
 
 	@Test
-	public void testRook6() {
+	public final void testRook6() {
 		// attempt to move through a black piece
 		mainmodel = new ChessModel();
 		mainboard = new ChessBoard();

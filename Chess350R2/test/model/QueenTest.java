@@ -11,7 +11,7 @@ public class QueenTest {
 	Move move1;
 	
 	@Test
-	public void queensWreakingHavocTest() {
+	public final void queensWreakingHavocTest() {
 		ChessModel model = new ChessModel();
 		ChessBoard board = new ChessBoard();
 		Move move;
@@ -119,7 +119,7 @@ public class QueenTest {
 	}
 	
 	@Test
-	public void queenFoolsMateStuff(){
+	public final void queenFoolsMateStuff() {
 		//Use Queen to force a checkmate
 		ChessBoard cb = new ChessBoard();
 		ChessModel game = new ChessModel();
@@ -152,7 +152,7 @@ public class QueenTest {
 	}
 	
 	@Test
-	public void testQueen1() {
+	public final void testQueen1() {
 		// move the queen diagonal 3 spaces
 		mainmodel = new ChessModel();
 		mainboard = new ChessBoard();
@@ -163,7 +163,7 @@ public class QueenTest {
 	}
 
 	@Test
-	public void testQueen2() {
+	public final void testQueen2() {
 		// move the queen right 3 spaces
 		mainmodel = new ChessModel();
 		mainboard = new ChessBoard();
@@ -174,7 +174,7 @@ public class QueenTest {
 	}
 
 	@Test
-	public void testQueen3() {
+	public final void testQueen3() {
 		// move the queen in up l-move
 		mainmodel = new ChessModel();
 		mainboard = new ChessBoard();
@@ -184,7 +184,7 @@ public class QueenTest {
 	}
 
 	@Test
-	public void testQueen4() {
+	public final void testQueen4() {
 		// move the queen in up 2 spaces
 		mainmodel = new ChessModel();
 		mainboard = new ChessBoard();
@@ -195,7 +195,7 @@ public class QueenTest {
 	}
 
 	@Test
-	public void testQueen5() {
+	public final void testQueen5() {
 		// take a white piece
 		mainmodel = new ChessModel();
 		mainboard = new ChessBoard();
@@ -207,7 +207,7 @@ public class QueenTest {
 	}
 
 	@Test
-	public void testQueen6() {
+	public final void testQueen6() {
 		// attempt to take black piece
 		mainmodel = new ChessModel();
 		mainboard = new ChessBoard();

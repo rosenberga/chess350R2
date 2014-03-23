@@ -21,6 +21,7 @@ public class ChessView implements IChessView {
 	private static final String LEGAL = "legal.png";
 	private static final String SELECTED = "selected.png";
 	private static final String EMPTY = "piece-1-1.png";
+	private static final double RATIO = .83;
 	
 	private int cols;
 	private int rows;
@@ -57,10 +58,10 @@ public class ChessView implements IChessView {
 
 	private boolean showLegal;
 	
-	public ChessView(int rows, int cols) {
+	public ChessView(final int r, final int c) {
 		super();
-		this.rows = rows;
-		this.cols = cols;
+		this.rows = r;
+		this.cols = c;
 		frame = new JFrame();
 		newGame();
 		showLegal = true;
@@ -69,8 +70,8 @@ public class ChessView implements IChessView {
 			return showLegal;
 		}
 
-		public void setShowLegal(boolean showLegal) {
-			this.showLegal = showLegal;
+		public void setShowLegal(boolean sL) {
+			this.showLegal = sL;
 		}
 	private void newGame() {
 		frame.dispose();
@@ -88,7 +89,7 @@ public class ChessView implements IChessView {
 		
 		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 		double height = screenSize.getHeight();
-		int h = (int) (height * .83);
+		int h = (int) (height * RATIO);
 		
 		frame.setPreferredSize(new Dimension(h, h));
 		frame.pack();
@@ -138,7 +139,8 @@ public class ChessView implements IChessView {
 		pieceImages = new ImageIcon[NUM_COLORS][NUM_PIECES];
 		for (int i = 0; i < pieceImages.length; i++) {
 			for (int j = 0; j < pieceImages[i].length; j++) {
-				pieceImages[i][j] = new ImageIcon("piece" + i + "" + j + ".png", "piece" + i + "" + j + ".png");
+				pieceImages[i][j] = new ImageIcon("piece" + i + "" + j 
+						+ ".png", "piece" + i + "" + j + ".png");
 			}
 		}
 		
@@ -153,7 +155,7 @@ public class ChessView implements IChessView {
 	}
 
 	@Override
-	public void addButtonListeners(ActionListener e) {
+	public void addButtonListeners(final ActionListener e) {
 		for (int i = 0; i < rows; i++) {
 			for (int j = 0; j < cols; j++) {
 				pieceLabels[i][j].addActionListener(e);

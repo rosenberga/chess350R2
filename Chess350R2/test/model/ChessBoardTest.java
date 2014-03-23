@@ -1,13 +1,16 @@
 package model;
 
-import static org.junit.Assert.*;
-
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.assertNotEquals;
 import org.junit.Test;
 
 public class ChessBoardTest {
 
 	@Test
-	public void test() {
+	public final void test() {
 		ChessBoard board = new ChessBoard();
 		
 		// make sure all the pieces are there
@@ -137,7 +140,8 @@ public class ChessBoardTest {
 		assertNotNull(board.pieceAt(5, 0));
 		assertNull(board.pieceAt(6, 0));
 	}
-	private boolean pieceCheck(IChessPiece piece, int row, int column) {
+	private boolean pieceCheck(final IChessPiece piece, 
+			final int row, final int column) {
 		if (column == 0 || column == 7) {
 			return piece.type().equals("Rook");
 		} else if (column == 1 || column == 6) {

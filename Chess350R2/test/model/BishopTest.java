@@ -1,18 +1,19 @@
 package model;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
 
 public class BishopTest {
 
-	ChessModel mainmodel;
-	ChessBoard mainboard;
-	Move move1;
+	private ChessModel mainmodel;
+	private ChessBoard mainboard;
+	private Move move1;
 	
 	//******************************************************Test Bishop
 		@Test
-		public void testBishop1() {
+		public final void testBishop1() {
 			// move the bishop diagonal 3 spaces
 			mainmodel = new ChessModel();
 			mainboard = new ChessBoard();
