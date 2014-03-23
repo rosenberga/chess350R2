@@ -77,6 +77,21 @@ public class KingTest {
 	}
 	
 	//******************************************************Test Castling
+	
+	@Test
+	public final void testCastling0() {
+		// make sure it can be done
+		mainmodel = new ChessModel();
+		mainboard = new ChessBoard();
+		mainboard.clearBoard();
+		mainboard.set(new King(Player.BLACK), 0, 4);
+		mainboard.set(new Rook(Player.BLACK), 0, 7);
+		mainboard.set(new Queen(Player.WHITE), 1, 4);
+		move1 = new Move(0, 4, 0, 6);
+		mainmodel.setTurns(1);
+		assertFalse(mainmodel.isValidMove(move1, mainboard));
+	}
+
 		@Test
 		public final void testCastling1() {
 			// make sure it can be done
@@ -123,6 +138,7 @@ public class KingTest {
 			mainmodel.move(move1, mainboard);
 			//castle now
 			move1 = new Move(0, 4, 0, 6);
+			mainmodel.setTurns(1);
 			assertFalse(mainmodel.isValidMove(move1, mainboard));
 		}
 		

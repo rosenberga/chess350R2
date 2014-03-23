@@ -71,12 +71,4 @@ public final class CustomIcon extends ImageIcon {
         bottom.paintIcon(c, g, x, y);
         super.paintIcon(c, g, x, y);
     }
-    
-    @Override
-    /*****************************************************************
-     * Retruns the description of the icon
-     *****************************************************************/
-	public String getDescription() {
-    	return super.getDescription();
-    }
 }

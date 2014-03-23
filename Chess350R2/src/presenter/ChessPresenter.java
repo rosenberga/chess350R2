@@ -120,21 +120,15 @@ public class ChessPresenter implements IChessPresenter {
 					// they clicked a menu item
 					if (view.getExitItem() == e.getSource()) {
 						System.exit(0);
-					}
-
-					if (view.getSettingItem() == e.getSource()) {
+					} else if (view.getSettingItem() == e.getSource()) {
 						new SettingsDialog(view.getFrame(), view);
-					}
-
-					if (view.getNewGameItem() == e.getSource()) {
+					} else if (view.getNewGameItem() == e.getSource()) {
 						view.close();
 						game = new ChessGame();
 						view = new ChessView(game.getBoard().numRows(), game
 								.getBoard().numColumns());
 						new ChessPresenter(game, view);
-					}
-
-					if (view.getAboutItem() == e.getSource()) {
+					} else if (view.getAboutItem() == e.getSource()) {
 						try {
 							new AboutDialog(view.getFrame());
 						} catch (FileNotFoundException e1) {
@@ -229,7 +223,6 @@ public class ChessPresenter implements IChessPresenter {
 	 *            the action listener
 	 *****************************************************************/
 	public final void onInput(final ActionListener a) {
-		try {
 
 			game.setMove(coords); // set the move to be made
 
@@ -238,8 +231,7 @@ public class ChessPresenter implements IChessPresenter {
 					game.getModel().move(game.getMove(), game.getBoard());
 				}
 				updateView();
-				if (game.getModel().isComplete(game.getBoard())
-						&& !game.getModel().inStaleMate(game.getBoard())) {
+				if (game.getModel().inCheckMate(game.getBoard())) {
 					String winner;
 					if (game.getModel().currentPlayer() == Player.BLACK) {
 						winner = "WHITE";
@@ -248,14 +240,10 @@ public class ChessPresenter implements IChessPresenter {
 					}
 					view.showMessage(winner + " wins!");
 					view.disable(a);
-				}
-				if (game.getModel().inStaleMate(game.getBoard())) {
+				} else if (game.getModel().inStaleMate(game.getBoard())) {
 					view.showMessage("Stalemate.");
 					view.disable(a);
 				}
-		} catch (Exception e) {
-			view.showMessage(e.getMessage());
-		}
 	}
 
 	/*****************************************************************
