@@ -134,6 +134,8 @@ public class ChessPresenter implements IChessPresenter {
 						} catch (FileNotFoundException e1) {
 							e1.printStackTrace();
 						}
+					} else if (view.getUndoItem() == e.getSource()) {
+						undo();
 					}
 
 				}
@@ -206,7 +208,6 @@ public class ChessPresenter implements IChessPresenter {
 
 	/*****************************************************************
 	 * Calls for the action.
-	 * 
 	 *****************************************************************/
 	private void updateView() {
 		for (int i = 0; i < game.getBoard().numRows(); i++) {
@@ -228,7 +229,7 @@ public class ChessPresenter implements IChessPresenter {
 
 				if (game.getModel()
 						.isValidMove(game.getMove(), game.getBoard())) {
-					game.getModel().move(game.getMove(), game.getBoard());
+					game.getModel().move(game.getMove(), game.getBoard(), game.getChessStack());
 				}
 				updateView();
 				if (game.getModel().inCheckMate(game.getBoard())) {
@@ -296,6 +297,11 @@ public class ChessPresenter implements IChessPresenter {
 
 		return pieceNum;
 
+	}
+	
+	public void undo(){
+		game.undo();
+		updateView();
 	}
 
 	/*****************************************************************

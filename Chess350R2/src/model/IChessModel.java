@@ -37,6 +37,8 @@ public interface IChessModel {
     * @param board the current chess board
     *****************************************************************/
    void move(Move move, IChessBoard board);
+   
+   void move(Move move, IChessBoard board, ChessStack cs);
 
    /*****************************************************************
     * Report whether the current player is in check.

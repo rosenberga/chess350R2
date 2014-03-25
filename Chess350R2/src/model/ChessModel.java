@@ -169,6 +169,14 @@ public final class ChessModel implements IChessModel {
 		}
 		return false;
 	}
+	
+	public void move(final Move move, final IChessBoard board,
+			final ChessStack cs) {
+		IChessBoard b = new ChessBoard();
+		b.setBoard(board.copyBoard());
+		cs.push(b);
+		move(move, board);
+	}
 
 	/*****************************************************************
 	 * Checks if the game is complete.

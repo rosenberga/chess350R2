@@ -18,11 +18,16 @@ public final class ChessGame {
 	/** A Chess Move. */
 	private Move move;
 	
+	private ChessStack chessStack;
+	
+	private static final int UNDO_TURN = -1;
+	
 	
 	/*****************************************************************
 	 * Constructs a new chess game.
 	 *****************************************************************/
 	public ChessGame() {
+		chessStack = new ChessStack();
 		model = new ChessModel();
 		board = new ChessBoard();
 	}
@@ -93,5 +98,20 @@ public final class ChessGame {
 	public void setMove(final int[] coords) {
 		Move m = new Move(coords);
 		setMove(m);
+	}
+	
+	public boolean canUndo() {
+		return !chessStack.empty();
+	}
+	
+	public void undo() {
+		if (canUndo()) {
+			setBoard(chessStack.pop());
+			getModel().setTurns(UNDO_TURN);
+		}
+	}
+	
+	public ChessStack getChessStack(){
+		return chessStack;
 	}
 }

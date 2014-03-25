@@ -85,6 +85,8 @@ public interface IChessView {
 	 *****************************************************************/
 	JMenuItem getExitItem();
 	
+	JMenuItem getUndoItem();
+	
 	/*****************************************************************
 	 * Shows selected piece's square.
 	 * 

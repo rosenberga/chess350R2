@@ -96,6 +96,9 @@ public class ChessView implements IChessView {
 
 	/** Setting Menu Item. */
 	private JMenuItem settingItem;
+	
+	/** Undo Menu Item. */
+	private JMenuItem undoItem;
 
 	/** Shows if the square is a legal move. */
 	private boolean showLegal;
@@ -178,10 +181,12 @@ public class ChessView implements IChessView {
 		exitItem = new JMenuItem("Exit"); 
 		aboutItem = new JMenuItem("About");
 		settingItem = new JMenuItem("Game Settings");
+		undoItem = new JMenuItem("Undo Move");
 
 		gameMenu.add(newGameItem);
 		gameMenu.add(exitItem);
 		settingsMenu.add(settingItem);
+		settingsMenu.add(undoItem);
 		helpMenu.add(aboutItem);
 
 		menus.add(gameMenu);
@@ -250,6 +255,7 @@ public class ChessView implements IChessView {
 		exitItem.addActionListener(e);
 		aboutItem.addActionListener(e);
 		settingItem.addActionListener(e);
+		undoItem.addActionListener(e);
 	}
 
 	/*****************************************************************
@@ -374,6 +380,11 @@ public class ChessView implements IChessView {
 	@Override
 	public final JMenuItem getSettingItem() {
 		return settingItem;
+	}
+	
+	@Override
+	public final JMenuItem getUndoItem() {
+		return undoItem;
 	}
 
 	/*****************************************************************
