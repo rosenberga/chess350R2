@@ -315,5 +315,18 @@ public class ChessPresenter implements IChessPresenter {
 		ChessView v = new ChessView(g.getBoard().numRows(), g.getBoard()
 				.numColumns());
 		new ChessPresenter(g, v);
+		
+		while (true) {
+
+			// The mp3 file must be in the chess folder
+			MP3 music = new MP3("ChopinNocturneOp.9No.2.mp3");
+			music.play();
+			TimeUnit.SECONDS.sleep(136);
+
+			// When adding more music, please make sure to add:
+			// TimeUnit.SECONDS.sleep(How many seconds the song plays);
+			// after your code that plays the song.
+			// Otherwise, your song will play on top of another mp3
+		}
 	}
 }
