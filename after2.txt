@@ -1,0 +1,36 @@
+* 48a4109 2014-03-23 | last commit before r2 is done (HEAD, origin/master, master) [rosenberga]
+* 74f65df 2014-03-22 | checkstyle should be done [rosenberga]
+* c9a7b14 2014-03-22 | more work on checkstyle [rosenberga]
+* 0c7b1bb 2014-03-22 | more work on checkstyle [rosenberga]
+* 16d7e24 2014-03-22 | update to checkstyle [rosenberga]
+* 2f396be 2014-03-22 | fixed some checkstyle violations [rosenberga]
+*   9858cb2 2014-03-22 | Merge branch 'master' of https://github.com/rosenberga/Chess350R2.git [sagegithub]
+|\  
+| * 121ae62 2014-03-22 | more refactor [rosenberga]
+| * 1f4fe19 2014-03-22 | refactored alittle [rosenberga]
+| * 0c47e9b 2014-03-22 | added to about [rosenberga]
+* | 7ec2e82 2014-03-22 | more checkstyle [sagegithub]
+|/  
+*   d89ce73 2014-03-22 | Merge remote-tracking branch 'origin/master' [sagegithub]
+|\  
+| * e9d6925 2014-03-22 | removed messages for not valid move, changed legal piece icon and method [rosenberga]
+* | 5492f18 2014-03-22 | update to checkstyle [sagegithub]
+* |   133d456 2014-03-22 | Merge branch 'master' of https://github.com/rosenberga/Chess350R2.git [sagegithub]
+|\ \  
+| |/  
+| * 29c5d3c 2014-03-22 | added dynamic screen dymansions [rosenberga]
+* |   f165ae3 2014-03-22 | Merge remote-tracking branch 'origin/master' [sagegithub]
+|\ \  
+| |/  
+| *   b97317f 2014-03-22 | Merge branch 'master' of https://github.com/rosenberga/chess350R2.git [rosenberga]
+| |\  
+| * | 30a0e97 2014-03-22 | about an about dialog [rosenberga]
+* | | e180678 2014-03-22 | updates to cp [sagegithub]
+| |/  
+|/|   
+* | 171ecb8 2014-03-22 | Cleaned Model with checkstyle (except for contradiction in ChessPiece). [sagegithub]
+|/  
+* 626e80b 2014-03-22 | show legal moves working [rosenberga]
+* f57e2c0 2014-03-22 | sage test [sagegithub]
+* e64febe 2014-03-22 | retry, putting everything back [rosenberga]
+* 868a215 2014-03-22 | Initial commit [rosenberga]

@@ -3,13 +3,17 @@ package presenter;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.FileNotFoundException;
+import java.util.concurrent.TimeUnit;
+
 import javax.swing.JButton;
+
 import model.ChessGame;
 import model.Move;
 import model.Player;
 import view.AboutDialog;
 import view.ChessView;
 import view.IChessView;
+import view.MP3;
 import view.SettingsDialog;
 
 /*****************************************************************
@@ -321,7 +325,11 @@ public class ChessPresenter implements IChessPresenter {
 			// The mp3 file must be in the chess folder
 			MP3 music = new MP3("ChopinNocturneOp.9No.2.mp3");
 			music.play();
-			TimeUnit.SECONDS.sleep(136);
+			try {
+				TimeUnit.SECONDS.sleep(136);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
 
 			// When adding more music, please make sure to add:
 			// TimeUnit.SECONDS.sleep(How many seconds the song plays);
