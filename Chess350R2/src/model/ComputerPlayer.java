@@ -18,7 +18,7 @@ public class ComputerPlayer {
 		for (int i = 0; i < 16; i++) {    // initialize coordinates to -1
 				from[i] = -1;
 		}
-
+		
 		ArrayList<IChessPiece> field = new ArrayList<IChessPiece>(); // pieces owned by computer
 		for (int i = 0; i < board.numRows(); i++) {
 			for (int j = 0; j < board.numColumns(); j++) {
@@ -33,7 +33,7 @@ public class ComputerPlayer {
 		}
 
 		Random r = new Random(field.size());
-
+		
 		while(true){
 			int index = r.nextInt();
 			fc = from[index] % 10;
@@ -72,7 +72,7 @@ public class ComputerPlayer {
 		for (int i = 0; i < 16; i++) {    // initialize coordinates to -1
 				from[i] = -1;
 		}
-
+		
 		ArrayList<IChessPiece> field = new ArrayList<IChessPiece>(); // pieces owned by computer
 		for (int i = 0; i < board.numRows(); i++) {
 			for (int j = 0; j < board.numColumns(); j++) {
@@ -86,7 +86,7 @@ public class ComputerPlayer {
 			}
 		}
 
-
+		
 		while (field.size() != 0) {
 			Random r = new Random(field.size());
 			int index = r.nextInt();
