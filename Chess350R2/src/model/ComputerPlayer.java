@@ -21,9 +21,9 @@ public class ComputerPlayer {
 	public final Move getRandomMove(final IChessModel model,
 			final IChessBoard board) {
 
-		int fr = -1;
-		int fc = -1;
-		int count = -1;
+		int fr = 0;
+		int fc = 0;
+		int count = 0;
 		int[] from = new int[NUM_PIECES];
 		for (int i = 0; i < NUM_PIECES; i++) { // initialize coordinates to -1
 			from[i] = -1;
@@ -47,10 +47,10 @@ public class ComputerPlayer {
 			}
 		}
 
-		Random r = new Random(field.size());
+		Random r = new Random();
 
 		while (true) {
-			int index = r.nextInt();
+			int index = r.nextInt(field.size()-1);
 			fc = from[index] % 10;
 			fr = (from[index] - fc) / 10;
 			ArrayList<Move> available = new ArrayList<Move>(); // all available
@@ -67,8 +67,8 @@ public class ComputerPlayer {
 				}
 			}
 			if (available.size() != 0) {
-				r = new Random(available.size());
-				Move m = available.get(r.nextInt());
+				r = new Random();
+				Move m = available.get(r.nextInt(available.size()-1));
 				return m;
 			}
 		}
@@ -114,8 +114,8 @@ public class ComputerPlayer {
 		}
 
 		while (field.size() != 0) {
-			Random r = new Random(field.size());
-			int index = r.nextInt();
+			Random r = new Random();
+			int index = r.nextInt(field.size()-1);
 			fc = from[index] % 10;
 			fr = (from[index] - fc) / 10;
 			ArrayList<Move> available = new ArrayList<Move>(); // list of
@@ -139,8 +139,8 @@ public class ComputerPlayer {
 				}
 			}
 			if (available.size() != 0) {
-				r = new Random(available.size());
-				Move m = available.get(r.nextInt());
+				r = new Random();
+				Move m = available.get(r.nextInt(available.size()-1));
 				return m;
 			} else {
 				field.remove(index);

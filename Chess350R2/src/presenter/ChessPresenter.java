@@ -8,6 +8,7 @@ import java.util.concurrent.TimeUnit;
 import javax.swing.JButton;
 
 import model.ChessGame;
+import model.ComputerPlayer;
 import model.Move;
 import model.Player;
 import view.AboutDialog;
@@ -72,6 +73,11 @@ public class ChessPresenter implements IChessPresenter {
 	private static final int ROW = 0;
 	/** The standard row number. */
 	private static final int COL = 1;
+	private boolean onePlayer;
+	private int cpuStyle;
+	private static final int RANDOM = 0;
+	private static final int ATTACK = 1;
+	private static final int DEF = 2;
 
 	/*****************************************************************
 	 * A constructor for the Presenter.
@@ -81,11 +87,14 @@ public class ChessPresenter implements IChessPresenter {
 	 * @param v
 	 *            the view variable
 	 *****************************************************************/
-	public ChessPresenter(final ChessGame g, final IChessView v) {
+	public ChessPresenter(final ChessGame g, final IChessView v,
+			final boolean single, final int style) {
 		game = g;
 		view = v;
 		firstClick = true;
 		coords = new int[COORDS];
+		onePlayer = single;
+		cpuStyle = style;
 
 		// set starting data
 		for (int i = 0; i < game.getBoard().numRows(); i++) {
@@ -98,7 +107,7 @@ public class ChessPresenter implements IChessPresenter {
 			@Override
 			public void actionPerformed(final ActionEvent e) {
 
-				// if they clicked a button, 
+				// if they clicked a button,
 				// then it was a chess position
 				if (e.getSource().getClass() == JButton.class) {
 					int[] pos = view.getData(e);
@@ -106,13 +115,12 @@ public class ChessPresenter implements IChessPresenter {
 						firstClick(pos);
 					} else {
 						firstClick = true;
-						if (game.getBoard().pieceAt(pos[ROW], pos[COL]) 
-								== null) {
+						if (game.getBoard().pieceAt(pos[ROW], pos[COL]) == null) {
 							legalMove(pos, this);
 						} else {
-							if (game.getBoard().pieceAt(pos[ROW], 
-									pos[COL]).player() != game
-										.getModel().currentPlayer()) {
+							if (game.getBoard().pieceAt(pos[ROW], pos[COL])
+									.player() != game.getModel()
+									.currentPlayer()) {
 								legalMove(pos, this);
 							} else {
 								updateView();
@@ -131,7 +139,7 @@ public class ChessPresenter implements IChessPresenter {
 						game = new ChessGame();
 						view = new ChessView(game.getBoard().numRows(), game
 								.getBoard().numColumns());
-						new ChessPresenter(game, view);
+						new ChessPresenter(game, view, onePlayer, cpuStyle);
 					} else if (view.getAboutItem() == e.getSource()) {
 						try {
 							new AboutDialog(view.getFrame());
@@ -229,26 +237,47 @@ public class ChessPresenter implements IChessPresenter {
 	 *****************************************************************/
 	public final void onInput(final ActionListener a) {
 
-			game.setMove(coords); // set the move to be made
+		game.setMove(coords); // set the move to be made
 
-				if (game.getModel()
-						.isValidMove(game.getMove(), game.getBoard())) {
-					game.getModel().move(game.getMove(), game.getBoard(), game.getChessStack());
-				}
-				updateView();
-				if (game.getModel().inCheckMate(game.getBoard())) {
-					String winner;
-					if (game.getModel().currentPlayer() == Player.BLACK) {
-						winner = "WHITE";
-					} else {
-						winner = "BLACK";
-					}
-					view.showMessage(winner + " wins!");
-					view.disable(a);
-				} else if (game.getModel().inStaleMate(game.getBoard())) {
-					view.showMessage("Stalemate.");
-					view.disable(a);
-				}
+		if (game.getModel().isValidMove(game.getMove(), game.getBoard())) {
+			game.getModel().move(game.getMove(), game.getBoard(),
+					game.getChessStack());
+			if (onePlayer) {
+				computerMove(a);
+			}
+		}
+		afterMove(a);
+	}
+
+	private final void afterMove(final ActionListener a) {
+		updateView();
+		if (game.getModel().inCheckMate(game.getBoard())) {
+			String winner;
+			if (game.getModel().currentPlayer() == Player.BLACK) {
+				winner = "WHITE";
+			} else {
+				winner = "BLACK";
+			}
+			view.showMessage(winner + " wins!");
+			view.disable(a);
+		} else if (game.getModel().inStaleMate(game.getBoard())) {
+			view.showMessage("Stalemate.");
+			view.disable(a);
+		}
+	}
+
+	private final void computerMove(final ActionListener al) {
+		// it is now the computer players turn
+		ComputerPlayer cp = new ComputerPlayer();
+		Move m;
+		if(cpuStyle == RANDOM){
+			m = cp.getRandomMove(game.getModel(), game.getBoard());
+		} else if (cpuStyle == ATTACK) {
+			m = cp.getAttackMove(game.getModel(), game.getBoard());
+		} else { //(cpuStyle == DEF) 
+			m = cp.getDefensiveMove(game.getModel(), game.getBoard());
+		}
+		game.getModel().move(m, game.getBoard(), game.getChessStack());
 	}
 
 	/*****************************************************************
@@ -302,39 +331,9 @@ public class ChessPresenter implements IChessPresenter {
 		return pieceNum;
 
 	}
-	
-	public void undo(){
+
+	public void undo() {
 		game.undo();
 		updateView();
-	}
-
-	/*****************************************************************
-	 * Main method that starts the chess game.
-	 * 
-	 * @param args 
-	 * 			a String array of arguments passed to the program
-	 *****************************************************************/
-	public static void main(final String[] args) {
-		ChessGame g = new ChessGame();
-		ChessView v = new ChessView(g.getBoard().numRows(), g.getBoard()
-				.numColumns());
-		new ChessPresenter(g, v);
-		
-		while (true) {
-
-			// The mp3 file must be in the chess folder
-			MP3 music = new MP3("ChopinNocturneOp.9No.2.mp3");
-			music.play();
-			try {
-				TimeUnit.SECONDS.sleep(136);
-			} catch (InterruptedException e) {
-				e.printStackTrace();
-			}
-
-			// When adding more music, please make sure to add:
-			// TimeUnit.SECONDS.sleep(How many seconds the song plays);
-			// after your code that plays the song.
-			// Otherwise, your song will play on top of another mp3
-		}
 	}
 }
