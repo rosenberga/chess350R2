@@ -115,5 +115,11 @@ public interface IChessModel {
     * @throws InterruptedException 
     *****************************************************************/
    	void playMusic() throws InterruptedException;
+    
+    /*****************************************************************
+     * Stops music
+     * @throws InterruptedException
+     *****************************************************************/
+    void stopMusic() throws InterruptedException;
 
 }
