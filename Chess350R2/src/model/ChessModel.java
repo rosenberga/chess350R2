@@ -1,5 +1,7 @@
 package model;
 
+import java.util.concurrent.TimeUnit;
+
 /*****************************************************************
  * Represents a chess model for a standard game of chess. Contains 
  * logic for knowing who the current player is, whether or not 

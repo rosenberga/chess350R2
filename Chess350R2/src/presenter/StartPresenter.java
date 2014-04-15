@@ -36,6 +36,13 @@ public class StartPresenter {
 				}
 			}
 		});
+		while(true){
+			try {
+				g.getModel().playMusic();
+			} catch (InterruptedException e1) {
+				e1.printStackTrace();
+			}
+		}
 	}
 	
 
@@ -47,8 +54,5 @@ public class StartPresenter {
 	 *****************************************************************/
 	public static void main(final String[] args) {
 		new StartPresenter();
-		while(true){
-			g.getModel().playMusic();
-		}
 	}
 }

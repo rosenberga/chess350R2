@@ -14,7 +14,6 @@ import model.Player;
 import view.AboutDialog;
 import view.ChessView;
 import view.IChessView;
-import view.MP3;
 import view.SettingsDialog;
 
 /*****************************************************************
