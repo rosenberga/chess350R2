@@ -50,7 +50,7 @@ public class ComputerPlayer {
 		Random r = new Random();
 
 		while (true) {
-			int index = r.nextInt(field.size()-1);
+			int index = r.nextInt(field.size() - 1);
 			fc = from[index] % 10;
 			fr = (from[index] - fc) / 10;
 			ArrayList<Move> available = new ArrayList<Move>(); // all available
@@ -66,10 +66,12 @@ public class ComputerPlayer {
 					}
 				}
 			}
-			if (available.size() != 0) {
+			if (available.size() >= 2) {
 				r = new Random();
-				Move m = available.get(r.nextInt(available.size()-1));
+				Move m = available.get(r.nextInt(available.size() - 1));
 				return m;
+			} else if (available.size() == 1) {
+				return available.get(0);
 			}
 		}
 	}
@@ -87,9 +89,9 @@ public class ComputerPlayer {
 			final IChessBoard board) {
 		// if found, return a move that will attack opponent
 		// else return getRandomMove(model, board)
-		int fr = -1;
-		int fc = -1;
-		int count = -1;
+		int fr = 0;
+		int fc = 0;
+		int count = 0;
 		int[] from = new int[16];
 		for (int i = 0; i < 16; i++) { // initialize coordinates to -1
 			from[i] = -1;
@@ -115,7 +117,7 @@ public class ComputerPlayer {
 
 		while (field.size() != 0) {
 			Random r = new Random();
-			int index = r.nextInt(field.size()-1);
+			int index = r.nextInt(field.size());
 			fc = from[index] % 10;
 			fr = (from[index] - fc) / 10;
 			ArrayList<Move> available = new ArrayList<Move>(); // list of
@@ -126,6 +128,7 @@ public class ComputerPlayer {
 			for (int i = 0; i < board.numRows(); i++) {
 				for (int j = 0; j < board.numColumns(); j++) {
 					if (model.isValidMove(new Move(fr, fc, i, j), board)) {
+						if (board.pieceAt(i, j) != null){
 						if (board.pieceAt(i, j).player() != model
 								.currentPlayer()) { // if to row/col has enemy
 													// piece, add that spot
@@ -136,12 +139,14 @@ public class ComputerPlayer {
 																	// possible
 						}
 					}
-				}
+				}}
 			}
-			if (available.size() != 0) {
+			if (available.size() >= 2) {
 				r = new Random();
-				Move m = available.get(r.nextInt(available.size()-1));
+				Move m = available.get(r.nextInt(available.size() - 1));
 				return m;
+			} else if (available.size() == 1) {
+				return available.get(0);
 			} else {
 				field.remove(index);
 				for (int i = index; i < (available.size() - index); i++) {
@@ -232,8 +237,7 @@ public class ComputerPlayer {
 									// now we must find a place where it can
 									// move to
 									for (int r = 0; r < board.numRows(); r++) {
-										for (int c = 0; c < board.numColumns(); 
-												c++) {
+										for (int c = 0; c < board.numColumns(); c++) {
 											m = new Move(tr, tc, r, c);
 											if (model.isValidMove(m, board)) {
 												return m;
