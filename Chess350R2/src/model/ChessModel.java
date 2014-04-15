@@ -329,7 +329,7 @@ public final class ChessModel implements IChessModel {
 
 	/*****************************************************************
 	 * Stops music from playing
-     *
+     * This method can be safely called when music isn't playing 
 	 *****************************************************************/
 	public void stopMusic() throws InterruptedException {
 		music.close();
