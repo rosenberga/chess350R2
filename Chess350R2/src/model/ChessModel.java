@@ -44,6 +44,9 @@ public final class ChessModel implements IChessModel {
 	
 	/** Column King is moving to another way. */
 	private static final int CAST2TO = 5;
+    
+    /** Our music playing */
+	private MP3 music;
 
 	/*****************************************************************
 	 * Constructs a new ChessModel.
@@ -319,11 +322,19 @@ public final class ChessModel implements IChessModel {
 	 * this prevents sound overlapping
 	 *****************************************************************/
 	public void playMusic() throws InterruptedException {
-		MP3 music = new MP3("ChopinNocturneOp.9No.2.mp3");
+		music = new MP3("ChopinNocturneOp.9No.2.mp3");
 		music.play();
 		TimeUnit.SECONDS.sleep(136);
 	}
 
+	/*****************************************************************
+	 * Stops music from playing
+     * This method can be safely called when music isn't playing 
+	 *****************************************************************/
+	public void stopMusic() throws InterruptedException {
+		music.close();
+	}
+    
 	/*****************************************************************
 	 * Promote a pawn to another piece.
 	 * 
