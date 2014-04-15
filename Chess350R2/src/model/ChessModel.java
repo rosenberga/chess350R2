@@ -310,6 +310,17 @@ public final class ChessModel implements IChessModel {
 		board.set(new Queen(currentPlayer()), 
 				move.getToRow(), move.getToColumn());
 	}
+	
+	/*****************************************************************
+	 * Plays an mp3, then waits a set amount of time
+	 * When adding mp3s, change the wait time to the total play time
+	 * this prevents sound overlapping
+	 *****************************************************************/
+	public void playMusic() throws InterruptedException {
+		MP3 music = new MP3("ChopinNocturneOp.9No.2.mp3");
+		music.play();
+		TimeUnit.SECONDS.sleep(136);
+	}
 
 	/*****************************************************************
 	 * Promote a pawn to another piece.
