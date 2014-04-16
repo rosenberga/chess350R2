@@ -124,4 +124,12 @@ public interface IChessView {
 	 *****************************************************************/
 	JFrame getFrame();
 
+	void paintLastMove(int fromRow, int fromColumn, int[] sendPiece);
+
+	boolean isShowLast();
+
+	void setShowLast(boolean selected);
+
+	void paintLastMove(int fromRow, int fromColumn);
+
 }

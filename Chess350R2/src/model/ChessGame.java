@@ -22,12 +22,15 @@ public final class ChessGame {
 	
 	private static final int UNDO_TURN = -1;
 	
+	private MoveStack moveStack;
+	
 	
 	/*****************************************************************
 	 * Constructs a new chess game.
 	 *****************************************************************/
 	public ChessGame() {
 		chessStack = new ChessStack();
+		moveStack = new MoveStack();
 		model = new ChessModel();
 		board = new ChessBoard();
 	}
@@ -108,10 +111,19 @@ public final class ChessGame {
 		if (canUndo()) {
 			setBoard(chessStack.pop());
 			getModel().setTurns(UNDO_TURN);
+			moveStack.pop();
 		}
 	}
 	
 	public ChessStack getChessStack(){
 		return chessStack;
+	}
+	
+	public Move getLastMove(){
+		return moveStack.peek();
+	}
+	
+	public void pushMove(final Move m){
+		moveStack.push(m);
 	}
 }

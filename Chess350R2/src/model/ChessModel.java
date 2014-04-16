@@ -45,7 +45,7 @@ public final class ChessModel implements IChessModel {
 	/** Column King is moving to another way. */
 	private static final int CAST2TO = 5;
     
-    /** Our music playing */
+    /** Our music playing. */
 	private MP3 music;
 
 	/*****************************************************************

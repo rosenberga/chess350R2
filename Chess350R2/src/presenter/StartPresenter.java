@@ -18,20 +18,24 @@ public class StartPresenter {
 				if(e.getSource() == ss.getTwoPlayer()){
 					ChessView v = new ChessView(g.getBoard().numRows(), g.getBoard()
 							.numColumns());
+					ss.setVisible(false);
 					new ChessPresenter(g, v, false, 0);
 				} else if (e.getSource() == ss.getOnePlayer()) {
 					ss.changePanels();
 				} else if (e.getSource() == ss.getStyleOne()){
 					ChessView v = new ChessView(g.getBoard().numRows(), g.getBoard()
 							.numColumns());
+					ss.setVisible(false);
 					new ChessPresenter(g, v, true, 0);
 				} else if (e.getSource() == ss.getStyleTwo()){
 					ChessView v = new ChessView(g.getBoard().numRows(), g.getBoard()
 							.numColumns());
+					ss.setVisible(false);
 					new ChessPresenter(g, v, true, 1);
 				} else if (e.getSource() == ss.getStyleThree()){
 					ChessView v = new ChessView(g.getBoard().numRows(), g.getBoard()
 							.numColumns());
+					ss.setVisible(false);
 					new ChessPresenter(g, v, true, 2);
 				}
 			}

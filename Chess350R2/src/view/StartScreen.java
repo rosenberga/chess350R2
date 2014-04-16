@@ -76,5 +76,8 @@ public class StartScreen {
 		return styleThree;
 	}
 	
+	public void setVisible(final boolean visable){
+		frame.setVisible(visable);
+	}
 	
 }

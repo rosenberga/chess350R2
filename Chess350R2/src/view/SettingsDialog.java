@@ -26,6 +26,8 @@ public class SettingsDialog extends JDialog implements ActionListener {
 	/** A JCheckBox to check to show legal moves. */
 	private JCheckBox showLegal;
 	
+	private JCheckBox showLast;
+	
 	/** The OK Button. */
 	private JButton okButton;
 	
@@ -55,11 +57,14 @@ public class SettingsDialog extends JDialog implements ActionListener {
 		okButton = new JButton("Ok");
 		showLegal = new JCheckBox("Show Legal Moves");
 		showLegal.setSelected(view.isShowLegal());
+		showLast = new JCheckBox("Show Last Moves");
+		showLast.setSelected(view.isShowLast());
 		
 		// create new panel and add components to it
 		JPanel panel = new JPanel();
 		panel.setLayout(new GridLayout(ROWS, COLS));
 		panel.add(showLegal);
+		panel.add(showLast);
 		panel.add(okButton);
 		
 		// add panels to dialog
@@ -85,7 +90,7 @@ public class SettingsDialog extends JDialog implements ActionListener {
 		// get the selected value for showLegal and set the
 		// boolean showLegal in view to that
 		view.setShowLegal(showLegal.isSelected());
-		
+		view.setShowLast(showLast.isSelected());
 		// dispose the dialog
 		dispose();
 	}

@@ -54,6 +54,8 @@ public class ChessView implements IChessView {
 	private static final String SELECTED = "selected.png";
 	/** Picture of empty space. */
 	private static final String EMPTY = "piece-1-1.png";
+	/** Picture of last space. */
+	private static final String LAST = "last.png";
 	/** Ratio to use when sizing the frame. */
 	private static final double RATIO = 0.83;
 
@@ -102,6 +104,9 @@ public class ChessView implements IChessView {
 
 	/** Shows if the square is a legal move. */
 	private boolean showLegal;
+	
+	/** Shows the last move. */
+	private boolean showLast;
 
 	/*****************************************************************
 	 * Constructor for the View.
@@ -116,6 +121,7 @@ public class ChessView implements IChessView {
 		frame = new JFrame();
 		newGame();
 		showLegal = true;
+		showLast = true;
 	}
 	/*****************************************************************
 	 * Returns true if the square is a legal move.
@@ -131,8 +137,16 @@ public class ChessView implements IChessView {
 	 * 
 	 * @param showLegal1 the legality
 	 *****************************************************************/
-	public final void setShowLegal(final boolean showLegal1) {
-		this.showLegal = showLegal1;
+	public final void setShowLegal(final boolean showLegal) {
+		this.showLegal = showLegal;
+	}
+	
+	public boolean isShowLast(){
+		return showLast;
+	}
+	
+	public final void setShowLast(final boolean showLast){
+		this.showLast = showLast;
 	}
 	
 	/*****************************************************************
@@ -333,6 +347,19 @@ public class ChessView implements IChessView {
 			icon = new ImageIcon(EMPTY, EMPTY);
 		}
 		icon = new CustomIcon(LEGAL, icon);
+		pieceLabels[row][col].setIcon(icon);
+	}
+	
+	public final void paintLastMove(final int row, final int col,
+			final int[] pieceID){
+		ImageIcon icon = pieceImages[pieceID[OWNER]][pieceID[TYPE]];
+		icon = new CustomIcon(LEGAL, icon);
+		pieceLabels[row][col].setIcon(icon);
+	}
+	
+	public final void paintLastMove(final int row, final int col){
+		ImageIcon icon = new ImageIcon(EMPTY, EMPTY);
+		icon = new CustomIcon(LAST, icon);
 		pieceLabels[row][col].setIcon(icon);
 	}
 

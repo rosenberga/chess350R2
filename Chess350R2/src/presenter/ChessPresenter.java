@@ -226,6 +226,17 @@ public class ChessPresenter implements IChessPresenter {
 				view.setData(i, j, sendPiece(i, j));
 			}
 		}
+		showLastMove();
+	}
+	
+	private void showLastMove(){
+		if(view.isShowLast()){
+			Move m = game.getLastMove();
+			if (m != null){
+			view.paintLastMove(m.getFromRow(), m.getFromColumn());
+			view.paintLastMove(m.getToRow(), m.getToColumn(), sendPiece(m.getToRow(), m.getToColumn()));
+			}
+		}
 	}
 
 	/*****************************************************************
@@ -241,6 +252,7 @@ public class ChessPresenter implements IChessPresenter {
 		if (game.getModel().isValidMove(game.getMove(), game.getBoard())) {
 			game.getModel().move(game.getMove(), game.getBoard(),
 					game.getChessStack());
+			game.pushMove(game.getMove());
 			if (onePlayer) {
 				computerMove(a);
 			}
@@ -269,13 +281,14 @@ public class ChessPresenter implements IChessPresenter {
 		// it is now the computer players turn
 		ComputerPlayer cp = new ComputerPlayer();
 		Move m;
-		if(cpuStyle == RANDOM){
+		if (cpuStyle == RANDOM) {
 			m = cp.getRandomMove(game.getModel(), game.getBoard());
 		} else if (cpuStyle == ATTACK) {
 			m = cp.getAttackMove(game.getModel(), game.getBoard());
 		} else { //(cpuStyle == DEF) 
 			m = cp.getDefensiveMove(game.getModel(), game.getBoard());
 		}
+		game.pushMove(m);
 		game.getModel().move(m, game.getBoard(), game.getChessStack());
 	}
 
