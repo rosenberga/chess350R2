@@ -97,7 +97,7 @@ public class ChessPresenter implements IChessPresenter {
 		coords = new int[COORDS];
 		onePlayer = single;
 		cpuStyle = style;
-
+		playMusic();
 		// set starting data
 		for (int i = 0; i < game.getBoard().numRows(); i++) {
 			for (int j = 0; j < game.getBoard().numColumns(); j++) {
@@ -163,7 +163,6 @@ public class ChessPresenter implements IChessPresenter {
 				}
 			}
 		});
-		playMusic();
 	}
 	
 	private void playMusic(){

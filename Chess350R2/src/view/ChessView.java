@@ -1,11 +1,26 @@
 package view;
 
+import java.applet.Applet;
+import java.applet.AudioClip;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
+import java.awt.Frame;
 import java.awt.GridLayout;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
+import java.io.IOException;
+import java.net.MalformedURLException;
+import java.net.URL;
+
+import javax.sound.sampled.AudioFormat;
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
+import javax.sound.sampled.DataLine;
+import javax.sound.sampled.LineUnavailableException;
+import javax.sound.sampled.UnsupportedAudioFileException;
 import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
@@ -21,7 +36,9 @@ import javax.swing.JOptionPane;
  * @author Adam Rosenberg
  * @version 1.0
  *****************************************************************/
-public class ChessView implements IChessView {
+public class ChessView extends Frame implements IChessView {
+
+	private static final long serialVersionUID = -8519417649667845070L;
 
 	/** Number of colors in the game. */
 	private static final int NUM_COLORS = 2;
@@ -110,9 +127,11 @@ public class ChessView implements IChessView {
 	/** Shows the last move. */
 	private boolean showLast;
 
-	private static final String song = "ChopinNocturneOp.9Mo.2.mp3";
-	
-	
+	private static final String song = "ChopinNocturneOp.9No.2.wav";
+	private File audioFile;
+	private AudioInputStream audioStream;
+	private Clip audioClip;
+	private static final int LOOP = Clip.LOOP_CONTINUOUSLY;
 
 	/*****************************************************************
 	 * Constructor for the View.
@@ -130,6 +149,24 @@ public class ChessView implements IChessView {
 		newGame();
 		showLegal = true;
 		showLast = true;
+	}
+	
+	private void setUpAudio(){
+		audioFile = new File(song);
+		try {
+			audioStream = AudioSystem.getAudioInputStream(audioFile);
+		} catch (UnsupportedAudioFileException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		AudioFormat format = audioStream.getFormat();
+		DataLine.Info info = new DataLine.Info(Clip.class, format);
+		try {
+			audioClip = (Clip) AudioSystem.getLine(info);
+		} catch (LineUnavailableException e) {
+			e.printStackTrace();
+		}
 	}
 
 	/*****************************************************************
@@ -486,10 +523,25 @@ public class ChessView implements IChessView {
 
 	@Override
 	public void playMusic() {
+		setUpAudio();
+		try {
+			audioClip.open(audioStream);
+		} catch (LineUnavailableException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		audioClip.loop(LOOP);
 	}
 
 	@Override
 	public void stopMusic() {
+		audioClip.close();
+		try {
+			audioStream.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 
 }
