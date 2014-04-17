@@ -172,6 +172,50 @@ public class ChessPresenter implements IChessPresenter {
 		view.stopMusic();
 	}
 
+    /*****************************************************************
+	 * Saves the board state to a file
+	 * @throws IOException
+	 *
+	 *
+	 *****************************************************************/
+	private void saveGame() throws IOException {
+		try {
+			// Create an array containing our board data to be saved
+			Object[] data = {game, view, onePlayer, cpuStyle};
+			File file = new File("chessSave");
+			// Create a file location and save our data there
+			FileOutputStream fout = new FileOutputStream(file);
+			ObjectOutputStream oos = new ObjectOutputStream(fout);
+			oos.writeObject(data);
+			oos.close();
+			System.out.println("Done");
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+	/*****************************************************************
+	 * Loads a game state from a file
+	 * @throws IOException
+	 * @throws ClassNotFoundException
+	 *
+	 *
+	 *****************************************************************/
+	private void loadGame(String fileLocation) throws IOException, ClassNotFoundException {
+		try {
+			FileInputStream in = new FileInputStream(fileLocation);
+			ObjectInputStream s = new ObjectInputStream(in);
+			Object[] data = (Object[]) s.readObject();
+			s.close();
+			new ChessPresenter((ChessGame) data[0], (IChessView) data[1], (boolean) data[2], (int) data[3]);
+			
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+    
 	/*****************************************************************
 	 * Calls for the action.
 	 * 
