@@ -208,7 +208,6 @@ public class ChessPresenter implements IChessPresenter, Serializable {
 			ObjectOutputStream oos = new ObjectOutputStream(fout);
 			oos.writeObject(data);
 			oos.close();
-			System.out.println("Done");
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		}
@@ -221,7 +220,7 @@ public class ChessPresenter implements IChessPresenter, Serializable {
 	 *
 	 *
 	 *****************************************************************/
-	private void loadGame(String fileLocation) throws IOException, ClassNotFoundException {
+	public void loadGame(String fileLocation) throws IOException, ClassNotFoundException {
 		try {
 			view.close();
 			stopMusic();

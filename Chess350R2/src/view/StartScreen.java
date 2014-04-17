@@ -16,6 +16,7 @@ public class StartScreen {
 	private JButton styleOne;
 	private JButton styleTwo;
 	private JButton styleThree;
+	private JButton loadGame;
 	
 	public StartScreen(){
 		frame = new JFrame("Chess350");
@@ -27,12 +28,14 @@ public class StartScreen {
 		styleOne = new JButton("Random CPU");
 		styleTwo = new JButton("Offensive CPU");
 		styleThree = new JButton("Defensive CPU");
+		loadGame = new JButton("Load Last Saved Game");
 		
-		firstPanel.setLayout(new GridLayout(2,1));
+		firstPanel.setLayout(new GridLayout(0,1));
 		firstPanel.add(onePlayer);
 		firstPanel.add(twoPlayer);
+		firstPanel.add(loadGame);
 		
-		secondPanel.setLayout(new GridLayout(3,1));
+		secondPanel.setLayout(new GridLayout(0,1));
 		secondPanel.add(styleOne);
 		secondPanel.add(styleTwo);
 		secondPanel.add(styleThree);
@@ -48,6 +51,7 @@ public class StartScreen {
 		styleOne.addActionListener(e);
 		styleTwo.addActionListener(e);
 		styleThree.addActionListener(e);
+		loadGame.addActionListener(e);
 	}
 	
 	public final void changePanels(){
@@ -74,6 +78,10 @@ public class StartScreen {
 
 	public JButton getStyleThree() {
 		return styleThree;
+	}
+	
+	public JButton getLoadGame() {
+		return loadGame;
 	}
 	
 	public void setVisible(final boolean visable){

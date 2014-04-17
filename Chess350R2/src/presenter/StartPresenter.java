@@ -2,9 +2,11 @@ package presenter;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 
 import model.ChessGame;
 import view.ChessView;
+import view.IChessView;
 import view.StartScreen;
 
 public class StartPresenter {
@@ -16,27 +18,39 @@ public class StartPresenter {
 			@Override
 			public void actionPerformed(final ActionEvent e){
 				if(e.getSource() == ss.getTwoPlayer()){
-					ChessView v = new ChessView(g.getBoard().numRows(), g.getBoard()
-							.numColumns());
 					ss.setVisible(false);
+					IChessView v = new ChessView(g.getBoard().numRows(), g.getBoard()
+							.numColumns());
 					new ChessPresenter(g, v, false, 0);
 				} else if (e.getSource() == ss.getOnePlayer()) {
 					ss.changePanels();
 				} else if (e.getSource() == ss.getStyleOne()){
-					ChessView v = new ChessView(g.getBoard().numRows(), g.getBoard()
-							.numColumns());
 					ss.setVisible(false);
+					IChessView v = new ChessView(g.getBoard().numRows(), g.getBoard()
+							.numColumns());
 					new ChessPresenter(g, v, true, 0);
 				} else if (e.getSource() == ss.getStyleTwo()){
-					ChessView v = new ChessView(g.getBoard().numRows(), g.getBoard()
-							.numColumns());
 					ss.setVisible(false);
+					IChessView v = new ChessView(g.getBoard().numRows(), g.getBoard()
+							.numColumns());
 					new ChessPresenter(g, v, true, 1);
 				} else if (e.getSource() == ss.getStyleThree()){
-					ChessView v = new ChessView(g.getBoard().numRows(), g.getBoard()
-							.numColumns());
 					ss.setVisible(false);
+					IChessView v = new ChessView(g.getBoard().numRows(), g.getBoard()
+							.numColumns());
 					new ChessPresenter(g, v, true, 2);
+				} else if(e.getSource() == ss.getLoadGame()){
+					ss.setVisible(false);
+					IChessView v = new ChessView(g.getBoard().numRows(), g.getBoard()
+							.numColumns());
+					ChessPresenter cp = new ChessPresenter(g, v, false, 0);
+					try {
+						cp.loadGame("chessSave.ser");
+					} catch (ClassNotFoundException e1) {
+						e1.printStackTrace();
+					} catch (IOException e1) {
+						e1.printStackTrace();
+					}
 				}
 			}
 		});

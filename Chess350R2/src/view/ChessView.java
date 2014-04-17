@@ -228,6 +228,7 @@ public class ChessView extends Frame implements IChessView, Serializable {
 		frame.setPreferredSize(new Dimension(h, h));
 		frame.pack();
 		frame.setVisible(true);
+		frame.setResizable(false);
 	}
 
 	/*****************************************************************
