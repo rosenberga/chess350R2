@@ -40,6 +40,7 @@ public class AboutDialog extends JDialog {
 		
 		// call parent and create a 'modal' dialog
 		super(parent, true);
+		super.setLocationRelativeTo(parent);
 		about = "";
 		
 		// get info from file for about

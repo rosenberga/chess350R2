@@ -1,7 +1,5 @@
 package view;
 
-import java.applet.Applet;
-import java.applet.AudioClip;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.Frame;
@@ -11,9 +9,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.IOException;
-import java.net.MalformedURLException;
-import java.net.URL;
-
 import javax.sound.sampled.AudioFormat;
 import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
@@ -140,7 +135,8 @@ public class ChessView extends Frame implements IChessView {
 	 *            number of rows
 	 * @param col
 	 *            number of columns
-	 *****************************************************************/
+	 ******************************
+	 ************************************/
 	public ChessView(final int row, final int col) {
 		super();
 		this.rows = row;

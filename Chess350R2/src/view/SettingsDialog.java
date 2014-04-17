@@ -52,6 +52,7 @@ public class SettingsDialog extends JDialog implements ActionListener {
 		
 		// call parent and create a 'modal' dialog
 		super(parent, true);
+		super.setLocationRelativeTo(parent);
 		this.view = v;
 		
 		okButton = new JButton("Ok");
