@@ -101,6 +101,12 @@ public class ChessView extends Frame implements IChessView {
 
 	/** New Game Menu Item. */
 	private JMenuItem newGameItem;
+    
+    /** Save Game Menu Item. */
+	private JMenuItem saveGameItem;
+	
+	/** Load Game Menu Item. */
+	private JMenuItem loadGameItem;
 
 	/** Exit Menu Item. */
 	private JMenuItem exitItem;
@@ -235,6 +241,8 @@ public class ChessView extends Frame implements IChessView {
 		helpMenu = new JMenu("Help");
 
 		newGameItem = new JMenuItem("New Game");
+        saveGameItem = new JMenuItem("Save Game");
+		loadGameItem = new JMenuItem("Load Game");
 		exitItem = new JMenuItem("Exit");
 		aboutItem = new JMenuItem("About");
 		settingItem = new JMenuItem("Game Settings");
@@ -242,6 +250,8 @@ public class ChessView extends Frame implements IChessView {
 		musicItem = new JMenuItem("Stop Music");
 
 		gameMenu.add(newGameItem);
+        gameMenu.add(saveGameItem);
+		gameMenu.add(loadGameItem);
 		gameMenu.add(exitItem);
 		settingsMenu.add(settingItem);
 		settingsMenu.add(musicItem);
@@ -312,6 +322,8 @@ public class ChessView extends Frame implements IChessView {
 		}
 
 		newGameItem.addActionListener(e);
+        saveGameItem.addActionListener(e);
+		loadGameItem.addActionListener(e);
 		exitItem.addActionListener(e);
 		aboutItem.addActionListener(e);
 		settingItem.addActionListener(e);
@@ -434,6 +446,26 @@ public class ChessView extends Frame implements IChessView {
 		pieceLabels[row][col].setIcon(icon);
 	}
 
+    /*****************************************************************
+	 * Returns the save menu item.
+	 *
+	 * @return a jmenuitem that closes the program
+	 *****************************************************************/
+	@Override
+	public final JMenuItem getSaveItem() {
+		return saveGameItem;
+	}
+	
+	/*****************************************************************
+	 * Returns the load menu item.
+	 *
+	 * @return a jmenuitem that closes the program
+	 *****************************************************************/
+	@Override
+	public final JMenuItem getLoadItem() {
+		return loadGameItem;
+	}
+    
 	/*****************************************************************
 	 * Returns the exits menu item.
 	 * 
