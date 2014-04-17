@@ -492,9 +492,4 @@ public class ChessView implements IChessView {
 	public void stopMusic() {
 	}
 
-	@Override
-	public void disableButton(int row, int col) {
-		pieceLabels[row][col].setEnabled(false);
-	}
-
 }

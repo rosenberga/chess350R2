@@ -274,10 +274,10 @@ public class ChessPresenter implements IChessPresenter {
 			game.pushMove(game.getMove());
 		}
 		afterMove(a);
-		if (onePlayer) {
+		if (onePlayer && !game.getModel().isComplete(game.getBoard())) {
 			computerMove(a);
+			afterMove(a);
 		}
-		afterMove(a);
 	}
 
 	private final void afterMove(final ActionListener a) {
@@ -290,18 +290,8 @@ public class ChessPresenter implements IChessPresenter {
 				winner = "BLACK";
 			}
 			view.showMessage(winner + " wins!");
-			disableAllButtons();
-			view.disable(a);
 		} else if (game.getModel().inStaleMate(game.getBoard())) {
 			view.showMessage("Stalemate.");
-			disableAllButtons();
-		}
-	}
-	private final void disableAllButtons(){
-		for(int i = 0; i < game.getBoard().numRows(); i++){
-			for(int j = 0; j < game.getBoard().numColumns(); j++){
-				view.disableButton(i,j);
-			}
 		}
 	}
 
