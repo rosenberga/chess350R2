@@ -138,4 +138,8 @@ public interface IChessView {
 	 * @param status the game status
 	 *****************************************************************/
 	void showMessage(String status, String message);
+
+	JMenuItem getSaveItem();
+
+	JMenuItem getLoadItem();
 }
