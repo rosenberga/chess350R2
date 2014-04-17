@@ -288,9 +288,9 @@ public class ChessPresenter implements IChessPresenter {
 			} else {
 				winner = "BLACK";
 			}
-			view.showMessage(winner + " wins!");
+			view.showMessage("Checkmate", winner + " wins!");
 		} else if (game.getModel().inStaleMate(game.getBoard())) {
-			view.showMessage("Stalemate.");
+			view.showMessage("Stalemate", "The Game ended in a checkmate.");
 		}
 	}
 

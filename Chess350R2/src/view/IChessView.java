@@ -42,13 +42,6 @@ public interface IChessView {
 	void setData(int row, int col, int[] pieceID);
 	
 	/*****************************************************************
-	 * Show the message of the game. 
-	 * 
-	 * @param m the message
-	 *****************************************************************/
-	void showMessage(String m);
-	
-	/*****************************************************************
 	 * Mark the squares to show what is legal. 
 	 * 
 	 * @param row the new row
@@ -137,4 +130,12 @@ public interface IChessView {
 	void playMusic();
 
 	void stopMusic();
+	
+	/*****************************************************************
+	 * Show the message of the game. 
+	 * 
+	 * @param message the text to display
+	 * @param status the game status
+	 *****************************************************************/
+	void showMessage(String status, String message);
 }

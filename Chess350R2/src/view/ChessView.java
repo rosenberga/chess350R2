@@ -374,8 +374,8 @@ public class ChessView extends Frame implements IChessView {
 	}
 
 	@Override
-	public final void showMessage(final String m) {
-		JOptionPane.showMessageDialog(frame, m);
+	public final void showMessage(final String status, final String message) {
+		JOptionPane.showMessageDialog(frame, message, status, JOptionPane.INFORMATION_MESSAGE);
 	}
 
 	/*****************************************************************
