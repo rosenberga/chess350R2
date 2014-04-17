@@ -1,12 +1,6 @@
 package model;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.util.concurrent.TimeUnit;
-
-import javax.sound.sampled.AudioInputStream;
-
-import javazoom.jl.player.AudioDevice;
+import java.io.Serializable;
 
 /*****************************************************************
  * Represents a chess model for a standard game of chess. Contains 
@@ -17,7 +11,7 @@ import javazoom.jl.player.AudioDevice;
  * @author Adam Rosenberg
  * @version 1.0
  *****************************************************************/
-public final class ChessModel implements IChessModel {
+public final class ChessModel implements IChessModel,Serializable {
 
 	/** whether or not the player can move en passant. */
 	private boolean enPassant;

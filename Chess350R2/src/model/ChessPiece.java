@@ -1,12 +1,14 @@
 package model;
 
+import java.io.Serializable;
+
 /*****************************************************************
  * Class that represents a chess piece.
  *
  * @author Team 7
  * @version 1.0
  *****************************************************************/
-public abstract class ChessPiece implements IChessPiece {
+public abstract class ChessPiece implements IChessPiece, Serializable {
 	
 	/** The owner of a chess piece. */
 	private Player owner;

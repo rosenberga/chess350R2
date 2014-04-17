@@ -8,7 +8,7 @@ package model;
  * @author Zachary Kurmas
  *****************************************************************/
 
-public interface IChessModel {
+public interface IChessModel{
 
    /*****************************************************************
     * Returns whether the game is complete.

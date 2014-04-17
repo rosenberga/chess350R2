@@ -9,6 +9,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.IOException;
+import java.io.Serializable;
 import javax.sound.sampled.AudioFormat;
 import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
@@ -31,7 +32,7 @@ import javax.swing.JOptionPane;
  * @author Adam Rosenberg
  * @version 1.0
  *****************************************************************/
-public class ChessView extends Frame implements IChessView {
+public class ChessView extends Frame implements IChessView, Serializable {
 
 	private static final long serialVersionUID = -8519417649667845070L;
 

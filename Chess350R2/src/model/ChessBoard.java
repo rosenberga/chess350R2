@@ -1,5 +1,7 @@
 package model;
 
+import java.io.Serializable;
+
 /*****************************************************************
  * Represents a chess board for a standard game of chess. Stores 
  * pieces at positions on the board and can move all pieces
@@ -8,7 +10,7 @@ package model;
  * @author Adam Rosenberg
  * @version 1.0
  *****************************************************************/
-public final class ChessBoard implements IChessBoard {
+public final class ChessBoard implements IChessBoard, Serializable{
 
 	/** The current board in the form of a 2D array of IChessPieces. */
 	private IChessPiece[][] board;

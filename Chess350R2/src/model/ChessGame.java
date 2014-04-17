@@ -1,12 +1,14 @@
 package model;
 
+import java.io.Serializable;
+
 /*****************************************************************
  * Represents a chess game by having a chess model and a chess board.
  * 
  * @author Adam Rosenberg
  * @version 1.0
  *****************************************************************/
-public final class ChessGame {
+public final class ChessGame implements Serializable{
 
 	/** The ChessModel. */
 	private IChessModel model;

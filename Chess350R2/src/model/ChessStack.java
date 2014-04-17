@@ -1,8 +1,9 @@
 package model;
 
+import java.io.Serializable;
 import java.util.Stack;
 
-public final class ChessStack {
+public final class ChessStack implements Serializable{
 	
 	private Stack<IChessBoard> myStack;
 	

@@ -1,12 +1,14 @@
 package model;
 
+import java.io.Serializable;
+
 /*****************************************************************
  * Describes a piece for a game of chess (King, Queen, Rook, etc).
  *
  * @author Zachary Kurmas
  *****************************************************************/
 
-public interface IChessPiece {
+public interface IChessPiece{
 
    /*****************************************************************
     * Return the player that owns this piece.

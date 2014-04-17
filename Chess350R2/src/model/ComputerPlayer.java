@@ -1,9 +1,10 @@
 package model;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Random;
 
-public class ComputerPlayer {
+public class ComputerPlayer implements Serializable{
 
 	private final int KING_RANK = 0;
 	private final int QUEEN_RANK = 1;

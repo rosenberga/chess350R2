@@ -1,8 +1,9 @@
 package model;
 
+import java.io.Serializable;
 import java.util.Stack;
 
-public final class MoveStack {
+public final class MoveStack implements Serializable {
 	
 	private Stack<Move> myStack;
 	

@@ -1,5 +1,7 @@
 package model;
 
+import java.io.Serializable;
+
 /*****************************************************************
  * A Bishop in a game of chess.
  *

@@ -11,6 +11,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.io.Serializable;
 import java.util.Random;
 import java.util.concurrent.TimeUnit;
 
@@ -31,7 +32,7 @@ import view.SettingsDialog;
  * @author Adam Rosenberg
  * @version 1.0
  *****************************************************************/
-public class ChessPresenter implements IChessPresenter {
+public class ChessPresenter implements IChessPresenter, Serializable {
 
 	/** The standard row number. */
 	private IChessView view;
@@ -164,6 +165,20 @@ public class ChessPresenter implements IChessPresenter {
 							view.getMusicItem().setText("Stop Music");
 							playMusic();
 						}
+					} else if (view.getSaveItem() == e.getSource()){
+						try {
+							saveGame();
+						} catch (IOException e1) {
+							e1.printStackTrace();
+						}
+					} else if(view.getLoadItem() == e.getSource()){
+						try {
+							loadGame("chessSave.ser");
+						} catch (ClassNotFoundException e1) {
+							e1.printStackTrace();
+						} catch (IOException e1) {
+							e1.printStackTrace();
+						}
 					}
 
 				}
@@ -187,9 +202,8 @@ public class ChessPresenter implements IChessPresenter {
 	private void saveGame() throws IOException {
 		try {
 			// Create an array containing our board data to be saved
-			Object[] data = {game, view, onePlayer, cpuStyle};
-			File file = new File("chessSave");
-			// Create a file location and save our data there
+			Object[] data = {game, onePlayer, cpuStyle};
+			File file = new File("chessSave.ser");
 			FileOutputStream fout = new FileOutputStream(file);
 			ObjectOutputStream oos = new ObjectOutputStream(fout);
 			oos.writeObject(data);
@@ -209,12 +223,17 @@ public class ChessPresenter implements IChessPresenter {
 	 *****************************************************************/
 	private void loadGame(String fileLocation) throws IOException, ClassNotFoundException {
 		try {
+			view.close();
+			stopMusic();
 			FileInputStream in = new FileInputStream(fileLocation);
 			ObjectInputStream s = new ObjectInputStream(in);
 			Object[] data = (Object[]) s.readObject();
 			s.close();
-			new ChessPresenter((ChessGame) data[0], (IChessView) data[1], (boolean) data[2], (int) data[3]);
-			
+			ChessGame cg = (ChessGame) data[0];
+			boolean one = (boolean) data[1];
+			int cpu = (int) data[2];
+			IChessView view = new ChessView(cg.getBoard().numRows(),cg.getBoard().numColumns());
+			new ChessPresenter(cg,view,one,cpu);;			
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		}

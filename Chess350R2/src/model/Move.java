@@ -1,5 +1,7 @@
 package model;
 
+import java.io.Serializable;
+
 /**
  * Packages the four components of a move into a single object. (Instance
  * variables are public because this object is a simple container.)
@@ -7,7 +9,7 @@ package model;
  * @author Zachary Kurmas
  */
 
-public final class Move {
+public final class Move implements Serializable{
 
 	/** The row and column the piece is moving from and moving to. */
 	private int fromRow, fromColumn, toRow, toColumn;
