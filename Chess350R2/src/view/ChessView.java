@@ -22,28 +22,28 @@ import javax.swing.JOptionPane;
  * @version 1.0
  *****************************************************************/
 public class ChessView implements IChessView {
-	
+
 	/** Number of colors in the game. */
 	private static final int NUM_COLORS = 2;
 
 	/** Number of different types of pieces. */
 	private static final int NUM_PIECES = 7;
-	
+
 	/** Owner position in piece info int[]. */
 	private static final int OWNER = 0;
-	
+
 	/** Piece type position in piece info int[]. */
 	private static final int TYPE = 1;
-	
+
 	/** Size of int[] with piece info. */
 	private static final int PIECE_INFO = 2;
-	
+
 	/** Represents the row in a JButton array. */
 	private static final int ROW = 0;
-	
+
 	/** Represents the column in a JButton array. */
 	private static final int COL = 1;
-	
+
 	/** Picture of black space. */
 	private static final String BLACK_SPACE = "blackSpace.png";
 	/** Picture of white space. */
@@ -91,28 +91,36 @@ public class ChessView implements IChessView {
 	private JMenuItem newGameItem;
 
 	/** Exit Menu Item. */
-	private JMenuItem exitItem; 
+	private JMenuItem exitItem;
 
 	/** About Menu Item. */
 	private JMenuItem aboutItem;
 
 	/** Setting Menu Item. */
 	private JMenuItem settingItem;
-	
+
 	/** Undo Menu Item. */
 	private JMenuItem undoItem;
 
+	private JMenuItem musicItem;
+
 	/** Shows if the square is a legal move. */
 	private boolean showLegal;
-	
+
 	/** Shows the last move. */
 	private boolean showLast;
+
+	private static final String song = "ChopinNocturneOp.9Mo.2.mp3";
+	
+	
 
 	/*****************************************************************
 	 * Constructor for the View.
 	 * 
-	 * @param row number of rows
-	 * @param col number of columns
+	 * @param row
+	 *            number of rows
+	 * @param col
+	 *            number of columns
 	 *****************************************************************/
 	public ChessView(final int row, final int col) {
 		super();
@@ -123,10 +131,11 @@ public class ChessView implements IChessView {
 		showLegal = true;
 		showLast = true;
 	}
+
 	/*****************************************************************
 	 * Returns true if the square is a legal move.
 	 * 
-	 * @return showlegal 
+	 * @return showlegal
 	 *****************************************************************/
 	public final boolean isShowLegal() {
 		return showLegal;
@@ -135,20 +144,21 @@ public class ChessView implements IChessView {
 	/*****************************************************************
 	 * Sets the legality of a move.
 	 * 
-	 * @param showLegal1 the legality
+	 * @param showLegal1
+	 *            the legality
 	 *****************************************************************/
 	public final void setShowLegal(final boolean showLegal) {
 		this.showLegal = showLegal;
 	}
-	
-	public boolean isShowLast(){
+
+	public boolean isShowLast() {
 		return showLast;
 	}
-	
-	public final void setShowLast(final boolean showLast){
+
+	public final void setShowLast(final boolean showLast) {
 		this.showLast = showLast;
 	}
-	
+
 	/*****************************************************************
 	 * Create a new game.
 	 * 
@@ -192,14 +202,16 @@ public class ChessView implements IChessView {
 		helpMenu = new JMenu("Help");
 
 		newGameItem = new JMenuItem("New Game");
-		exitItem = new JMenuItem("Exit"); 
+		exitItem = new JMenuItem("Exit");
 		aboutItem = new JMenuItem("About");
 		settingItem = new JMenuItem("Game Settings");
 		undoItem = new JMenuItem("Undo Move");
+		musicItem = new JMenuItem("Stop Music");
 
 		gameMenu.add(newGameItem);
 		gameMenu.add(exitItem);
 		settingsMenu.add(settingItem);
+		settingsMenu.add(musicItem);
 		settingsMenu.add(undoItem);
 		helpMenu.add(aboutItem);
 
@@ -236,9 +248,9 @@ public class ChessView implements IChessView {
 		pieceImages = new ImageIcon[NUM_COLORS][NUM_PIECES];
 		for (int i = 0; i < pieceImages.length; i++) {
 			for (int j = 0; j < pieceImages[i].length; j++) {
-				pieceImages[i][j] = new ImageIcon("piece" 
-						+ i + "" + j + ".png", 
-							"piece" + i + "" + j + ".png");
+				pieceImages[i][j] = new ImageIcon(
+						"piece" + i + "" + j + ".png", "piece" + i + "" + j
+								+ ".png");
 			}
 		}
 
@@ -255,7 +267,8 @@ public class ChessView implements IChessView {
 	/*****************************************************************
 	 * Adds an action listener to all clickable components.
 	 * 
-	 * @param e the action listener to add
+	 * @param e
+	 *            the action listener to add
 	 *****************************************************************/
 	@Override
 	public final void addButtonListeners(final ActionListener e) {
@@ -270,12 +283,14 @@ public class ChessView implements IChessView {
 		aboutItem.addActionListener(e);
 		settingItem.addActionListener(e);
 		undoItem.addActionListener(e);
+		musicItem.addActionListener(e);
 	}
 
 	/*****************************************************************
 	 * Returns an int[] containing information about a chess location.
 	 * 
-	 * @param e the actionevent that was created by a click event
+	 * @param e
+	 *            the actionevent that was created by a click event
 	 * @return an int[] containing information about a chess location
 	 *****************************************************************/
 	@Override
@@ -296,24 +311,25 @@ public class ChessView implements IChessView {
 	/*****************************************************************
 	 * Sets a new icon for a given location.
 	 * 
-	 * @param row the row to change
-	 * @param col the column to change
-	 * @param pieceID an int array with info on the what to change
-	 * 			the location to
+	 * @param row
+	 *            the row to change
+	 * @param col
+	 *            the column to change
+	 * @param pieceID
+	 *            an int array with info on the what to change the location to
 	 *****************************************************************/
 	@Override
-	public final void setData(final int row, final int col, 
-			final int[] pieceID) {
+	public final void setData(final int row, final int col, final int[] pieceID) {
 		ImageIcon icon;
 		try {
 			icon = pieceImages[pieceID[OWNER]][pieceID[TYPE]];
 		} catch (Exception e) {
-			
+
 			// then one of ints in the array was -1
 			// thus set the icon to show an empty space
 			icon = new ImageIcon(EMPTY, EMPTY);
 		}
-		
+
 		// else it was a piece, so determine if it should be a white or
 		// black background
 		if ((row % 2 == 0 && col % 2 == 0) || (row % 2 != 0 && col % 2 != 0)) {
@@ -332,13 +348,16 @@ public class ChessView implements IChessView {
 	/*****************************************************************
 	 * Sets the legality of a move.
 	 * 
-	 * @param row paint at this row
-	 * @param col paint at this column
-	 * @param pieceID array of places to paint
+	 * @param row
+	 *            paint at this row
+	 * @param col
+	 *            paint at this column
+	 * @param pieceID
+	 *            array of places to paint
 	 *****************************************************************/
-	public final void paintLegalMove(final int row, final int col, 
+	public final void paintLegalMove(final int row, final int col,
 			final int[] pieceID) {
-		
+
 		// shows legal moves with a green background
 		ImageIcon icon;
 		try {
@@ -349,15 +368,15 @@ public class ChessView implements IChessView {
 		icon = new CustomIcon(LEGAL, icon);
 		pieceLabels[row][col].setIcon(icon);
 	}
-	
+
 	public final void paintLastMove(final int row, final int col,
-			final int[] pieceID){
+			final int[] pieceID) {
 		ImageIcon icon = pieceImages[pieceID[OWNER]][pieceID[TYPE]];
-		icon = new CustomIcon(LEGAL, icon);
+		icon = new CustomIcon(LAST, icon);
 		pieceLabels[row][col].setIcon(icon);
 	}
-	
-	public final void paintLastMove(final int row, final int col){
+
+	public final void paintLastMove(final int row, final int col) {
 		ImageIcon icon = new ImageIcon(EMPTY, EMPTY);
 		icon = new CustomIcon(LAST, icon);
 		pieceLabels[row][col].setIcon(icon);
@@ -366,13 +385,16 @@ public class ChessView implements IChessView {
 	/*****************************************************************
 	 * Show the legality of a move.
 	 * 
-	 * @param row paint at this row
-	 * @param col paint at this column
-	 * @param pieceID array of places to paint
+	 * @param row
+	 *            paint at this row
+	 * @param col
+	 *            paint at this column
+	 * @param pieceID
+	 *            array of places to paint
 	 *****************************************************************/
-	public final void showSelected(final int row, 
-			final int col, final int[] pieceID) {
-		
+	public final void showSelected(final int row, final int col,
+			final int[] pieceID) {
+
 		// set the JButton to have a blue background
 		ImageIcon icon = pieceImages[pieceID[OWNER]][pieceID[TYPE]];
 		icon = new CustomIcon(SELECTED, icon);
@@ -408,7 +430,7 @@ public class ChessView implements IChessView {
 	public final JMenuItem getSettingItem() {
 		return settingItem;
 	}
-	
+
 	@Override
 	public final JMenuItem getUndoItem() {
 		return undoItem;
@@ -427,7 +449,8 @@ public class ChessView implements IChessView {
 	/*****************************************************************
 	 * Removes an action listener from all JButtons.
 	 * 
-	 * @param e the action listener to remove
+	 * @param e
+	 *            the action listener to remove
 	 *****************************************************************/
 	@Override
 	public final void disable(final ActionListener e) {
@@ -454,6 +477,19 @@ public class ChessView implements IChessView {
 	@Override
 	public final JFrame getFrame() {
 		return frame;
+	}
+
+	@Override
+	public JMenuItem getMusicItem() {
+		return musicItem;
+	}
+
+	@Override
+	public void playMusic() {
+	}
+
+	@Override
+	public void stopMusic() {
 	}
 
 }

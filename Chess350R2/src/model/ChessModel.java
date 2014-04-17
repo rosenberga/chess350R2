@@ -1,6 +1,12 @@
 package model;
 
+import java.io.File;
+import java.io.FileInputStream;
 import java.util.concurrent.TimeUnit;
+
+import javax.sound.sampled.AudioInputStream;
+
+import javazoom.jl.player.AudioDevice;
 
 /*****************************************************************
  * Represents a chess model for a standard game of chess. Contains 
@@ -44,9 +50,7 @@ public final class ChessModel implements IChessModel {
 	
 	/** Column King is moving to another way. */
 	private static final int CAST2TO = 5;
-    
-    /** Our music playing. */
-	private MP3 music;
+
 
 	/*****************************************************************
 	 * Constructs a new ChessModel.
@@ -314,25 +318,6 @@ public final class ChessModel implements IChessModel {
 		board.unset(move.getToRow(), move.getToColumn());
 		board.set(new Queen(currentPlayer()), 
 				move.getToRow(), move.getToColumn());
-	}
-	
-	/*****************************************************************
-	 * Plays an mp3, then waits a set amount of time
-	 * When adding mp3s, change the wait time to the total play time
-	 * this prevents sound overlapping
-	 *****************************************************************/
-	public void playMusic() throws InterruptedException {
-		music = new MP3("ChopinNocturneOp.9No.2.mp3");
-		music.play();
-		TimeUnit.SECONDS.sleep(136);
-	}
-
-	/*****************************************************************
-	 * Stops music from playing
-     * This method can be safely called when music isn't playing 
-	 *****************************************************************/
-	public void stopMusic() throws InterruptedException {
-		music.close();
 	}
     
 	/*****************************************************************

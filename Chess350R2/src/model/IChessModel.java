@@ -109,17 +109,5 @@ public interface IChessModel {
      * @param i the amount to increase turns by
      *****************************************************************/
    	void setTurns(int i);
-   	
-    /*****************************************************************
-    * Plays music
-    * @throws InterruptedException 
-    *****************************************************************/
-   	void playMusic() throws InterruptedException;
-    
-    /*****************************************************************
-     * Stops music
-     * @throws InterruptedException
-     *****************************************************************/
-    void stopMusic() throws InterruptedException;
 
 }

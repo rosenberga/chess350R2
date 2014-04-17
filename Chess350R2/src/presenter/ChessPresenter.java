@@ -2,7 +2,10 @@ package presenter;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.io.FileNotFoundException;
+import java.util.Random;
 import java.util.concurrent.TimeUnit;
 
 import javax.swing.JButton;
@@ -147,11 +150,27 @@ public class ChessPresenter implements IChessPresenter {
 						}
 					} else if (view.getUndoItem() == e.getSource()) {
 						undo();
+					} else if (view.getMusicItem() == e.getSource()){
+						if (view.getMusicItem().getText().equals("Stop Music")){
+							view.getMusicItem().setText("Play Music");
+							stopMusic();
+						} else {
+							view.getMusicItem().setText("Stop Music");
+							playMusic();
+						}
 					}
 
 				}
 			}
 		});
+		playMusic();
+	}
+	
+	private void playMusic(){
+		view.playMusic();
+	}
+	private void stopMusic(){
+		view.stopMusic();
 	}
 
 	/*****************************************************************

@@ -38,7 +38,7 @@ public class SettingsDialog extends JDialog implements ActionListener {
 	private static final int COLS = 1;
 	
 	/** Number of rows in grid. */
-	private static final int ROWS = 1;
+	private static final int ROWS = 0;
 	
     /*****************************************************************
      * Constructs a new SettingsDisalog.
@@ -65,7 +65,6 @@ public class SettingsDialog extends JDialog implements ActionListener {
 		panel.setLayout(new GridLayout(ROWS, COLS));
 		panel.add(showLegal);
 		panel.add(showLast);
-		panel.add(okButton);
 		
 		// add panels to dialog
 		getContentPane().add(panel, BorderLayout.CENTER);

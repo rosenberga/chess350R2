@@ -132,4 +132,8 @@ public interface IChessView {
 
 	void paintLastMove(int fromRow, int fromColumn);
 
+	JMenuItem getMusicItem();
+	
+	void playMusic();
+	void stopMusic();
 }

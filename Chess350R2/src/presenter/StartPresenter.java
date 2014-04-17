@@ -40,13 +40,6 @@ public class StartPresenter {
 				}
 			}
 		});
-		while(true){
-			try {
-				g.getModel().playMusic();
-			} catch (InterruptedException e1) {
-				e1.printStackTrace();
-			}
-		}
 	}
 	
 
