@@ -66,12 +66,10 @@ public class ComputerPlayer {
 					}
 				}
 			}
-			if (available.size() >= 2) {
+			if (available.size() > 0) {
 				r = new Random();
-				Move m = available.get(r.nextInt(available.size() - 1));
+				Move m = available.get(r.nextInt(available.size()));
 				return m;
-			} else if (available.size() == 1) {
-				return available.get(0);
 			}
 		}
 	}
@@ -87,76 +85,42 @@ public class ComputerPlayer {
 	 ********************************************************/
 	public final Move getAttackMove(final IChessModel model,
 			final IChessBoard board) {
-		// if found, return a move that will attack opponent
-		// else return getRandomMove(model, board)
-		int fr = 0;
-		int fc = 0;
-		int count = 0;
-		int[] from = new int[16];
-		for (int i = 0; i < 16; i++) { // initialize coordinates to -1
-			from[i] = -1;
-		}
+		ArrayList<String> legal = new ArrayList<String>();
 
-		ArrayList<IChessPiece> field = new ArrayList<IChessPiece>(); // pieces
-																		// owned
-																		// by
-																		// computer
 		for (int i = 0; i < board.numRows(); i++) {
 			for (int j = 0; j < board.numColumns(); j++) {
 				if (board.pieceAt(i, j) != null) {
 					if (board.pieceAt(i, j).player() == model.currentPlayer()) {
-						field.add(board.pieceAt(i, j)); // adding pieces owned
-														// by computer
-						from[count] = i * 10 + j; // getting coordinates and
-													// storing into single int
-						count++;
-					}
-				}
-			}
-		}
-
-		while (field.size() != 0) {
-			Random r = new Random();
-			int index = r.nextInt(field.size());
-			fc = from[index] % 10;
-			fr = (from[index] - fc) / 10;
-			ArrayList<Move> available = new ArrayList<Move>(); // list of
-																// available
-																// moves for
-																// selected
-																// piece
-			for (int i = 0; i < board.numRows(); i++) {
-				for (int j = 0; j < board.numColumns(); j++) {
-					if (model.isValidMove(new Move(fr, fc, i, j), board)) {
-						if (board.pieceAt(i, j) != null){
-						if (board.pieceAt(i, j).player() != model
-								.currentPlayer()) { // if to row/col has enemy
-													// piece, add that spot
-							available.add(new Move(fr, fc, i, j)); // add move
-																	// to
-																	// available
-																	// if
-																	// possible
+						for (int k = 0; k < board.numRows(); k++) {
+							for (int l = 0; l < board.numColumns(); l++) {
+								if (board.pieceAt(k, l) != null) {
+									if (board.pieceAt(k, l).player() != model
+											.currentPlayer()) {
+										if (model.isValidMove(new Move(i, j, k,
+												l), board)) {
+											String s = ""+i+""+j+""+k+""+l;
+											legal.add(s);
+										}
+									}
+								}
+							}
 						}
 					}
-				}}
-			}
-			if (available.size() >= 2) {
-				r = new Random();
-				Move m = available.get(r.nextInt(available.size() - 1));
-				return m;
-			} else if (available.size() == 1) {
-				return available.get(0);
-			} else {
-				field.remove(index);
-				for (int i = index; i < (available.size() - index); i++) {
-					// move coordinates back an index to allow for deleted piece
-					// in available
-					from[i] = from[i + 1];
 				}
 			}
 		}
-		return getRandomMove(model, board);
+		if (legal.size() > 0) {
+			Random r = new Random();
+			int index = r.nextInt(legal.size());
+			String positions = legal.get(index);
+			int fr = Integer.parseInt(positions.charAt(0)+"");
+			int fc = Integer.parseInt(positions.charAt(1)+"");
+			int tr = Integer.parseInt(positions.charAt(2)+"");
+			int tc = Integer.parseInt(positions.charAt(3)+"");
+			return new Move(fr,fc,tr,tc);
+		} else {
+			return getRandomMove(model, board);
+		}
 	}
 
 	public final Move getDefensiveMove(final IChessModel model,

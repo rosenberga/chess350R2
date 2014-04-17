@@ -1,8 +1,7 @@
 package model;
 
 /*****************************************************************
- * Represents a chess game by having a chess model and a chess
- * board.
+ * Represents a chess game by having a chess model and a chess board.
  * 
  * @author Adam Rosenberg
  * @version 1.0
@@ -11,20 +10,19 @@ public final class ChessGame {
 
 	/** The ChessModel. */
 	private IChessModel model;
-	
+
 	/** The ChessBoard. */
 	private IChessBoard board;
-	
+
 	/** A Chess Move. */
 	private Move move;
-	
+
 	private ChessStack chessStack;
-	
+
 	private static final int UNDO_TURN = -1;
-	
+
 	private MoveStack moveStack;
-	
-	
+
 	/*****************************************************************
 	 * Constructs a new chess game.
 	 *****************************************************************/
@@ -34,8 +32,7 @@ public final class ChessGame {
 		model = new ChessModel();
 		board = new ChessBoard();
 	}
-	
-	
+
 	/*****************************************************************
 	 * Gets model.
 	 * 
@@ -44,8 +41,7 @@ public final class ChessGame {
 	public IChessModel getModel() {
 		return model;
 	}
-	
-	
+
 	/*****************************************************************
 	 * Gets board.
 	 * 
@@ -54,22 +50,22 @@ public final class ChessGame {
 	public IChessBoard getBoard() {
 		return board;
 	}
-	
-	
+
 	/*****************************************************************
 	 * Sets model.
 	 * 
-	 * @param newModel a new IChessModel to set this.model to
+	 * @param newModel
+	 *            a new IChessModel to set this.model to
 	 *****************************************************************/
 	public void setModel(final IChessModel newModel) {
 		model = newModel;
 	}
-	
-	
+
 	/*****************************************************************
 	 * Sets Board.
 	 * 
-	 * @param newBoard a new IChessBoard to set this.board to
+	 * @param newBoard
+	 *            a new IChessBoard to set this.board to
 	 *****************************************************************/
 	public void setBoard(final IChessBoard newBoard) {
 		board = newBoard;
@@ -87,26 +83,28 @@ public final class ChessGame {
 	/*****************************************************************
 	 * Sets Move.
 	 * 
-	 * @param move1 a new move to set in the game
+	 * @param move1
+	 *            a new move to set in the game
 	 *****************************************************************/
 	public void setMove(final Move move1) {
 		this.move = move1;
 	}
-	
+
 	/*****************************************************************
 	 * Sets Move given coordinates instead of a Move.
 	 * 
-	 * @param coords a new move to set in the game
+	 * @param coords
+	 *            a new move to set in the game
 	 *****************************************************************/
 	public void setMove(final int[] coords) {
 		Move m = new Move(coords);
 		setMove(m);
 	}
-	
+
 	public boolean canUndo() {
 		return !chessStack.empty();
 	}
-	
+
 	public void undo() {
 		if (canUndo()) {
 			setBoard(chessStack.pop());
@@ -114,16 +112,33 @@ public final class ChessGame {
 			moveStack.pop();
 		}
 	}
-	
-	public ChessStack getChessStack(){
+
+	public ChessStack getChessStack() {
 		return chessStack;
 	}
-	
-	public Move getLastMove(){
+
+	public Move getLastMove() {
 		return moveStack.peek();
 	}
-	
-	public void pushMove(final Move m){
+
+	public void pushMove(final Move m) {
 		moveStack.push(m);
+	}
+
+	public void undo2() {
+		if (canUndo2()) {
+			chessStack.pop();
+			setBoard(chessStack.pop());
+			moveStack.pop();
+			moveStack.pop();
+		}
+	}
+
+	public boolean canUndo2() {
+		if (chessStack.size() > 1) {
+			return true;
+		} else {
+			return false;
+		}
 	}
 }

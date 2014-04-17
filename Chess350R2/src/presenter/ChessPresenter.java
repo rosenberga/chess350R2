@@ -272,9 +272,10 @@ public class ChessPresenter implements IChessPresenter {
 			game.getModel().move(game.getMove(), game.getBoard(),
 					game.getChessStack());
 			game.pushMove(game.getMove());
-			if (onePlayer) {
-				computerMove(a);
-			}
+		}
+		afterMove(a);
+		if (onePlayer) {
+			computerMove(a);
 		}
 		afterMove(a);
 	}
@@ -289,10 +290,18 @@ public class ChessPresenter implements IChessPresenter {
 				winner = "BLACK";
 			}
 			view.showMessage(winner + " wins!");
+			disableAllButtons();
 			view.disable(a);
 		} else if (game.getModel().inStaleMate(game.getBoard())) {
 			view.showMessage("Stalemate.");
-			view.disable(a);
+			disableAllButtons();
+		}
+	}
+	private final void disableAllButtons(){
+		for(int i = 0; i < game.getBoard().numRows(); i++){
+			for(int j = 0; j < game.getBoard().numColumns(); j++){
+				view.disableButton(i,j);
+			}
 		}
 	}
 
@@ -364,7 +373,13 @@ public class ChessPresenter implements IChessPresenter {
 	}
 
 	public void undo() {
-		game.undo();
-		updateView();
+		if(onePlayer){
+			game.undo2();
+			updateView();
+		} else {
+			game.undo();
+			updateView();
+		}
 	}
+	
 }

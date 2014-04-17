@@ -136,4 +136,6 @@ public interface IChessView {
 	
 	void playMusic();
 	void stopMusic();
+
+	void disableButton(int i, int j);
 }
