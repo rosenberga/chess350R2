@@ -119,6 +119,7 @@ public interface IChessModel {
      * Get a piece in the graveyard.
      * 
      * @param index of piece space
+     * @return a black IChessPiece
      *****************************************************************/
    	IChessPiece getBlackGravePiece(int index);
    	
@@ -126,6 +127,7 @@ public interface IChessModel {
      * Get a piece in the graveyard.
      * 
      * @param index of piece space
+     * @return a white IChessPiece
      *****************************************************************/
    	IChessPiece getWhiteGravePiece(int index);
    	
@@ -133,6 +135,7 @@ public interface IChessModel {
      * Get array of the graveyard.
      * 
      * @param index of piece space
+     * @return an ArrayList of lost black pieces
      *****************************************************************/
    	ArrayList<IChessPiece> getBlackGrave();
    	
@@ -140,6 +143,7 @@ public interface IChessModel {
      * Get array of the graveyard.
      * 
      * @param index of piece space
+     * @return an ArrayList of lost white pieces
      *****************************************************************/
    	ArrayList<IChessPiece> getWhiteGrave();
 

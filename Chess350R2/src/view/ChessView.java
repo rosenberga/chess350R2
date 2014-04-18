@@ -134,7 +134,7 @@ public class ChessView implements IChessView, Serializable {
 	private boolean showLast;
 
 	/** Chopin's file name. */
-	private static final String song = "ChopinNocturneOp.9No.2.wav";
+	private static final String SONG = "ChopinNocturneOp.9No.2.wav";
 
 	/** audiofile. */
 	private File audioFile;
@@ -184,7 +184,7 @@ public class ChessView implements IChessView, Serializable {
 		showLast = true;
 		graveWhitePieces = new JLabel[NUM_P];
 		graveBlackPieces = new JLabel[NUM_P];
-		for(int i = 0; i < graveBlackPieces.length; i++) {
+		for (int i = 0; i < graveBlackPieces.length; i++) {
 			graveWhitePieces[i] = new JLabel();
 			graveBlackPieces[i] = new JLabel();
 			graveWhitePieces[i].setIcon(new ImageIcon(
@@ -196,7 +196,7 @@ public class ChessView implements IChessView, Serializable {
 	}
 
 	private void setUpAudio() {
-		audioFile = new File(song);
+		audioFile = new File(SONG);
 		try {
 		    audioStream = AudioSystem.getAudioInputStream(audioFile);
 		} catch (UnsupportedAudioFileException e) {
@@ -680,7 +680,7 @@ public class ChessView implements IChessView, Serializable {
 			icon = pieceImages[pieceID[OWNER]][pieceID[TYPE]];
 			graveWhitePieces[index].setIcon(icon);
 		} catch (Exception e) {
-
+		    e.printStackTrace();
 		}
 	}
 
@@ -700,13 +700,13 @@ public class ChessView implements IChessView, Serializable {
 			graveBlackPieces[index].setIcon(icon);
 			gpanel2.add(graveBlackPieces[index]);
 		} catch (Exception e) {
-
+		    e.printStackTrace();
 		}
 	}
 
     @Override
     public final void clearGraves() {
-        for(int i = 0; i < graveWhitePieces.length; i++) {
+        for (int i = 0; i < graveWhitePieces.length; i++) {
             graveWhitePieces[i].setIcon(new ImageIcon("piece-1-1.png"));
             graveBlackPieces[i].setIcon(new ImageIcon("piece-1-1.png"));
         }
