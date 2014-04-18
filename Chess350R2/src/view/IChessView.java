@@ -93,16 +93,6 @@ public interface IChessView {
 	void showSelected(int i, int j, int[] sendPiece);
 
 	/*****************************************************************
-<<<<<<< HEAD
-	 * Disables the board.
-	 *
-	 * @param actionListener disables all squares
-	 *****************************************************************/
-	void disable(ActionListener actionListener);
-
-	/*****************************************************************
-=======
->>>>>>> branch 'master' of https://github.com/rosenberga/Chess350R2.git
 	 * The squares will show legal moves if true.
 	 *
 	 * @param b used to set legality
