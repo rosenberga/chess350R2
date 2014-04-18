@@ -11,6 +11,7 @@ import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.IOException;
 import java.io.Serializable;
+import java.util.ArrayList;
 
 import javax.sound.sampled.AudioFormat;
 import javax.sound.sampled.AudioInputStream;
@@ -30,9 +31,11 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JOptionPane;
 
+import model.IChessPiece;
+
 /*****************************************************************
  * The view class.
- * 
+ *
  * @author Adam Rosenberg
  * @version 1.0
  *****************************************************************/
@@ -630,18 +633,6 @@ public class ChessView implements IChessView, Serializable {
 		}
 	}
 	
-	//Removes the most recently added image from the White grave.
-	public void popFromWhiteGrave()
-	{
-		
-	}
-	
-	//removes the most recently added image from the black grave.
-	public void popFromBlackGrave()
-	{
-		
-	}
-	
 	public void updateBlackGrave(final int index, final int[] pieceID) {
 		ImageIcon icon;
 		try {
@@ -652,5 +643,13 @@ public class ChessView implements IChessView, Serializable {
 			
 		}
 	}
+
+    @Override
+    public void clearGraves() {
+        for(int i = 0; i < graveWhitePieces.length; i++){
+            graveWhitePieces[i].setIcon(new ImageIcon("piece-1-1.png"));
+            graveBlackPieces[i].setIcon(new ImageIcon("piece-1-1.png"));
+        }
+    }
 
 }

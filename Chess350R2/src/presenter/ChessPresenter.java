@@ -491,6 +491,7 @@ public class ChessPresenter implements IChessPresenter, Serializable {
 			game.undo();
 			updateView();
 		}
+		updateGraves();
 	}
 	
 	/*****************************************************************
@@ -589,6 +590,11 @@ public class ChessPresenter implements IChessPresenter, Serializable {
 		}
 
 		return pieceNum;
+	}
+	
+	private void updateGraves(){
+	    view.clearGraves();
+	    reboundGraves();
 	}
 	
 }

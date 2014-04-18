@@ -39,7 +39,7 @@ public class StartScreen {
     private static final int FONT_SIZE = 20;
     private static final int DIM = 300;
     private static final int C1 = 204;
-    private static final int C2 = 299;
+    private static final int C2 = 229;
     private static final int C3 = 255;
 
     public StartScreen() {
