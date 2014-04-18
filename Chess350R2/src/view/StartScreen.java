@@ -1,9 +1,12 @@
 package view;
 
+import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.Toolkit;
 import java.awt.event.ActionListener;
+import java.lang.reflect.Field;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -47,6 +50,12 @@ public class StartScreen {
 		frame.setVisible(true);
 		Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
 		frame.setLocation(dim.width/2-frame.getSize().width/2, dim.height/2-frame.getSize().height/2);
+		frame.setResizable(false);
+		frame.setSize(300,300);
+		
+		changeButtonLook(loadGame);
+		changeButtonLook(onePlayer);
+		changeButtonLook(twoPlayer);
 	}
 	
 	public final void addActionListeners(final ActionListener e){
@@ -61,7 +70,12 @@ public class StartScreen {
 	public final void changePanels(){
 		frame.getContentPane().remove(firstPanel);
 		frame.getContentPane().add(secondPanel);
+		changeButtonLook(styleOne);
+		changeButtonLook(styleTwo);
+		changeButtonLook(styleThree);
 		frame.pack();
+		frame.setSize(300,300);
+		frame.setResizable(false);
 	}
 
 	public JButton getOnePlayer() {
@@ -90,6 +104,13 @@ public class StartScreen {
 	
 	public void setVisible(final boolean visable){
 		frame.setVisible(visable);
+	}
+	
+	private void changeButtonLook(JButton b){
+        b.setBackground(new Color(204,229,255));
+        b.setForeground(Color.black);
+        b.setFocusPainted(false);
+        b.setFont(new Font(Font.SANS_SERIF,Font.BOLD, 20));
 	}
 	
 }

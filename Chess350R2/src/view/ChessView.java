@@ -32,7 +32,7 @@ import javax.swing.JOptionPane;
  * @author Adam Rosenberg
  * @version 1.0
  *****************************************************************/
-public class ChessView extends Frame implements IChessView, Serializable {
+public class ChessView implements IChessView, Serializable {
 
 	private static final long serialVersionUID = -8519417649667845070L;
 
