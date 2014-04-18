@@ -373,6 +373,7 @@ public class ChessView implements IChessView, Serializable {
 		ImageIcon icon;
 		try {
 			icon = pieceImages[pieceID[OWNER]][pieceID[TYPE]];
+			
 		} catch (Exception e) {
 
 			// then one of ints in the array was -1
