@@ -64,22 +64,24 @@ public final class ChessModel implements IChessModel,Serializable {
 		wGrave = new ArrayList<IChessPiece>();
 		bGrave = new ArrayList<IChessPiece>();
 	}
-	
+
 	/*****************************************************************
 	 * Checks whether the board is en passant.
-	 * 
+	 *
 	 * @return enPassant, whether or not the player can move enpassant
 	 *****************************************************************/
 	public boolean getEnPassant() {
 		return enPassant;
 	}
-	
+
 	/*****************************************************************
-	 * Counts black pieces in the graveyard and board
-	 * 
+	 * Counts black pieces in the graveyard and board.
+	 *
 	 * @return enPassant
+	 *
+	 * @param board
 	 *****************************************************************/
-	public int countBlacks(IChessBoard board) {
+	public int countBlacks(final IChessBoard board) {
 		int countB = 0;
 		countB = (bGrave.size());
 		for(int i = 0; i < 8; ++i) {
