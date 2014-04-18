@@ -20,6 +20,9 @@ public interface IChessModel{
     *****************************************************************/
    boolean isComplete(IChessBoard board);
 
+   int countBlacks(IChessBoard board);
+   int countWhites(IChessBoard board);
+  
    /*****************************************************************
     * Returns whether the piece at location 
     * [move.fromRow, move.fromColumn] is allowed to move to 

@@ -97,7 +97,7 @@ public final class ChessModel implements IChessModel,Serializable {
 	 * 
 	 * @return enPassant
 	 *****************************************************************/
-	public int countWhite(IChessBoard board) {
+	public int countWhites(IChessBoard board) {
 		int countW = 0;
 		countW = (wGrave.size());
 		for(int i = 0; i < 8; ++i) {

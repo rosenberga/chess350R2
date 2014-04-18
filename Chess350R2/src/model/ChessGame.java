@@ -114,12 +114,12 @@ public final class ChessGame implements Serializable{
 			moveStack.pop();
 			
 			//Graveyard remove
-			if (model.) {
-				
+			if (model.countBlacks(board) > 16) {
+				model.getBlackGrave()
 			}
 			
-			if () {
-				
+			if (model.countBlacks(board) > 16) {
+				model.getWhiteGrave()
 			}
 		}
 	}
