@@ -584,6 +584,8 @@ public class ChessPresenter implements IChessPresenter, Serializable {
 	/*****************************************************************
 	 * Sends the black piece.
 	 * @return int[] returns an array of ints.
+	 *
+	 * @param toSend the piece we're sending
 	 *****************************************************************/
 	public final int[] sendBlackPiece(final IChessPiece toSend) {
 		int[] pieceNum = new int[PIECE_INFO];
@@ -625,8 +627,9 @@ public class ChessPresenter implements IChessPresenter, Serializable {
 
 		return pieceNum;
 	}
+	
     /*****************************************************************
-     * Updates graves when an undo is done
+     * Updates graves when an undo is done.
      *****************************************************************/
 	private void updateGraves() {
 	    view.clearGraves();

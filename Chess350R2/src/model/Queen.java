@@ -2,15 +2,15 @@ package model;
 
 /*****************************************************************
  * A Queen in a game of chess.
- * 
+ *
  * @author Adam Rosenberg
  * @version 1.0
  *****************************************************************/
 public final class Queen extends ChessPiece {
-	
+
 	/*****************************************************************
 	 * Constructs a new Queen object.
-	 * 
+	 *
 	 * @param color
 	 *            the player that owns this piece
 	 *****************************************************************/
@@ -18,10 +18,10 @@ public final class Queen extends ChessPiece {
 		super(color);
 	}
 
-	
+
 	/*****************************************************************
 	 * Returns the type of ChessPiece it is.
-	 * 
+	 *
 	 * @return the String value of the name of the ChessPiece
 	 *****************************************************************/
 	@Override
@@ -29,10 +29,10 @@ public final class Queen extends ChessPiece {
 		return "Queen";
 	}
 
-	
+
 	/*****************************************************************
 	 * Checks if a move is valid for the chess piece.
-	 * 
+	 *
 	 * @param move
 	 *            the move to check for validity
 	 * @param board
@@ -42,12 +42,12 @@ public final class Queen extends ChessPiece {
 	 * @return true if the move is valid, else false
 	 *****************************************************************/
 	@Override
-	public boolean isValidMove(final Move move, 
+	public boolean isValidMove(final Move move,
 			final IChessBoard board, final IChessModel model) {
 		if (!super.isValidMove(move, board, model)) {
 			return false;
 		}
-		
+
 		// check if it is moving vertically or horizontally
 		// changing rows
 		if (move.getToColumn() == move.getFromColumn()) {
@@ -55,7 +55,7 @@ public final class Queen extends ChessPiece {
 					move.getToRow(), move.getFromColumn(), 
 						false, board);
 		}
-				
+
 		// changing columns
 		if (move.getToRow() == move.getFromRow()) {
 			return checkForPieceInPath(move.getFromColumn(), 

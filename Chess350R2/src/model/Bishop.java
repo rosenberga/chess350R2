@@ -92,7 +92,7 @@ public final class Bishop extends ChessPiece {
 		return false;
 	}
 
-	
+
 	/*****************************************************************
 	 * Set the current piece to reflect it being moved.
 	 *
@@ -104,7 +104,7 @@ public final class Bishop extends ChessPiece {
 		super.setMoved(moved);
 	}
 
-	
+
 	/*****************************************************************
 	 * Returns a boolean that is true or false depending on if the
 	 *		piece has moved yet.

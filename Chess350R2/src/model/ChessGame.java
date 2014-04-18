@@ -2,7 +2,7 @@ package model;
 
 /*****************************************************************
  * Represents a chess game by having a chess model and a chess board.
- * 
+ *
  * @author Adam Rosenberg
  * @version 1.0
  *****************************************************************/
@@ -25,10 +25,10 @@ public final class ChessGame {
 
 	/** Stack of Move Class. */
 	private MoveStack moveStack;
-	
+
 	/** Magic Number 16. */
 	private static final int MAGIC16 = 16;
-	
+
 	/** Magic Number 1. */
 	private static final int MAGIC1 = 1;
 
@@ -44,7 +44,7 @@ public final class ChessGame {
 
 	/*****************************************************************
 	 * Gets model.
-	 * 
+	 *
 	 * @return model the IChessModel in ChessGame
 	 *****************************************************************/
 	public IChessModel getModel() {
@@ -53,7 +53,7 @@ public final class ChessGame {
 
 	/*****************************************************************
 	 * Gets board.
-	 * 
+	 *
 	 * @return board the IChessBoard in ChessGame
 	 *****************************************************************/
 	public IChessBoard getBoard() {
@@ -62,7 +62,7 @@ public final class ChessGame {
 
 	/*****************************************************************
 	 * Sets model.
-	 * 
+	 *
 	 * @param newModel
 	 *            a new IChessModel to set this.model to
 	 *****************************************************************/
@@ -72,7 +72,7 @@ public final class ChessGame {
 
 	/*****************************************************************
 	 * Sets Board.
-	 * 
+	 *
 	 * @param newBoard
 	 *            a new IChessBoard to set this.board to
 	 *****************************************************************/
@@ -82,7 +82,7 @@ public final class ChessGame {
 
 	/*****************************************************************
 	 * Gets move.
-	 * 
+	 *
 	 * @return move the move in ChessGame
 	 *****************************************************************/
 	public Move getMove() {
@@ -91,7 +91,7 @@ public final class ChessGame {
 
 	/*****************************************************************
 	 * Sets Move.
-	 * 
+	 *
 	 * @param move1
 	 *            a new move to set in the game
 	 *****************************************************************/
@@ -101,7 +101,7 @@ public final class ChessGame {
 
 	/*****************************************************************
 	 * Sets Move given coordinates instead of a Move.
-	 * 
+	 *
 	 * @param coords
 	 *            a new move to set in the game
 	 *****************************************************************/
@@ -112,7 +112,7 @@ public final class ChessGame {
 
 	/*****************************************************************
 	 * Determines if Undo Feature is possible.
-	 * 
+	 *
 	 * @return true if chessstack is not empty
 	 *****************************************************************/
 	public boolean canUndo() {
@@ -121,7 +121,7 @@ public final class ChessGame {
 
 	/*****************************************************************
 	 * Undoes the previous move.
-	 * 
+	 *
 	 *****************************************************************/
 	public void undo() {
 		if (canUndo()) {
@@ -134,20 +134,20 @@ public final class ChessGame {
 
 			if (model.countBlacks(board) > MAGIC16) {
 				model.getBlackGrave().remove(model.
-						getBlackGrave().size() - MAGIC1);
+					getBlackGrave().size() - MAGIC1);
 
 			}
 
 			if (model.countWhites(board) > MAGIC16) {
 				model.getWhiteGrave().remove(model.
-						getWhiteGrave().size() - MAGIC1);
+					getWhiteGrave().size() - MAGIC1);
 			}
 		}
 	}
 
 	/*****************************************************************
 	 * Return the stack of ChessBoards.
-	 * 
+	 *
 	 * @return the chessStack
 	 *****************************************************************/
 	public ChessStack getChessStack() {
@@ -156,7 +156,7 @@ public final class ChessGame {
 
 	/*****************************************************************
 	 * Push a move onto the stack of moves.
-	 * 
+	 *
 	 * @return the top of the move stack
 	 *****************************************************************/
 	public Move getLastMove() {
@@ -165,7 +165,7 @@ public final class ChessGame {
 
 	/*****************************************************************
 	 * Push a move onto the stack of moves.
-	 * 
+	 *
 	 * @param m the move to push
 	 *****************************************************************/
 	public void pushMove(final Move m) {
@@ -174,7 +174,7 @@ public final class ChessGame {
 
 	/*****************************************************************
 	 * Undoes the previous two moves.
-	 * 
+	 *
 	 *****************************************************************/
 	public void undo2() {
 		if (canUndo2()) {
@@ -187,7 +187,7 @@ public final class ChessGame {
 
 	/*****************************************************************
 	 * Determines if Undo Feature is possible.
-	 * 
+	 *
 	 * @return true if chessStack has at least 2 moves
 	 *****************************************************************/
 	public boolean canUndo2() {
