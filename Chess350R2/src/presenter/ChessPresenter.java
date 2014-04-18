@@ -197,22 +197,11 @@ public class ChessPresenter implements IChessPresenter, Serializable {
 						}
 					} else if (view.getSaveItem()
 							== e.getSource()) {
-						try {
-							saveGame();
-						} catch (IOException e1) {
-							e1.printStackTrace();
-						}
+						saveGame();
 					} else if (view.getLoadItem()
 							== e.getSource()) {
-						try {
-							loadGame(
-							"chessSave.ser");
-						} catch (
-						 ClassNotFoundException e1) {
-							e1.printStackTrace();
-						} catch (IOException e1) {
-							e1.printStackTrace();
-						}
+						loadGame(
+                        "chessSave.ser");
 					}
 
 				}
@@ -240,9 +229,8 @@ public class ChessPresenter implements IChessPresenter, Serializable {
 
     /*****************************************************************
 	 * Saves the board state to a file.
-	 * @throws IOException
 	 *****************************************************************/
-	private void saveGame() throws IOException {
+	private void saveGame() {
 		try {
 			// Create an array containing our board data to be saved
 			Object[] data = {game, onePlayer, cpuStyle};
@@ -253,18 +241,19 @@ public class ChessPresenter implements IChessPresenter, Serializable {
 			oos.close();
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
+		} catch (Exception e) {
+		    e.printStackTrace();
 		}
 	}
 
 	/*****************************************************************
 	 * Loads a game state from a file.
+	 * 
+	 * @param fileLocation the location of the saved game file
 	 * @throws IOException
 	 * @throws ClassNotFoundException
-	 *
-	 *
 	 *****************************************************************/
-	public final void loadGame(final String fileLocation)
-			throws IOException, ClassNotFoundException {
+	public final void loadGame(final String fileLocation) {
 		try {
 			view.close();
 			stopMusic();
@@ -281,6 +270,8 @@ public class ChessPresenter implements IChessPresenter, Serializable {
 			new ChessPresenter(cg, view, one, cpu);
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
+		} catch (Exception e) {
+		    e.printStackTrace();
 		}
 	}
 
@@ -538,6 +529,8 @@ public class ChessPresenter implements IChessPresenter, Serializable {
 
 	/*****************************************************************
 	 * Sends the white piece.
+	 * 
+	 * @param toSend the IChessPiece to send
 	 * @return int[] returns an array of ints.
 	 *****************************************************************/
 	public final int[] sendWhitePiece(final IChessPiece toSend) {

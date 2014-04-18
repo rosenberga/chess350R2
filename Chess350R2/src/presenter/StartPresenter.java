@@ -66,13 +66,7 @@ public class StartPresenter {
 					ChessPresenter cp
 					= new ChessPresenter(g,
 							v, false, 0);
-					try {
-						cp.loadGame("chessSave.ser");
-					} catch (ClassNotFoundException e1) {
-						e1.printStackTrace();
-					} catch (IOException e1) {
-						e1.printStackTrace();
-					}
+					cp.loadGame("chessSave.ser");
 				}
 			}
 		});

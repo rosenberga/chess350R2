@@ -59,8 +59,8 @@ public abstract class ChessPiece implements IChessPiece, Serializable {
 		// make sure the move is within the board
 		if (m.getFromRow() < 0 || m.getFromRow() >= board.numRows()
 				|| m.getToRow() < 0 || m.getToRow()
-					>= board.numRows() ||
-					m.getFromColumn() < 0
+					>= board.numRows() 
+					  || m.getFromColumn() < 0
 						|| m.getFromColumn()
 						>= board.numColumns()
 							|| m.getToColumn() < 0

@@ -197,7 +197,7 @@ public class ChessView implements IChessView, Serializable {
 	}
 
 	 /*****************************************************************
-     * All code needed to start playing music
+     * All code needed to start playing music.
      *****************************************************************/
 	private void setUpAudio() {
 		audioFile = new File(SONG);
