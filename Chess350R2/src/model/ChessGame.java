@@ -112,6 +112,15 @@ public final class ChessGame implements Serializable{
 			setBoard(chessStack.pop());
 			getModel().setTurns(UNDO_TURN);
 			moveStack.pop();
+			
+			//Graveyard remove
+			if (model.) {
+				
+			}
+			
+			if () {
+				
+			}
 		}
 	}
 

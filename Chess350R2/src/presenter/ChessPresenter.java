@@ -244,7 +244,7 @@ public class ChessPresenter implements IChessPresenter, Serializable {
 	 *
 	 *
 	 *****************************************************************/
-	public void loadGame(String fileLocation) 
+	public void loadGame(String fileLocation)
 			throws IOException, ClassNotFoundException {
 		try {
 			view.close();
@@ -280,21 +280,24 @@ public class ChessPresenter implements IChessPresenter, Serializable {
 
 	/*****************************************************************
 	 * Called after the first click on the board.
-	 * 
+	 *
 	 * @param pos
 	 *            the array for position of the piece
 	 *****************************************************************/
 	private void firstClick(final int[] pos) {
 		if (game.getBoard().pieceAt(pos[ROW], pos[COL]) != null) {
-			if (game.getBoard().pieceAt(pos[ROW], pos[COL]).player() == game
+			if (game.getBoard().pieceAt(pos[ROW], pos[COL]).player()
+					== game
 					.getModel().currentPlayer()) {
-				int count = getAndShowLegalMoves(pos[ROW], pos[COL]);
+				int count = getAndShowLegalMoves(pos[ROW],
+						pos[COL]);
 				if (count != 0) {
 					firstClick = false;
 					coords[FR] = pos[ROW];
 					coords[FC] = pos[COL];
 					view.showSelected(pos[ROW], pos[COL],
-							sendPiece(pos[ROW], pos[COL]));
+							sendPiece(pos[ROW], 
+									pos[COL]));
 				}
 			}
 		}
@@ -302,12 +305,12 @@ public class ChessPresenter implements IChessPresenter, Serializable {
 
 	/*****************************************************************
 	 * Shows legal moves on the board.
-	 * 
+	 *
 	 * @param row
 	 *            the row available
 	 * @param col
 	 *            the column available
-	 * 
+	 *
 	 * @return count
 	 *****************************************************************/
 	private int getAndShowLegalMoves(final int row, final int col) {
@@ -316,9 +319,11 @@ public class ChessPresenter implements IChessPresenter, Serializable {
 		for (int i = 0; i < game.getBoard().numRows(); i++) {
 			for (int j = 0; j < game.getBoard().numColumns(); j++) {
 				Move m = new Move(row, col, i, j);
-				if (game.getModel().isValidMove(m, game.getBoard())) {
+				if (game.getModel().isValidMove(m,
+						game.getBoard())) {
 					if (legal) {
-						view.paintLegalMove(i, j, sendPiece(i, j));
+						view.paintLegalMove(i, j,
+							sendPiece(i, j));
 					}
 					count++;
 				}
@@ -339,20 +344,25 @@ public class ChessPresenter implements IChessPresenter, Serializable {
 		showLastMove();
 		reboundGraves();
 	}
-	
-	private void showLastMove(){
-		if(view.isShowLast()){
+
+	/*****************************************************************
+	 * Visually shows the user the last move performed.
+	 *****************************************************************/
+	private void showLastMove() {
+		if (view.isShowLast()) {
 			Move m = game.getLastMove();
-			if (m != null){
+			if (m != null) {
 			view.paintLastMove(m.getFromRow(), m.getFromColumn());
-			view.paintLastMove(m.getToRow(), m.getToColumn(), sendPiece(m.getToRow(), m.getToColumn()));
+			view.paintLastMove(m.getToRow(), m.getToColumn(),
+					sendPiece(m.getToRow(),
+							m.getToColumn()));
 			}
 		}
 	}
 
 	/*****************************************************************
 	 * Calls for the action.
-	 * 
+	 *
 	 * @param a
 	 *            the action listener
 	 *****************************************************************/
@@ -360,7 +370,8 @@ public class ChessPresenter implements IChessPresenter, Serializable {
 
 		game.setMove(coords); // set the move to be made
 
-		if (game.getModel().isValidMove(game.getMove(), game.getBoard())) {
+		if (game.getModel().isValidMove(game.getMove(),
+				game.getBoard())) {
 			game.getModel().move(game.getMove(), game.getBoard(),
 					game.getChessStack());
 			game.pushMove(game.getMove());
@@ -372,7 +383,13 @@ public class ChessPresenter implements IChessPresenter, Serializable {
 		}
 	}
 
-	private final void afterMove(final ActionListener a) {
+	/*****************************************************************
+	 * Work to be done after a piece has been moved.
+	 *
+	 * @param a
+	 *            the action listener
+	 *****************************************************************/
+	private void afterMove(final ActionListener a) {
 		updateView();
 		if (game.getModel().inCheckMate(game.getBoard())) {
 			String winner;
@@ -383,11 +400,18 @@ public class ChessPresenter implements IChessPresenter, Serializable {
 			}
 			view.showMessage("Checkmate", winner + " wins!");
 		} else if (game.getModel().inStaleMate(game.getBoard())) {
-			view.showMessage("Stalemate", "The Game ended in a checkmate.");
+			view.showMessage("Stalemate", "The Game "
+					+ "ended in a checkmate.");
 		}
 	}
 
-	private final void computerMove(final ActionListener al) {
+	/*****************************************************************
+	 * Computer thinks of a move.
+	 *
+	 * @param al
+	 *            the action listener
+	 *****************************************************************/
+	private void computerMove(final ActionListener al) {
 		// it is now the computer players turn
 		ComputerPlayer cp = new ComputerPlayer();
 		Move m;
@@ -395,8 +419,9 @@ public class ChessPresenter implements IChessPresenter, Serializable {
 			m = cp.getRandomMove(game.getModel(), game.getBoard());
 		} else if (cpuStyle == ATTACK) {
 			m = cp.getAttackMove(game.getModel(), game.getBoard());
-		} else { //(cpuStyle == DEF) 
-			m = cp.getDefensiveMove(game.getModel(), game.getBoard());
+		} else { //(cpuStyle == DEF)
+			m = cp.getDefensiveMove(game.getModel(),
+					game.getBoard());
 		}
 		game.pushMove(m);
 		game.getModel().move(m, game.getBoard(), game.getChessStack());
@@ -404,12 +429,12 @@ public class ChessPresenter implements IChessPresenter, Serializable {
 
 	/*****************************************************************
 	 * Sends piece to a new position.
-	 * 
+	 *
 	 * @param row
 	 *            the new row position of the piece
 	 * @param column
 	 *            the new column position of the piece
-	 * 
+	 *
 	 * @return piecenum
 	 *****************************************************************/
 	public final int[] sendPiece(final int row, final int column) {
@@ -454,8 +479,11 @@ public class ChessPresenter implements IChessPresenter, Serializable {
 
 	}
 
+	/*****************************************************************
+	 * Undoes the move just performed.
+	 *****************************************************************/
 	public void undo() {
-		if(onePlayer){
+		if (onePlayer) {
 			game.undo2();
 			updateView();
 		} else {
@@ -464,6 +492,9 @@ public class ChessPresenter implements IChessPresenter, Serializable {
 		}
 	}
 	
+	/*****************************************************************
+	 * Calls for the action.
+	 *****************************************************************/
 	public void reboundGraves() {
 		//if (game.getModel().getWhiteGrave().size() > 0) {
 			for (int i = 0; i < game.getModel().getWhiteGrave().size(); i++) {
