@@ -397,18 +397,19 @@ public class ChessPresenter implements IChessPresenter, Serializable {
 	public final void onInput(final ActionListener a) {
 
 		game.setMove(coords); // set the move to be made
-
+		boolean wasL = false;
 		if (game.getModel().isValidMove(game.getMove(),
 				game.getBoard())) {
-			game.getModel().move(game.getMove(), game.getBoard(),
-					game.getChessStack());
+			game.getModel().move(game.getMove(), game.getBoard(), 
+			        game.getChessStack());
 			game.pushMove(game.getMove());
+		    wasL = true;
 		}
 		afterMove(a);
-		if (onePlayer && !game.getModel().isComplete(game.getBoard())) {
-			computerMove(a);
-			afterMove(a);
-		}
+        if (wasL && onePlayer && !game.getModel().isComplete(game.getBoard())) {
+            computerMove(a);
+            afterMove(a);
+        }
 	}
 
 	/*****************************************************************
@@ -518,6 +519,7 @@ public class ChessPresenter implements IChessPresenter, Serializable {
 			game.undo();
 			updateView();
 		}
+		updateGraves();
 	}
 
 	/*****************************************************************
@@ -632,4 +634,8 @@ public class ChessPresenter implements IChessPresenter, Serializable {
 		return pieceNum;
 	}
 
+	private void updateGraves(){
+	    view.clearGraves();
+	    reboundGraves();
+	}
 }

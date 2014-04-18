@@ -1,14 +1,12 @@
 package model;
 
-import java.io.Serializable;
-
 /*****************************************************************
  * Represents a chess game by having a chess model and a chess board.
  * 
  * @author Adam Rosenberg
  * @version 1.0
  *****************************************************************/
-public final class ChessGame implements Serializable{
+public final class ChessGame {
 
 	/** The ChessModel. */
 	private IChessModel model;
@@ -19,11 +17,20 @@ public final class ChessGame implements Serializable{
 	/** A Chess Move. */
 	private Move move;
 
+	/** Stack of ChessBoard Class. */
 	private ChessStack chessStack;
 
+	/** Represents turn counter for undo. */
 	private static final int UNDO_TURN = -1;
 
+	/** Stack of Move Class. */
 	private MoveStack moveStack;
+	
+	/** Magic Number 16. */
+	private static final int MAGIC16 = 16;
+	
+	/** Magic Number 1. */
+	private static final int MAGIC1 = 1;
 
 	/*****************************************************************
 	 * Constructs a new chess game.
@@ -103,41 +110,72 @@ public final class ChessGame implements Serializable{
 		setMove(m);
 	}
 
+	/*****************************************************************
+	 * Determines if Undo Feature is possible.
+	 * 
+	 * @return true if chessstack is not empty
+	 *****************************************************************/
 	public boolean canUndo() {
 		return !chessStack.empty();
 	}
 
+	/*****************************************************************
+	 * Undoes the previous move.
+	 * 
+	 *****************************************************************/
 	public void undo() {
 		if (canUndo()) {
 			setBoard(chessStack.pop());
 			getModel().setTurns(UNDO_TURN);
 			moveStack.pop();
-			
+
 			//Graveyard remove
-			if (model.countBlacks(board) > 16) {
-				
-				model.getBlackGrave().remove(model.getBlackGrave().size()-1);
-				
+
+
+			if (model.countBlacks(board) > MAGIC16) {
+				model.getBlackGrave().remove(model.
+						getBlackGrave().size() - MAGIC1);
+
 			}
-			
-if (model.countWhites(board) > 16) {
-				model.getWhiteGrave().remove(model.getWhiteGrave().size()-1);
+
+			if (model.countWhites(board) > MAGIC16) {
+				model.getWhiteGrave().remove(model.
+						getWhiteGrave().size() - MAGIC1);
 			}
 		}
 	}
 
+	/*****************************************************************
+	 * Return the stack of ChessBoards.
+	 * 
+	 * @return the chessStack
+	 *****************************************************************/
 	public ChessStack getChessStack() {
 		return chessStack;
 	}
 
+	/*****************************************************************
+	 * Push a move onto the stack of moves.
+	 * 
+	 * @return the top of the move stack
+	 *****************************************************************/
 	public Move getLastMove() {
 		return moveStack.peek();
 	}
 
+	/*****************************************************************
+	 * Push a move onto the stack of moves.
+	 * 
+	 * @param m the move to push
+	 *****************************************************************/
 	public void pushMove(final Move m) {
 		moveStack.push(m);
 	}
 
+	/*****************************************************************
+	 * Undoes the previous two moves.
+	 * 
+	 *****************************************************************/
 	public void undo2() {
 		if (canUndo2()) {
 			chessStack.pop();
@@ -147,7 +185,12 @@ if (model.countWhites(board) > 16) {
 		}
 	}
 
+	/*****************************************************************
+	 * Determines if Undo Feature is possible.
+	 * 
+	 * @return true if chessStack has at least 2 moves
+	 *****************************************************************/
 	public boolean canUndo2() {
-		return chessStack.size() > 1;
+		return (chessStack.size() > 1);
 	}
 }

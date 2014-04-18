@@ -11,6 +11,7 @@ import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.IOException;
 import java.io.Serializable;
+import java.util.ArrayList;
 
 import javax.sound.sampled.AudioFormat;
 import javax.sound.sampled.AudioInputStream;
@@ -29,6 +30,8 @@ import javax.swing.JPanel;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JOptionPane;
+
+import model.IChessPiece;
 
 /*****************************************************************
  * The view class.
@@ -622,21 +625,6 @@ public class ChessView implements IChessView, Serializable {
 	}
 
 	/*****************************************************************
-	 * Removes an action listener from all JButtons.
-	 * 
-	 * @param e
-	 *            the action listener to remove
-	 *****************************************************************/
-	@Override
-	public final void disable(final ActionListener e) {
-		for (int i = 0; i < pieceLabels.length; i++) {
-			for (int j = 0; j < pieceLabels[i].length; j++) {
-				pieceLabels[i][j].removeActionListener(e);
-			}
-		}
-	}
-
-	/*****************************************************************
 	 * Get rid of the frame.
 	 *****************************************************************/
 	public final void close() {
@@ -701,6 +689,7 @@ public class ChessView implements IChessView, Serializable {
 		}
 	}
 
+
 	/*****************************************************************
 	 * Updates the black graveyard.
 	 *
@@ -709,8 +698,7 @@ public class ChessView implements IChessView, Serializable {
 	 * @param pieceID
 	 *            array of places to update
 	 *****************************************************************/
-	public void updateBlackGrave(final int index,
-			final int[] pieceID) {
+public void updateBlackGrave(final int index, final int[] pieceID) {
 		ImageIcon icon;
 		try {
 			icon = pieceImages[pieceID[OWNER]][pieceID[TYPE]];
@@ -720,4 +708,13 @@ public class ChessView implements IChessView, Serializable {
 
 		}
 	}
+
+    @Override
+    public void clearGraves() {
+        for(int i = 0; i < graveWhitePieces.length; i++){
+            graveWhitePieces[i].setIcon(new ImageIcon("piece-1-1.png"));
+            graveBlackPieces[i].setIcon(new ImageIcon("piece-1-1.png"));
+        }
+    }
+
 }

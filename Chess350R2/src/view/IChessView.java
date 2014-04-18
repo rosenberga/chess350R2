@@ -2,9 +2,12 @@ package view;
 
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.util.ArrayList;
 
 import javax.swing.JFrame;
 import javax.swing.JMenuItem;
+
+import model.IChessPiece;
 
 /*****************************************************************
  * The Interface for the view class.
@@ -90,6 +93,7 @@ public interface IChessView {
 	void showSelected(int i, int j, int[] sendPiece);
 
 	/*****************************************************************
+<<<<<<< HEAD
 	 * Disables the board.
 	 *
 	 * @param actionListener disables all squares
@@ -97,6 +101,8 @@ public interface IChessView {
 	void disable(ActionListener actionListener);
 
 	/*****************************************************************
+=======
+>>>>>>> branch 'master' of https://github.com/rosenberga/Chess350R2.git
 	 * The squares will show legal moves if true.
 	 *
 	 * @param b used to set legality
@@ -154,4 +160,6 @@ public interface IChessView {
 	void updateWhiteGrave(int index, int[] pieceID);
 
 	void updateBlackGrave(int index, int[] pieceID);
+	
+    void clearGraves();
 }
