@@ -563,21 +563,6 @@ public class ChessView implements IChessView, Serializable {
 	}
 
 	/*****************************************************************
-	 * Removes an action listener from all JButtons.
-	 * 
-	 * @param e
-	 *            the action listener to remove
-	 *****************************************************************/
-	@Override
-	public final void disable(final ActionListener e) {
-		for (int i = 0; i < pieceLabels.length; i++) {
-			for (int j = 0; j < pieceLabels[i].length; j++) {
-				pieceLabels[i][j].removeActionListener(e);
-			}
-		}
-	}
-
-	/*****************************************************************
 	 * Get rid of the frame.
 	 *****************************************************************/
 	public final void close() {

@@ -93,13 +93,6 @@ public interface IChessView {
 	void showSelected(int i, int j, int[] sendPiece);
 	
 	/*****************************************************************
-	 * Disables the board.
-	 * 
-	 * @param actionListener disables all squares
-	 *****************************************************************/
-	void disable(ActionListener actionListener);
-	
-	/*****************************************************************
 	 * The squares will show legal moves if true.
 	 * 
 	 * @param b used to set legality
