@@ -142,4 +142,7 @@ public interface IChessView {
 	JMenuItem getSaveItem();
 
 	JMenuItem getLoadItem();
+	void updateWhiteGrave(int index, int[] pieceID);
+	
+	void updateBlackGrave(int index, int[] pieceID);
 }

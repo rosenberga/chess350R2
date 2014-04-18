@@ -109,5 +109,33 @@ public interface IChessModel{
      * @param i the amount to increase turns by
      *****************************************************************/
    	void setTurns(int i);
+   	
+    /*****************************************************************
+     * Get a piece in the graveyard.
+     * 
+     * @param index of piece space
+     *****************************************************************/
+   	IChessPiece getBlackGravePiece(int index);
+   	
+    /*****************************************************************
+     * Get a piece in the graveyard.
+     * 
+     * @param index of piece space
+     *****************************************************************/
+   	IChessPiece getWhiteGravePiece(int index);
+   	
+    /*****************************************************************
+     * Get array of the graveyard.
+     * 
+     * @param index of piece space
+     *****************************************************************/
+   	ArrayList<IChessPiece> getBlackGrave();
+   	
+    /*****************************************************************
+     * Get array of the graveyard.
+     * 
+     * @param index of piece space
+     *****************************************************************/
+   	ArrayList<IChessPiece> getWhiteGrave();
 
 }

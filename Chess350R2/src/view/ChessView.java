@@ -134,6 +134,15 @@ public class ChessView implements IChessView, Serializable {
 	private AudioInputStream audioStream;
 	private Clip audioClip;
 	private static final int LOOP = Clip.LOOP_CONTINUOUSLY;
+	/** Array of Grave Pieces */
+	private JLabel[] graveWhitePieces;
+	/** Array of Grave Pieces */
+	private JLabel[] graveBlackPieces;
+	/** Panel for the graveyard. */
+	private JPanel gpanel1;
+	
+	/** Panel for the graveyard. */
+	private JPanel gpanel2;
 
 	/*****************************************************************
 	 * Constructor for the View.
@@ -149,9 +158,17 @@ public class ChessView implements IChessView, Serializable {
 		this.rows = row;
 		this.cols = col;
 		frame = new JFrame();
-		newGame();
 		showLegal = true;
 		showLast = true;
+		graveWhitePieces = new JLabel[16];
+		graveBlackPieces = new JLabel[16];
+		for(int i = 0; i < graveBlackPieces.length; i++){
+			graveWhitePieces[i] = new JLabel();
+			graveBlackPieces[i] = new JLabel();
+			graveWhitePieces[i].setIcon(new ImageIcon("piece-1-1.png"));
+			graveBlackPieces[i].setIcon(new ImageIcon("piece-1-1.png"));
+		}
+		newGame();
 	}
 	
 	private void setUpAudio(){
@@ -215,20 +232,19 @@ public class ChessView implements IChessView, Serializable {
 	private void setUpBase() {
 		frame = new JFrame("Chess350");
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
+		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+		double height = screenSize.getHeight();
+		int h = (int) (height*RATIO);
+		int width = (int) (screenSize.getWidth() * RATIO);
+		
+		frame.setPreferredSize(new Dimension(width,h));
 		setUpMenu();
 		setUpPanels();
 		frame.getContentPane().add(panel);
 		frame.setJMenuBar(menus);
 
-		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-		double height = screenSize.getHeight();
-		int h = (int) (height * RATIO);
-
-		frame.setPreferredSize(new Dimension(h, h));
 		frame.pack();
 		frame.setVisible(true);
-		frame.setResizable(false);
 		
 		Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
 		frame.setLocation(dim.width/2-frame.getSize().width/2, dim.height/2-frame.getSize().height/2);
@@ -275,10 +291,24 @@ public class ChessView implements IChessView, Serializable {
 	private void setUpPanels() {
 		panel = new JPanel();
 		panel.setLayout(new BorderLayout());
+		
+		gpanel1 = new JPanel();
+		gpanel1.setLayout(new GridLayout(8,2));
+		gpanel1.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+		gpanel2 = new JPanel();
+		gpanel2.setLayout(new GridLayout(8,2));
+		gpanel2.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+		
+		for(int i = 0; i < graveWhitePieces.length; i++){
+			gpanel1.add(graveWhitePieces[i]);
+			gpanel2.add(graveBlackPieces[i]);
+		}
 
 		piecePanel = new JPanel();
 		setUpPiecePanel();
 		panel.add(piecePanel, BorderLayout.CENTER);
+		panel.add(gpanel1, BorderLayout.EAST);
+		panel.add(gpanel2, BorderLayout.WEST);
 	}
 
 	/*****************************************************************
@@ -286,6 +316,14 @@ public class ChessView implements IChessView, Serializable {
 	 *****************************************************************/
 	private void setUpPiecePanel() {
 		piecePanel.setLayout(new GridLayout(rows, cols));
+		
+		int hi = frame.getHeight();
+		int wi = frame.getWidth();
+		hi = (int) (hi * RATIO);
+		wi = (int) (wi*RATIO);
+		
+		
+		piecePanel.setSize(hi,wi);
 		setUpImages();
 	}
 
@@ -575,6 +613,27 @@ public class ChessView implements IChessView, Serializable {
 			audioStream.close();
 		} catch (IOException e) {
 			e.printStackTrace();
+		}
+	}
+	
+	public void updateWhiteGrave(final int index, final int[] pieceID) {
+		ImageIcon icon;
+		try {
+			icon = pieceImages[pieceID[OWNER]][pieceID[TYPE]];
+			graveWhitePieces[index].setIcon(icon);;
+		} catch (Exception e) {
+			
+		}
+	}
+	
+	public void updateBlackGrave(final int index, final int[] pieceID) {
+		ImageIcon icon;
+		try {
+			icon = pieceImages[pieceID[OWNER]][pieceID[TYPE]];
+			graveBlackPieces[index].setIcon(icon);
+			gpanel2.add(graveBlackPieces[index]);
+		} catch (Exception e) {
+			
 		}
 	}
 

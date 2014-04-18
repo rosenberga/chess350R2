@@ -44,6 +44,12 @@ public final class ChessModel implements IChessModel,Serializable {
 	
 	/** Column King is moving to another way. */
 	private static final int CAST2TO = 5;
+	
+	/** White's Graveyard. */
+	private ArrayList<IChessPiece> wGrave;
+
+	/** Black's Graveyard. */
+	private ArrayList<IChessPiece> bGrave;
 
 
 	/*****************************************************************
@@ -54,6 +60,8 @@ public final class ChessModel implements IChessModel,Serializable {
 		enPassant = false;
 		enPassantPositionR = "";
 		enPassantPositionL = "";
+		wGrave = new ArrayList<IChessPiece>();
+		bGrave = new ArrayList<IChessPiece>();
 	}
 	
 	/*****************************************************************
@@ -190,6 +198,21 @@ public final class ChessModel implements IChessModel,Serializable {
 	@Override
 	public void move(final Move move, final IChessBoard board) {
 
+		if (isValidMove(move, board)) {
+			if ((board.pieceAt(move.getToRow(), move.getToColumn())) != null) {
+				if (board.pieceAt(move.getToRow(), move.getToColumn()).player() 
+						!= currentPlayer()) {
+					// a piece will be taken and 
+					// must be sent to the graveyard
+					if (turns % 2 == 0) { // white is taking black
+						bGrave.add(board.pieceAt(move.getToRow(), move.getToColumn()));
+					} else {
+						wGrave.add(board.pieceAt(move.getToRow(), move.getToColumn()));
+					}
+				}
+			}
+		}
+		
 		// make the move on the board
 		boardChange(board, move);
 		
@@ -612,5 +635,45 @@ public final class ChessModel implements IChessModel,Serializable {
 	public boolean enPassant(final Move move) {
 		return getEnPassant(move);
 	}
+	
+	/*****************************************************************
+	 * Returns the piece in the white graveyard.
+	 * 
+	 * @param index the index of the piece in the list
+	 * @return the piece at the provided index
+	 *****************************************************************/
+	public IChessPiece getWhiteGravePiece(final int index) {
+		return wGrave.get(index);
+	}
+
+	/*****************************************************************
+	 * Returns the piece in the black graveyard.
+	 * 
+	 * @param index the index of the piece in the list
+	 * @return the piece at the provided index
+	 *****************************************************************/
+	public IChessPiece getBlackGravePiece(final int index) {
+		return bGrave.get(index);
+	}
+	
+    /*****************************************************************
+     * Get array of the graveyard.
+     * 
+     * @param index of piece space
+     *****************************************************************/
+   	public final ArrayList<IChessPiece> getBlackGrave() {
+   		return bGrave;
+   	}
+   	
+    /*****************************************************************
+     * Get array of the graveyard.
+     * 
+     * @param index of piece space
+     *****************************************************************/
+   	public final ArrayList<IChessPiece> getWhiteGrave() {
+   		return wGrave;
+   	}
+}
+
 
 }

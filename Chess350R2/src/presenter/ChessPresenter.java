@@ -311,6 +311,7 @@ public class ChessPresenter implements IChessPresenter, Serializable {
 			}
 		}
 		showLastMove();
+		reboundGraves();
 	}
 	
 	private void showLastMove(){
@@ -435,6 +436,101 @@ public class ChessPresenter implements IChessPresenter, Serializable {
 			game.undo();
 			updateView();
 		}
+	}
+	
+	public void reboundGraves() {
+		//if (game.getModel().getWhiteGrave().size() > 0) {
+			for (int i = 0; i < game.getModel().getWhiteGrave().size(); i++) {
+				view.updateWhiteGrave(i, sendWhitePiece(game.getModel().getWhiteGravePiece(i)));
+			}
+		//}
+		//if (game.getModel().getBlackGrave().size() > 0) {
+			for (int i = 0; i < game.getModel().getBlackGrave().size(); i++) {
+				view.updateBlackGrave(i, sendBlackPiece(game.getModel().getBlackGravePiece(i)));
+			}
+		//}
+	}
+
+	public int[] sendWhitePiece(IChessPiece toSend) {
+		int[] pieceNum = new int[PIECE_INFO];
+		Player p;
+		try {
+			p = toSend.player();
+		} catch (Exception e) {
+			pieceNum[OWNER] = NULL_OWNER;
+			pieceNum[TYPE] = NULL_TYPE;
+			return pieceNum;
+		}
+		if (p == Player.WHITE) {
+			pieceNum[OWNER] = WHV;
+		} else {
+			pieceNum[OWNER] = BLV;
+		}
+
+		String type = toSend.type();
+		switch (type) {
+		case "Pawn":
+			pieceNum[TYPE] = PV;
+			break;
+		case "Bishop":
+			pieceNum[TYPE] = BV;
+			break;
+		case "Knight":
+			pieceNum[TYPE] = NV;
+			break;
+		case "Queen":
+			pieceNum[TYPE] = QV;
+			break;
+		case "King":
+			pieceNum[TYPE] = KV;
+			break;
+		default:
+			pieceNum[TYPE] = RV;
+			break;
+		}
+
+		return pieceNum;
+	}
+
+	public int[] sendBlackPiece(IChessPiece toSend) {
+		int[] pieceNum = new int[PIECE_INFO];
+		Player p = toSend.player();
+		try {
+			p = toSend.player();
+		} catch (Exception e) {
+			pieceNum[OWNER] = NULL_OWNER;
+			pieceNum[TYPE] = NULL_TYPE;
+			return pieceNum;
+		}
+		if (p == Player.WHITE) {
+			pieceNum[OWNER] = WHV;
+		} else {
+			pieceNum[OWNER] = BLV;
+		}
+
+		String type = toSend.type();
+		switch (type) {
+		case "Pawn":
+			pieceNum[TYPE] = PV;
+			break;
+		case "Bishop":
+			pieceNum[TYPE] = BV;
+			break;
+		case "Knight":
+			pieceNum[TYPE] = NV;
+			break;
+		case "Queen":
+			pieceNum[TYPE] = QV;
+			break;
+		case "King":
+			pieceNum[TYPE] = KV;
+			break;
+		default:
+			pieceNum[TYPE] = RV;
+			break;
+		}
+
+		return pieceNum;
 	}
 	
 }
