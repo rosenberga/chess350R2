@@ -80,16 +80,7 @@ public final class ChessModel implements IChessModel {
 
 	/*****************************************************************
 	 * Counts black pieces in the graveyard and board.
-<<<<<<< HEAD
-	 *
-	 * @return enPassant
-	 *
-	 * @param board
-=======
-	 * 
-	 * @param board the board used to count pieces on
 	 * @return number of black pieces
->>>>>>> branch 'master' of https://github.com/rosenberga/Chess350R2.git
 	 *****************************************************************/
 	public int countBlacks(final IChessBoard board) {
 		int countB = 0;
@@ -108,16 +99,9 @@ public final class ChessModel implements IChessModel {
 	}
 
 	/*****************************************************************
-<<<<<<< HEAD
 	 * Counts white pieces in the graveyard and bouard
 	 *
-	 * @return enPassant
-=======
-	 * Checks whether the board is en passant.
-	 * 
-	 * @param board the board used to count piece on.
-	 * @return number of white pieces
->>>>>>> branch 'master' of https://github.com/rosenberga/Chess350R2.git
+	 * @return countW
 	 *****************************************************************/
 	public int countWhites(final IChessBoard board) {
 		int countW = 0;

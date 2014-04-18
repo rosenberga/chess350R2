@@ -200,7 +200,7 @@ public class ChessView implements IChessView, Serializable {
 		newGame();
 	}
 
-	private void setUpAudio(){
+	private void setUpAudio() {
 		audioFile = new File(song);
 		try {
 		    audioStream = AudioSystem.getAudioInputStream(audioFile);
@@ -230,11 +230,11 @@ public class ChessView implements IChessView, Serializable {
 	/*****************************************************************
 	 * Sets the legality of a move.
 	 *
-	 * @param showLegal
+	 * @param sl
 	 *            the legality
 	 *****************************************************************/
-	public final void setShowLegal(final boolean showLegal) {
-		this.showLegal = showLegal;
+	public final void setShowLegal(final boolean sl) {
+		this.showLegal = sl;
 	}
 
 	/*****************************************************************
@@ -250,11 +250,11 @@ public class ChessView implements IChessView, Serializable {
 	/*****************************************************************
 	 * sets the show Last boolean.
 	 *
-	 * @param showLast
+	 * @param sl
 	 *            show last
 	 *****************************************************************/
-	public final void setShowLast(final boolean showLast) {
-		this.showLast = showLast;
+	public final void setShowLast(final boolean sl) {
+		this.showLast = sl;
 	}
 
 	/*****************************************************************
@@ -711,7 +711,7 @@ public void updateBlackGrave(final int index, final int[] pieceID) {
 
     @Override
     public void clearGraves() {
-        for(int i = 0; i < graveWhitePieces.length; i++){
+        for(int i = 0; i < graveWhitePieces.length; i++) {
             graveWhitePieces[i].setIcon(new ImageIcon("piece-1-1.png"));
             graveBlackPieces[i].setIcon(new ImageIcon("piece-1-1.png"));
         }

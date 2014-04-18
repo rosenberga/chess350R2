@@ -10,7 +10,7 @@ import java.io.Serializable;
  * @author Adam Rosenberg
  * @version 1.0
  *****************************************************************/
-public final class ChessBoard implements IChessBoard, Serializable{
+public final class ChessBoard implements IChessBoard, Serializable {
 
 	/** The current board in the form of a 2D array of IChessPieces. */
 	private IChessPiece[][] board;

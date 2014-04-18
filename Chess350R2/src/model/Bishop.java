@@ -1,7 +1,5 @@
 package model;
 
-import java.io.Serializable;
-
 /*****************************************************************
  * A Bishop in a game of chess.
  *
@@ -19,7 +17,6 @@ public final class Bishop extends ChessPiece {
 		super(color);
 	}
 
-	
 	/*****************************************************************
 	 * Returns the type of ChessPiece it is.
 	 *

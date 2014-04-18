@@ -8,7 +8,7 @@ import java.io.Serializable;
  * @author Zachary Kurmas
  *****************************************************************/
 
-public interface IChessPiece{
+public interface IChessPiece {
 
    /*****************************************************************
     * Return the player that owns this piece.
