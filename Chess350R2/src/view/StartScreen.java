@@ -1,6 +1,8 @@
 package view;
 
+import java.awt.Dimension;
 import java.awt.GridLayout;
+import java.awt.Toolkit;
 import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
@@ -43,6 +45,8 @@ public class StartScreen {
 		frame.getContentPane().add(firstPanel);
 		frame.pack();
 		frame.setVisible(true);
+		Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
+		frame.setLocation(dim.width/2-frame.getSize().width/2, dim.height/2-frame.getSize().height/2);
 	}
 	
 	public final void addActionListeners(final ActionListener e){
