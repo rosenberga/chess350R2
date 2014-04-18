@@ -118,10 +118,9 @@ public final class ChessGame implements Serializable{
 				System.out.println(model.getBlackGrave().size()-1);
 				model.getBlackGrave().remove(model.getBlackGrave().size()-1);
 				System.out.println(model.getBlackGrave().size()-1);
-				
 			}
 			
-			if (model.countWhites(board) > 16) {
+if (model.countWhites(board) > 16) {
 				model.getWhiteGrave().remove(model.getWhiteGrave().size()-1);
 			}
 		}
@@ -149,10 +148,6 @@ public final class ChessGame implements Serializable{
 	}
 
 	public boolean canUndo2() {
-		if (chessStack.size() > 1) {
-			return true;
-		} else {
-			return false;
-		}
+		return chessStack.size() > 1;
 	}
 }

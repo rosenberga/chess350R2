@@ -157,6 +157,7 @@ public class ChessPresenter implements IChessPresenter, Serializable {
 					} else if (view.getSettingItem() == e.getSource()) {
 						new SettingsDialog(view.getFrame(), view);
 					} else if (view.getNewGameItem() == e.getSource()) {
+						stopMusic();
 						view.close();
 						game = new ChessGame();
 						view = new ChessView(game.getBoard().numRows(), game
