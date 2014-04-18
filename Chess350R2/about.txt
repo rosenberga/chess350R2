@@ -1,6 +1,8 @@
 Chess350 is a new chess program, still in beta, that will be so great that it will turn the chess world almost completely around. 
-At this moment, it only includes a two-player game, but stay turned to later released for new features. 
+At this moment, it includes a two-player game and a one-player game with three different playing styles.
 All normal chess rules are in Chess350, including castling and en passent moves. The current selected piece will have a blue background, 
-while the legal moves for the piece will have a green background. This show legal moves option can be disabled under game settings. 
+while the legal moves for the piece will have a green background. Also, the last move will be shown with a yellow background. 
+The show legals moves and show last move options can be disabled under game settings.
+Chess350 also includes background music and the ability to undo your last movie, along with save and load games.
 
 Have fun playing Chess350!
