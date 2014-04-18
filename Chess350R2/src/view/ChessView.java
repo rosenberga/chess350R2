@@ -41,6 +41,7 @@ import model.IChessPiece;
  *****************************************************************/
 public class ChessView implements IChessView, Serializable {
 
+	/** SerialUID */
 	private static final long serialVersionUID = -8519417649667845070L;
 
 	/** Number of colors in the game. */
@@ -109,10 +110,10 @@ public class ChessView implements IChessView, Serializable {
 
 	/** New Game Menu Item. */
 	private JMenuItem newGameItem;
-    
+
     /** Save Game Menu Item. */
 	private JMenuItem saveGameItem;
-	
+
 	/** Load Game Menu Item. */
 	private JMenuItem loadGameItem;
 
@@ -128,6 +129,7 @@ public class ChessView implements IChessView, Serializable {
 	/** Undo Menu Item. */
 	private JMenuItem undoItem;
 
+	/** Undo Menu Item. */
 	private JMenuItem musicItem;
 
 	/** Shows if the square is a legal move. */
@@ -136,24 +138,42 @@ public class ChessView implements IChessView, Serializable {
 	/** Shows the last move. */
 	private boolean showLast;
 
+	/** Chopin's file name. */
 	private static final String song = "ChopinNocturneOp.9No.2.wav";
+
+	/** audiofile. */
 	private File audioFile;
+
+	/** Audio input stream. */
 	private AudioInputStream audioStream;
+
+	/** Audio clip. */
 	private Clip audioClip;
+
+	/** Undo Menu Item. */
 	private static final int LOOP = Clip.LOOP_CONTINUOUSLY;
-	/** Array of Grave Pieces */
+
+	/** Array of Grave Pieces. */
 	private JLabel[] graveWhitePieces;
-	/** Array of Grave Pieces */
+
+	/** Array of Grave Pieces. */
 	private JLabel[] graveBlackPieces;
+
 	/** Panel for the graveyard. */
 	private JPanel gpanel1;
-	
+
 	/** Panel for the graveyard. */
 	private JPanel gpanel2;
+	
+	private static final int NUM_P = 16;
+	
+	private static final int EIGHT = 8;
+	
+	private static final int TWO = 2;
 
 	/*****************************************************************
 	 * Constructor for the View.
-	 * 
+	 *
 	 * @param row
 	 *            number of rows
 	 * @param col
@@ -167,21 +187,23 @@ public class ChessView implements IChessView, Serializable {
 		frame = new JFrame();
 		showLegal = true;
 		showLast = true;
-		graveWhitePieces = new JLabel[16];
-		graveBlackPieces = new JLabel[16];
-		for(int i = 0; i < graveBlackPieces.length; i++){
+		graveWhitePieces = new JLabel[NUM_P];
+		graveBlackPieces = new JLabel[NUM_P];
+		for(int i = 0; i < graveBlackPieces.length; i++) {
 			graveWhitePieces[i] = new JLabel();
 			graveBlackPieces[i] = new JLabel();
-			graveWhitePieces[i].setIcon(new ImageIcon("piece-1-1.png"));
-			graveBlackPieces[i].setIcon(new ImageIcon("piece-1-1.png"));
+			graveWhitePieces[i].setIcon(new ImageIcon(
+					"piece-1-1.png"));
+			graveBlackPieces[i].setIcon(new ImageIcon(
+					"piece-1-1.png"));
 		}
 		newGame();
 	}
-	
+
 	private void setUpAudio(){
 		audioFile = new File(song);
 		try {
-			audioStream = AudioSystem.getAudioInputStream(audioFile);
+		    audioStream = AudioSystem.getAudioInputStream(audioFile);
 		} catch (UnsupportedAudioFileException e) {
 			e.printStackTrace();
 		} catch (IOException e) {
@@ -198,7 +220,7 @@ public class ChessView implements IChessView, Serializable {
 
 	/*****************************************************************
 	 * Returns true if the square is a legal move.
-	 * 
+	 *
 	 * @return showlegal
 	 *****************************************************************/
 	public final boolean isShowLegal() {
@@ -207,25 +229,37 @@ public class ChessView implements IChessView, Serializable {
 
 	/*****************************************************************
 	 * Sets the legality of a move.
-	 * 
-	 * @param showLegal1
+	 *
+	 * @param showLegal
 	 *            the legality
 	 *****************************************************************/
 	public final void setShowLegal(final boolean showLegal) {
 		this.showLegal = showLegal;
 	}
 
+	/*****************************************************************
+	 * Do we show last?
+	 *
+	 * @return showLast
+	 *            returns showLast
+	 *****************************************************************/
 	public boolean isShowLast() {
 		return showLast;
 	}
 
+	/*****************************************************************
+	 * sets the show Last boolean.
+	 *
+	 * @param showLast
+	 *            show last
+	 *****************************************************************/
 	public final void setShowLast(final boolean showLast) {
 		this.showLast = showLast;
 	}
 
 	/*****************************************************************
 	 * Create a new game.
-	 * 
+	 *
 	 *****************************************************************/
 	private void newGame() {
 		frame.dispose();
@@ -234,17 +268,18 @@ public class ChessView implements IChessView, Serializable {
 
 	/*****************************************************************
 	 * Builds the GUI.
-	 * 
+	 *
 	 *****************************************************************/
 	private void setUpBase() {
 		frame = new JFrame("Chess350");
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+		Dimension screenSize = Toolkit.
+				getDefaultToolkit().getScreenSize();
 		double height = screenSize.getHeight();
-		int h = (int) (height*RATIO);
+		int h = (int) (height * RATIO);
 		int width = (int) (screenSize.getWidth() * RATIO);
-		
-		frame.setPreferredSize(new Dimension(width,h));
+
+		frame.setPreferredSize(new Dimension(width, h));
 		setUpMenu();
 		setUpPanels();
 		frame.getContentPane().add(panel);
@@ -252,9 +287,12 @@ public class ChessView implements IChessView, Serializable {
 
 		frame.pack();
 		frame.setVisible(true);
-		
+
 		Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
-		frame.setLocation(dim.width/2-frame.getSize().width/2, dim.height/2-frame.getSize().height/2);
+		frame.setLocation(dim.width / 2 - frame.
+				getSize().width / 2,
+				dim.height / 2 - frame.
+				getSize().height / 2);
 	}
 
 	/*****************************************************************
@@ -298,15 +336,15 @@ public class ChessView implements IChessView, Serializable {
 	private void setUpPanels() {
 		panel = new JPanel();
 		panel.setLayout(new BorderLayout());
-		
+
 		gpanel1 = new JPanel();
-		gpanel1.setLayout(new GridLayout(8,2));
+		gpanel1.setLayout(new GridLayout(EIGHT, TWO));
 		gpanel1.setBorder(BorderFactory.createLineBorder(Color.BLACK));
 		gpanel2 = new JPanel();
-		gpanel2.setLayout(new GridLayout(8,2));
+		gpanel2.setLayout(new GridLayout(EIGHT, TWO));
 		gpanel2.setBorder(BorderFactory.createLineBorder(Color.BLACK));
-		
-		for(int i = 0; i < graveWhitePieces.length; i++){
+
+		for (int i = 0; i < graveWhitePieces.length; i++) {
 			gpanel1.add(graveWhitePieces[i]);
 			gpanel2.add(graveBlackPieces[i]);
 		}
@@ -323,14 +361,14 @@ public class ChessView implements IChessView, Serializable {
 	 *****************************************************************/
 	private void setUpPiecePanel() {
 		piecePanel.setLayout(new GridLayout(rows, cols));
-		
+
 		int hi = frame.getHeight();
 		int wi = frame.getWidth();
 		hi = (int) (hi * RATIO);
-		wi = (int) (wi*RATIO);
-		
-		
-		piecePanel.setSize(hi,wi);
+		wi = (int) (wi * RATIO);
+
+
+		piecePanel.setSize(hi, wi);
 		setUpImages();
 	}
 
@@ -342,7 +380,8 @@ public class ChessView implements IChessView, Serializable {
 		for (int i = 0; i < pieceImages.length; i++) {
 			for (int j = 0; j < pieceImages[i].length; j++) {
 				pieceImages[i][j] = new ImageIcon(
-						"piece" + i + "" + j + ".png", "piece" + i + "" + j
+						"piece" + i + ""
+				+ j + ".png", "piece" + i + "" + j
 								+ ".png");
 			}
 		}
@@ -359,7 +398,7 @@ public class ChessView implements IChessView, Serializable {
 
 	/*****************************************************************
 	 * Adds an action listener to all clickable components.
-	 * 
+	 *
 	 * @param e
 	 *            the action listener to add
 	 *****************************************************************/
@@ -383,7 +422,7 @@ public class ChessView implements IChessView, Serializable {
 
 	/*****************************************************************
 	 * Returns an int[] containing information about a chess location.
-	 * 
+	 *
 	 * @param e
 	 *            the actionevent that was created by a click event
 	 * @return an int[] containing information about a chess location
@@ -405,20 +444,21 @@ public class ChessView implements IChessView, Serializable {
 
 	/*****************************************************************
 	 * Sets a new icon for a given location.
-	 * 
+	 *
 	 * @param row
 	 *            the row to change
 	 * @param col
 	 *            the column to change
 	 * @param pieceID
-	 *            an int array with info on the what to change the location to
+	 *            an int array with info on the what to change
 	 *****************************************************************/
 	@Override
-	public final void setData(final int row, final int col, final int[] pieceID) {
+	public final void setData(final int row,
+			final int col, final int[] pieceID) {
 		ImageIcon icon;
 		try {
 			icon = pieceImages[pieceID[OWNER]][pieceID[TYPE]];
-			
+
 		} catch (Exception e) {
 
 			// then one of ints in the array was -1
@@ -428,7 +468,8 @@ public class ChessView implements IChessView, Serializable {
 
 		// else it was a piece, so determine if it should be a white or
 		// black background
-		if ((row % 2 == 0 && col % 2 == 0) || (row % 2 != 0 && col % 2 != 0)) {
+		if ((row % 2 == 0 && col % 2 == 0)
+				|| (row % 2 != 0 && col % 2 != 0)) {
 			icon = new CustomIcon(WHITE_SPACE, icon);
 		} else {
 			icon = new CustomIcon(BLACK_SPACE, icon);
@@ -437,13 +478,16 @@ public class ChessView implements IChessView, Serializable {
 	}
 
 	@Override
-	public final void showMessage(final String status, final String message) {
-		JOptionPane.showMessageDialog(frame, message, status, JOptionPane.INFORMATION_MESSAGE);
+	public final void showMessage(final String status,
+			final String message) {
+		JOptionPane.showMessageDialog(frame,
+				message, status, JOptionPane.
+				INFORMATION_MESSAGE);
 	}
 
 	/*****************************************************************
 	 * Sets the legality of a move.
-	 * 
+	 *
 	 * @param row
 	 *            paint at this row
 	 * @param col
@@ -465,6 +509,16 @@ public class ChessView implements IChessView, Serializable {
 		pieceLabels[row][col].setIcon(icon);
 	}
 
+	/*****************************************************************
+	 * Paints the last move.
+	 *
+	 * @param row
+	 *            paint at this row
+	 * @param col
+	 *            paint at this column
+	 * @param pieceID
+	 *            array of places to paint
+	 *****************************************************************/
 	public final void paintLastMove(final int row, final int col,
 			final int[] pieceID) {
 		ImageIcon icon = pieceImages[pieceID[OWNER]][pieceID[TYPE]];
@@ -472,6 +526,14 @@ public class ChessView implements IChessView, Serializable {
 		pieceLabels[row][col].setIcon(icon);
 	}
 
+	/*****************************************************************
+	 * Paints the last move.
+	 *
+	 * @param row
+	 *            paint at this row
+	 * @param col
+	 *            paint at this column
+	 *****************************************************************/
 	public final void paintLastMove(final int row, final int col) {
 		ImageIcon icon = new ImageIcon(EMPTY, EMPTY);
 		icon = new CustomIcon(LAST, icon);
@@ -480,7 +542,7 @@ public class ChessView implements IChessView, Serializable {
 
 	/*****************************************************************
 	 * Show the legality of a move.
-	 * 
+	 *
 	 * @param row
 	 *            paint at this row
 	 * @param col
@@ -506,7 +568,7 @@ public class ChessView implements IChessView, Serializable {
 	public final JMenuItem getSaveItem() {
 		return saveGameItem;
 	}
-	
+
 	/*****************************************************************
 	 * Returns the load menu item.
 	 *
@@ -516,10 +578,10 @@ public class ChessView implements IChessView, Serializable {
 	public final JMenuItem getLoadItem() {
 		return loadGameItem;
 	}
-    
+
 	/*****************************************************************
 	 * Returns the exits menu item.
-	 * 
+	 *
 	 * @return a jmenuitem that closes the program
 	 *****************************************************************/
 	@Override
@@ -563,21 +625,6 @@ public class ChessView implements IChessView, Serializable {
 	}
 
 	/*****************************************************************
-	 * Removes an action listener from all JButtons.
-	 * 
-	 * @param e
-	 *            the action listener to remove
-	 *****************************************************************/
-	@Override
-	public final void disable(final ActionListener e) {
-		for (int i = 0; i < pieceLabels.length; i++) {
-			for (int j = 0; j < pieceLabels[i].length; j++) {
-				pieceLabels[i][j].removeActionListener(e);
-			}
-		}
-	}
-
-	/*****************************************************************
 	 * Get rid of the frame.
 	 *****************************************************************/
 	public final void close() {
@@ -587,7 +634,7 @@ public class ChessView implements IChessView, Serializable {
 
 	/*****************************************************************
 	 * Sets the legality of a move.
-	 * 
+	 *
 	 * @return frame the user window
 	 *****************************************************************/
 	@Override
@@ -622,25 +669,43 @@ public class ChessView implements IChessView, Serializable {
 			e.printStackTrace();
 		}
 	}
-	
-	public void updateWhiteGrave(final int index, final int[] pieceID) {
+
+	/*****************************************************************
+	 * Updates the white graveyard.
+	 *
+	 * @param index
+	 *            the index we're using
+	 * @param pieceID
+	 *            array of places to update
+	 *****************************************************************/
+	public void updateWhiteGrave(final int index,
+			final int[] pieceID) {
 		ImageIcon icon;
 		try {
 			icon = pieceImages[pieceID[OWNER]][pieceID[TYPE]];
-			graveWhitePieces[index].setIcon(icon);;
+			graveWhitePieces[index].setIcon(icon);
 		} catch (Exception e) {
-			
+
 		}
 	}
-	
-	public void updateBlackGrave(final int index, final int[] pieceID) {
+
+
+	/*****************************************************************
+	 * Updates the black graveyard.
+	 *
+	 * @param index
+	 *            the index we're using
+	 * @param pieceID
+	 *            array of places to update
+	 *****************************************************************/
+public void updateBlackGrave(final int index, final int[] pieceID) {
 		ImageIcon icon;
 		try {
 			icon = pieceImages[pieceID[OWNER]][pieceID[TYPE]];
 			graveBlackPieces[index].setIcon(icon);
 			gpanel2.add(graveBlackPieces[index]);
 		} catch (Exception e) {
-			
+
 		}
 	}
 

@@ -186,9 +186,14 @@ public class StartScreen {
      *****************************************************************/
     private void changeButtonLook(final JButton b) {
         b.setBackground(new Color(C1, C2, C3));
+
         b.setForeground(Color.black);
         b.setFocusPainted(false);
+
+
+
         b.setFont(new Font(Font.SANS_SERIF, Font.BOLD, FONT_SIZE));
     }
+
 
 }

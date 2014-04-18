@@ -33,7 +33,7 @@ import view.SettingsDialog;
  * @version 1.0
  *****************************************************************/
 public class ChessPresenter implements IChessPresenter, Serializable {
-	
+
 	/** The standard row number. */
 	private IChessView view;
 	/** The standard row number. */
@@ -86,8 +86,11 @@ public class ChessPresenter implements IChessPresenter, Serializable {
 	private boolean onePlayer;
 	/** Offensive or defensive CPU or neither? */
 	private int cpuStyle;
+	/** CPU moves randomly. */
 	private static final int RANDOM = 0;
+	/** CPU moves offensively. */
 	private static final int ATTACK = 1;
+	/** CPU moves defensively. */
 	private static final int DEF = 2;
 
 	/*****************************************************************
@@ -137,13 +140,13 @@ public class ChessPresenter implements IChessPresenter, Serializable {
 							legalMove(pos, this);
 						} else {
 							if (game.getBoard()
-									.pieceAt
-									(pos[ROW],
-									pos[COL])
-									.player() 
-									!= game.getModel()
-									.currentPlayer()) {
-								legalMove(pos, this);
+								  .pieceAt(
+							     pos[ROW],
+							     pos[COL])
+								 .player()
+						!= game.getModel()
+						.currentPlayer()) {
+						legalMove(pos, this);
 							} else {
 								updateView();
 								firstClick(pos);
@@ -152,43 +155,66 @@ public class ChessPresenter implements IChessPresenter, Serializable {
 					}
 				} else {
 					// they clicked a menu item
-					if (view.getExitItem() == e.getSource()) {
+				if (view.getExitItem() == e.getSource()) {
 						System.exit(0);
-					} else if (view.getSettingItem() == e.getSource()) {
-						new SettingsDialog(view.getFrame(), view);
-					} else if (view.getNewGameItem() == e.getSource()) {
+					} else if (view.getSettingItem()
+							== e.getSource()) {
+						new SettingsDialog(
+								view.getFrame(),
+								view);
+					} else if (view.getNewGameItem()
+							== e.getSource()) {
 						stopMusic();
 						view.close();
 						game = new ChessGame();
-						view = new ChessView(game.getBoard().numRows(), game
-								.getBoard().numColumns());
-						new ChessPresenter(game, view, onePlayer, cpuStyle);
-					} else if (view.getAboutItem() == e.getSource()) {
+						view = new ChessView(
+								game.getBoard().
+								numRows(), game
+								.getBoard().
+								numColumns());
+						new ChessPresenter(game,
+								view, onePlayer,
+								cpuStyle);
+					} else if (view.getAboutItem()
+							== e.getSource()) {
 						try {
-							new AboutDialog(view.getFrame());
-						} catch (FileNotFoundException e1) {
+							new AboutDialog(view.
+								getFrame());
+						} catch (
+						FileNotFoundException e1) {
 							e1.printStackTrace();
 						}
-					} else if (view.getUndoItem() == e.getSource()) {
+					} else if (view.getUndoItem()
+							== e.getSource()) {
 						undo();
-					} else if (view.getMusicItem() == e.getSource()){
-						if (view.getMusicItem().getText().equals("Stop Music")){
-							view.getMusicItem().setText("Play Music");
+					} else if (view.getMusicItem()
+							== e.getSource()) {
+						if (view.getMusicItem().
+								getText().
+								equals(
+								"Stop Music")) {
+							view.getMusicItem().
+							setText("Play Music");
 							stopMusic();
 						} else {
-							view.getMusicItem().setText("Stop Music");
+							view.getMusicItem().
+							setText("Stop Music");
 							playMusic();
 						}
-					} else if (view.getSaveItem() == e.getSource()){
+					} else if (view.getSaveItem()
+							== e.getSource()) {
 						try {
 							saveGame();
 						} catch (IOException e1) {
 							e1.printStackTrace();
 						}
-					} else if(view.getLoadItem() == e.getSource()){
+					} else if (view.getLoadItem()
+							== e.getSource()) {
 						try {
-							loadGame("chessSave.ser");
-						} catch (ClassNotFoundException e1) {
+							loadGame(
+							"chessSave.ser");
+						} catch (
+						 ClassNotFoundException e1) {
 							e1.printStackTrace();
 						} catch (IOException e1) {
 							e1.printStackTrace();
@@ -257,9 +283,10 @@ public class ChessPresenter implements IChessPresenter, Serializable {
 			ChessGame cg = (ChessGame) data[0];
 			boolean one = (boolean) data[1];
 			int cpu = (int) data[2];
-			IChessView view = new ChessView(cg.getBoard().numRows(), 
+			view = new ChessView(cg.getBoard().
+					numRows(),
 					cg.getBoard().numColumns());
-			new ChessPresenter(cg,view,one,cpu);;			
+			new ChessPresenter(cg, view, one, cpu);
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		}
@@ -297,8 +324,8 @@ public class ChessPresenter implements IChessPresenter, Serializable {
 					coords[FR] = pos[ROW];
 					coords[FC] = pos[COL];
 					view.showSelected(pos[ROW], pos[COL],
-							sendPiece(pos[ROW], 
-									pos[COL]));
+							sendPiece(pos[ROW],
+								pos[COL]));
 				}
 			}
 		}
@@ -370,18 +397,19 @@ public class ChessPresenter implements IChessPresenter, Serializable {
 	public final void onInput(final ActionListener a) {
 
 		game.setMove(coords); // set the move to be made
-
+		boolean wasL = false;
 		if (game.getModel().isValidMove(game.getMove(),
 				game.getBoard())) {
-			game.getModel().move(game.getMove(), game.getBoard(),
-					game.getChessStack());
+			game.getModel().move(game.getMove(), game.getBoard(), 
+			        game.getChessStack());
 			game.pushMove(game.getMove());
+		    wasL = true;
 		}
 		afterMove(a);
-		if (onePlayer && !game.getModel().isComplete(game.getBoard())) {
-			computerMove(a);
-			afterMove(a);
-		}
+        if (wasL && onePlayer && !game.getModel().isComplete(game.getBoard())) {
+            computerMove(a);
+            afterMove(a);
+        }
 	}
 
 	/*****************************************************************
@@ -483,7 +511,7 @@ public class ChessPresenter implements IChessPresenter, Serializable {
 	/*****************************************************************
 	 * Undoes the move just performed.
 	 *****************************************************************/
-	public void undo() {
+	public final void undo() {
 		if (onePlayer) {
 			game.undo2();
 			updateView();
@@ -493,23 +521,33 @@ public class ChessPresenter implements IChessPresenter, Serializable {
 		}
 		updateGraves();
 	}
-	
+
 	/*****************************************************************
 	 * Calls for the action.
 	 *****************************************************************/
 	public void reboundGraves() {
 		//if (game.getModel().getWhiteGrave().size() > 0) {
-			for (int i = 0; i < game.getModel().getWhiteGrave().size(); i++) {
-				view.updateWhiteGrave(i, sendWhitePiece(game.getModel().getWhiteGravePiece(i)));
+			for (int i = 0; i < game.getModel().
+					getWhiteGrave().size(); i++) {
+				view.updateWhiteGrave(i,
+						sendWhitePiece(game.getModel().
+						getWhiteGravePiece(i)));
 			}
 		//}
 		//if (game.getModel().getBlackGrave().size() > 0) {
-			for (int i = 0; i < game.getModel().getBlackGrave().size(); i++) {
-				view.updateBlackGrave(i, sendBlackPiece(game.getModel().getBlackGravePiece(i)));
+			for (int i = 0; i < game.getModel().
+					getBlackGrave().size(); i++) {
+				view.updateBlackGrave(i,
+						sendBlackPiece(game.getModel().
+						getBlackGravePiece(i)));
 			}
 		//}
 	}
 
+	/*****************************************************************
+	 * Sends the white piece.
+	 * @return int[] returns an array of ints.
+	 *****************************************************************/
 	public int[] sendWhitePiece(IChessPiece toSend) {
 		int[] pieceNum = new int[PIECE_INFO];
 		Player p;
@@ -551,6 +589,10 @@ public class ChessPresenter implements IChessPresenter, Serializable {
 		return pieceNum;
 	}
 
+	/*****************************************************************
+	 * Sends the black piece.
+	 * @return int[] returns an array of ints.
+	 *****************************************************************/
 	public int[] sendBlackPiece(IChessPiece toSend) {
 		int[] pieceNum = new int[PIECE_INFO];
 		Player p = toSend.player();
@@ -591,10 +633,9 @@ public class ChessPresenter implements IChessPresenter, Serializable {
 
 		return pieceNum;
 	}
-	
+
 	private void updateGraves(){
 	    view.clearGraves();
 	    reboundGraves();
 	}
-	
 }
