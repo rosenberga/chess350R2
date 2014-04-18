@@ -73,6 +73,43 @@ public final class ChessModel implements IChessModel,Serializable {
 	public boolean getEnPassant() {
 		return enPassant;
 	}
+	
+	/*****************************************************************
+	 * Counts black pieces in the graveyard and board
+	 * 
+	 * @return enPassant
+	 *****************************************************************/
+	public int countBlacks(IChessBoard board) {
+		int countB = 0;
+		countB = (bGrave.size());
+		for(int i = 0; i < 8; ++i) {
+			for(int j = 0; j < 8; ++j){
+				if(pieceAt(board, i, j).player() == Player.BLACK)
+					++countB;
+			}
+		}
+		
+		return countB;
+	}
+	
+	/*****************************************************************
+	 * Checks whether the board is en passant.
+	 * 
+	 * @return enPassant
+	 *****************************************************************/
+	public int countWhites(IChessBoard board) {
+		int countW = 0;
+		countW = (wGrave.size());
+		for(int i = 0; i < 8; ++i) {
+			for(int j = 0; j < 8; ++j){
+				if(pieceAt(board, i, j).player() == Player.WHITE)
+					++countW;
+			}
+		}
+		
+		return countW;
+	}
+	
 
 	/*****************************************************************
 	 * Determines whether or not a player's move was en passant 

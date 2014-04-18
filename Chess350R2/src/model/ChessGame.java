@@ -112,6 +112,15 @@ public final class ChessGame implements Serializable{
 			setBoard(chessStack.pop());
 			getModel().setTurns(UNDO_TURN);
 			moveStack.pop();
+			
+			//Graveyard remove
+			if (model.countBlacks(board) > 16) {
+				model.getBlackGrave();
+			}
+			
+			if (model.countBlacks(board) > 16) {
+				model.getWhiteGrave();
+			}
 		}
 	}
 
@@ -137,10 +146,6 @@ public final class ChessGame implements Serializable{
 	}
 
 	public boolean canUndo2() {
-		if (chessStack.size() > 1) {
-			return true;
-		} else {
-			return false;
-		}
+		return chessStack.size() > 1;
 	}
 }
