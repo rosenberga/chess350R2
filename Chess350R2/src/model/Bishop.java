@@ -27,7 +27,7 @@ public final class Bishop extends ChessPiece {
 		return "Bishop";
 	}
 
-	
+
 	/*****************************************************************
 	 * Checks if a move is valid for the chess piece.
 	 *
@@ -51,7 +51,7 @@ public final class Bishop extends ChessPiece {
 		// the move toRow minus fromRow must be the same as the
 		// move fromColumn minus toColumn fir the bishop to move
 		if (Math.abs(move.getToRow() - move.getFromRow())
-				== Math.abs(move.getToColumn() 
+				== Math.abs(move.getToColumn()
 						- move.getFromColumn())) {
 
 			// get the row and column direction the piece is moving
