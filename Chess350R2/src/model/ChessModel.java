@@ -92,10 +92,10 @@ public final class ChessModel implements IChessModel,Serializable {
 		
 		return countB;
 	}
-	
+
 	/*****************************************************************
-	 * Checks whether the board is en passant.
-	 * 
+	 * Counts white pieces in the graveyard and bouard
+	 *
 	 * @return enPassant
 	 *****************************************************************/
 	public int countWhites(IChessBoard board) {
