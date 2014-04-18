@@ -85,6 +85,11 @@ public interface IChessView {
      *****************************************************************/
     JMenuItem getExitItem();
 
+    /*****************************************************************
+     * Returns the undo item.
+     * 
+     * @return the undo item
+     *****************************************************************/
     JMenuItem getUndoItem();
 
     /*****************************************************************
@@ -142,10 +147,26 @@ public interface IChessView {
 	 *****************************************************************/
     boolean isShowLast();
 
+    /*****************************************************************
+     * Sets show last to a boolean.
+     * 
+     * @param selected the boolean value to set showLast to
+     *****************************************************************/
     void setShowLast(boolean selected);
 
+    /*****************************************************************
+     * Paints the last move.
+     * 
+     * @param fromRow the row to paint
+     * @param fromColumn the col to paint
+     *****************************************************************/
     void paintLastMove(int fromRow, int fromColumn);
 
+    /*****************************************************************
+     * Gets the music menu item.
+     * 
+     * @return the music menu item
+     *****************************************************************/
     JMenuItem getMusicItem();
 
     /*****************************************************************
@@ -168,13 +189,38 @@ public interface IChessView {
      *****************************************************************/
     void showMessage(String status, String message);
 
+    /*****************************************************************
+     * Returns the save menu item.
+     * 
+     * @return the save menu item
+     *****************************************************************/
     JMenuItem getSaveItem();
 
+    /*****************************************************************
+     * Returns th load menu item.
+     * 
+     * @return get the load menu item
+     *****************************************************************/
     JMenuItem getLoadItem();
 
+    /*****************************************************************
+     * Adds a new Icon to the White Grave.
+     * 
+     * @param index to add to
+     * @param pieceID info about the piece to add
+     *****************************************************************/
     void updateWhiteGrave(int index, int[] pieceID);
 
+    /*****************************************************************
+     * Adds a new Icon to the Black Grave.
+     * 
+     * @param index to add to
+     * @param pieceID info about the piece to add
+     *****************************************************************/
     void updateBlackGrave(int index, int[] pieceID);
 
+    /*****************************************************************
+     * Removes all icons form graves.
+     *****************************************************************/
     void clearGraves();
 }
