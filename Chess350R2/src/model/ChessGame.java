@@ -115,11 +115,11 @@ public final class ChessGame implements Serializable{
 			
 			//Graveyard remove
 			if (model.countBlacks(board) > 16) {
-				model.getBlackGrave()
+				model.getBlackGrave().remove(model.getBlackGrave().size()-1);
 			}
 			
-			if (model.countBlacks(board) > 16) {
-				model.getWhiteGrave()
+			if (model.countWhites(board) > 16) {
+				model.getWhiteGrave().remove(model.getWhiteGrave().size()-1);
 			}
 		}
 	}

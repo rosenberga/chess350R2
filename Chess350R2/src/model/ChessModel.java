@@ -84,8 +84,9 @@ public final class ChessModel implements IChessModel,Serializable {
 		countB = (bGrave.size());
 		for(int i = 0; i < 8; ++i) {
 			for(int j = 0; j < 8; ++j){
+				if (pieceAt(board, i, j) != null) {
 				if(pieceAt(board, i, j).player() == Player.BLACK)
-					++countB;
+					++countB;}
 			}
 		}
 		
@@ -102,8 +103,8 @@ public final class ChessModel implements IChessModel,Serializable {
 		countW = (wGrave.size());
 		for(int i = 0; i < 8; ++i) {
 			for(int j = 0; j < 8; ++j){
-				if(pieceAt(board, i, j).player() == Player.WHITE)
-					++countW;
+				if(pieceAt(board, i, j) != null) {if(pieceAt(board, i, j).player() == Player.WHITE)
+					++countW;}
 			}
 		}
 		
