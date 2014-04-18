@@ -27,6 +27,13 @@ public interface IChessModel {
     * @return number of black pieces
     *****************************************************************/
    int countBlacks(IChessBoard board);
+   
+   /*****************************************************************
+    * Checks a board for the number of white pieces.
+    *
+    * @param board the board to check
+    * @return number of black pieces
+    *****************************************************************/
    int countWhites(IChessBoard board);
   
    /*****************************************************************
@@ -49,6 +56,14 @@ public interface IChessModel {
     *****************************************************************/
    void move(Move move, IChessBoard board);
    
+   /*****************************************************************
+    * Moves the piece from location [move.fromRow, move.fromColumn] to
+    * location [move.fromRow,move.fromColumn].
+    *
+    * @param move a Move object describing the move to be made.
+    * @param board the current chess board
+    * @param cs a chessstack to save the board to
+    *****************************************************************/
    void move(Move move, IChessBoard board, ChessStack cs);
 
    /*****************************************************************

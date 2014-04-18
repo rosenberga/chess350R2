@@ -2,7 +2,6 @@ package presenter;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.IOException;
 
 import model.ChessGame;
 import view.ChessView;
@@ -14,12 +13,12 @@ import view.StartScreen;
  * @author Adam Rosenberg
  * @version 1.0
  *****************************************************************/
-public class StartPresenter {
+public final class StartPresenter {
 
 	/*****************************************************************
 	 * A constructor for the StartPresenter.
 	 *****************************************************************/
-	public StartPresenter() {
+	private StartPresenter() {
 		final StartScreen ss = new StartScreen();
 		final ChessGame g = new ChessGame();
 		ss.addActionListeners(new ActionListener() {
