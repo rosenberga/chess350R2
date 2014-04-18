@@ -6,7 +6,7 @@ import java.io.Serializable;
  * Represents a chess board for a standard game of chess. Stores 
  * pieces at positions on the board and can move all pieces
  * when needed.
- * 
+ *
  * @author Adam Rosenberg
  * @version 1.0
  *****************************************************************/
@@ -14,49 +14,49 @@ public final class ChessBoard implements IChessBoard, Serializable {
 
 	/** The current board in the form of a 2D array of IChessPieces. */
 	private IChessPiece[][] board;
-	
+
 	/** The standard row number. */
 	private static final int ROWS = 8;
-	
+
 	/** The standard column number. */
 	private static final int COLUMNS = 8;
-	
+
 	/** White Pawn Row. */
 	private static final int WP = 6;
-	
+
 	/** Black Pawn Row. */
 	private static final int BP = 1;
-	
+
 	/** White Pieces Row. */
 	private static final int WPR = 7;
-	
+
 	/** Black Pieces Row. */
 	private static final int BPR = 0;
-	
+
 	/** Kings' Column. */
 	private static final int KR = 4;
-	
+
 	/** Queen's Column. */
 	private static final int QR = 3;
-	
+
 	/** Rook's Left Column. */
 	private static final int R1 = 0;
-	
+
 	/** Rook's Right Column. */
 	private static final int R2 = 7;
-	
+
 	/** Knight's Left Column. */
 	private static final int K1 = 1;
-	
+
 	/** Knight's Right Column. */
 	private static final int K2 = 6;
-	
+
 	/** Bishop's Left Column. */
 	private static final int B1 = 2;
-	
+
 	/** Bishop's Right Column. */
 	private static final int B2 = 5;
-	
+
 
 	/*****************************************************************
 	 * Constructs a new ChessBoard.
@@ -94,7 +94,7 @@ public final class ChessBoard implements IChessBoard, Serializable {
 
 	/*****************************************************************
 	 * Returns the number of rows in the board.
-	 * 
+	 *
 	 * @return the number of rows in the board
 	 *****************************************************************/
 	@Override
@@ -104,7 +104,7 @@ public final class ChessBoard implements IChessBoard, Serializable {
 
 	/*****************************************************************
 	 * Returns the number of columns in the board.
-	 * 
+	 *
 	 * @return the number of columns in the board
 	 *****************************************************************/
 	@Override
@@ -114,7 +114,7 @@ public final class ChessBoard implements IChessBoard, Serializable {
 
 	/*****************************************************************
 	 * Returns an IChessPiece at a given row and column.
-	 * 
+	 *
 	 * @param row
 	 *            the row of the IChessPiece to get
 	 * @param column
@@ -133,7 +133,7 @@ public final class ChessBoard implements IChessBoard, Serializable {
 	/*****************************************************************
 	 * Perform a move operation on the board by changing where a 
 	 * piece is located in board.
-	 * 
+	 *
 	 * @param move
 	 *            the move to be made on the board
 	 *****************************************************************/
@@ -143,7 +143,7 @@ public final class ChessBoard implements IChessBoard, Serializable {
 		// set the piece to its new position
 		// need to get the piece at the old position so the program
 		// knows what piece needs to be moved
-		set(pieceAt(move.getFromRow(), move.getFromColumn()), 
+		set(pieceAt(move.getFromRow(), move.getFromColumn()),
 				move.getToRow(), move.getToColumn());
 
 		// set the old position to null
@@ -153,7 +153,7 @@ public final class ChessBoard implements IChessBoard, Serializable {
 	/*****************************************************************
 	 * Set a position, given by row and column, 
 	 * in board to a given IChessPiece.
-	 * 
+	 *
 	 * @param piece
 	 *            the IChessPiece to set at the given position
 	 * @param row
@@ -164,7 +164,7 @@ public final class ChessBoard implements IChessBoard, Serializable {
 	@Override
 	public void set(final IChessPiece piece, final int row,
 			final int column) {
-		if (row >= numRows() || row < 0 || column < 0 
+		if (row >= numRows() || row < 0 || column < 0
 				|| column >= numColumns()) {
 			return;
 		}
@@ -173,7 +173,7 @@ public final class ChessBoard implements IChessBoard, Serializable {
 
 	/*****************************************************************
 	 * Set a given position, given by row and column, in board to null.
-	 * 
+	 *
 	 * @param row
 	 *            the row to set null
 	 * @param column
@@ -181,7 +181,7 @@ public final class ChessBoard implements IChessBoard, Serializable {
 	 *****************************************************************/
 	@Override
 	public void unset(final int row, final int column) {
-		if (row >= numRows() || row < 0 || column < 0 
+		if (row >= numRows() || row < 0 || column < 0
 				|| column >= numColumns()) {
 			return;
 		}
@@ -190,7 +190,7 @@ public final class ChessBoard implements IChessBoard, Serializable {
 
 	/*****************************************************************
 	 * Returns the current board.
-	 * 
+	 *
 	 * @return board the current IChessPiece[][] board
 	 *****************************************************************/
 	public IChessPiece[][] getBoard() {
@@ -199,7 +199,7 @@ public final class ChessBoard implements IChessBoard, Serializable {
 
 	/*****************************************************************
 	 * Set board to a given new IChessPiece[][].
-	 * 
+	 *
 	 * @param newBoard
 	 *            the IChessPiece[][] to set board to
 	 *****************************************************************/
@@ -222,7 +222,7 @@ public final class ChessBoard implements IChessBoard, Serializable {
 
 	/*****************************************************************
 	 * Creates a new IChessPiece[][] that is a copy of a given board.
-	 * 
+	 *
 	 * @return newBoard a IChessPiece[][] of this.board
 	 *****************************************************************/
 	public IChessPiece[][] copyBoard() {

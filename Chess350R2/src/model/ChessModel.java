@@ -9,7 +9,7 @@ import java.util.ArrayList;
  * logic for knowing who the current player is, whether or not 
  * they can move en passant, and the state of the game. 
  * Also checks if moves are valid and makes valid moves.
- * 
+ *
  * @author Adam Rosenberg
  * @version 1.0
  *****************************************************************/
@@ -46,7 +46,7 @@ public final class ChessModel implements IChessModel {
 
 	/** Column King is moving to another way. */
 	private static final int CAST2TO = 5;
-	
+
 	/** The magic number 8. */
 	private static final int MAGIC8 = 8;
 
@@ -80,7 +80,7 @@ public final class ChessModel implements IChessModel {
 
 	/*****************************************************************
 	 * Counts black pieces in the graveyard and board.
-	 * 
+	 *
 	 * @param board the IChessBoard to check for black pieces
 	 * @return number of black pieces
 	 *****************************************************************/
@@ -90,7 +90,8 @@ public final class ChessModel implements IChessModel {
 		for (int i = 0; i < MAGIC8; ++i) {
 			for (int j = 0; j < MAGIC8; ++j) {
 				if (pieceAt(board, i, j) != null) {
-					if (pieceAt(board, i, j).player() == Player.BLACK) {
+					if (pieceAt(board, i, j).player()
+							== Player.BLACK) {
 						++countB;
 					}
 				}
@@ -111,7 +112,8 @@ public final class ChessModel implements IChessModel {
 		for (int i = 0; i < MAGIC8; ++i) {
 			for (int j = 0; j < MAGIC8; ++j) {
 				if (pieceAt(board, i, j) != null) {
-					if (pieceAt(board, i, j).player() == Player.WHITE) {
+					if (pieceAt(board, i, j).player()
+							== Player.WHITE) {
 						++countW;
 					}
 				}
@@ -124,7 +126,7 @@ public final class ChessModel implements IChessModel {
 	/*****************************************************************
 	 * Determines whether or not a player's move was en passant 
 	 * and is so, was it legal.
-	 * 
+	 *
 	 * @param move
 	 *            the move to be made
 	 * @return true if the en passant move was legal, else false
@@ -136,8 +138,10 @@ public final class ChessModel implements IChessModel {
 
 			// the move must be from a certain position to a certain
 			// position
-			String enP = move.getFromRow() + "" + move.getFromColumn()
-					+ "" + move.getToRow() + "" + move.getToColumn();
+			String enP = move.getFromRow()
+					+ "" + move.getFromColumn()
+					+ "" + move.getToRow()
+					+ "" + move.getToColumn();
 			if (getEnPassantPosition(true).equals(enP)) {
 				return true;
 			}
@@ -151,7 +155,7 @@ public final class ChessModel implements IChessModel {
 
 	/*****************************************************************
 	 * Set the board to being en passant or not.
-	 * 
+	 *
 	 * @param enpassant a boolean that is true if the next player can
 	 *  move enpassant else it is false
 	 *****************************************************************/
@@ -161,7 +165,7 @@ public final class ChessModel implements IChessModel {
 
 	/*****************************************************************
 	 * Returns the number of turns.
-	 * 
+	 *
 	 * @return the number of turns played so far
 	 *****************************************************************/
 	public int getTurns() {
@@ -170,7 +174,7 @@ public final class ChessModel implements IChessModel {
 
 	/*****************************************************************
 	 * Sets the number of turns by increasing or decreasing turns.
-	 * 
+	 *
 	 * @param t the number to increase or decrease turns by
 	 *****************************************************************/
 	public void setTurns(final int t) {
@@ -179,7 +183,7 @@ public final class ChessModel implements IChessModel {
 
 	/*****************************************************************
 	 * Checks if the game is complete.
-	 * 
+	 *
 	 * @param board
 	 *            the IChessBoard to check for completion
 	 * @return true if the game is completed, else false
@@ -199,7 +203,7 @@ public final class ChessModel implements IChessModel {
 
 	/*****************************************************************
 	 * Checks to see if a move is valid.
-	 * 
+	 *
 	 * @param move the move to check for validity
 	 * @param board  the IChessBoard to check the move on
 	 * @return true if the move is valid, else false
@@ -214,7 +218,7 @@ public final class ChessModel implements IChessModel {
 			return false;
 		}
 		// first check to see if the move is legal for the piece
-		if (pieceAt(board, move.getFromRow(), 
+		if (pieceAt(board, move.getFromRow(),
 				move.getFromColumn()).isValidMove(move,
 						board, this)) {
 
@@ -231,7 +235,7 @@ public final class ChessModel implements IChessModel {
 
 	/*****************************************************************
 	 * Checks if the game is complete.
-	 * 
+	 *
 	 * @param move the move to make
 	 * @param board the board to make the move on
 	 * @param cs the stack to put boards on
@@ -246,7 +250,7 @@ public final class ChessModel implements IChessModel {
 
 	/*****************************************************************
 	 * Checks if the game is complete.
-	 * 
+	 *
 	 * @param move the move to be made
 	 * @param board the IChessBoard to make the move on
 	 *****************************************************************/
@@ -254,8 +258,10 @@ public final class ChessModel implements IChessModel {
 	public void move(final Move move, final IChessBoard board) {
 
 		if (isValidMove(move, board)) {
-			if ((board.pieceAt(move.getToRow(), move.getToColumn())) != null) {
-				if (board.pieceAt(move.getToRow(), move.getToColumn()).player() 
+			if ((board.pieceAt(move.getToRow(),
+					move.getToColumn())) != null) {
+				if (board.pieceAt(move.getToRow(),
+						move.getToColumn()).player() 
 						!= currentPlayer()) {
 					// a piece will be taken and 
 					// must be sent to the graveyard
@@ -350,11 +356,11 @@ public final class ChessModel implements IChessModel {
 
 			// if they castled, determine where the rook should move
 			if (move.getToColumn() == CAST1) {
-				m = new Move(move.getFromRow(), CAST1FROM, 
+				m = new Move(move.getFromRow(), CAST1FROM,
 						move.getFromRow(), CAST1TO);
 			}
 			if (move.getToColumn() == CAST2) {
-				m = new Move(move.getFromRow(), CAST2FROM, 
+				m = new Move(move.getFromRow(), CAST2FROM,
 						move.getFromRow(), CAST2TO);
 			}
 
@@ -369,7 +375,7 @@ public final class ChessModel implements IChessModel {
 				|| move.getToRow() == board.numRows() - 1)) {
 			// do promotion
 			// model makes it a queen,
-			// but will later ask for user input to make 
+			// but will later ask for user input to make
 			// it be different pieces
 			promotion(board, move);
 		}
@@ -382,27 +388,27 @@ public final class ChessModel implements IChessModel {
 
 	/*****************************************************************
 	 * Promote a pawn to another piece.
-	 * 
+	 *
 	 * @param board the IChessBoard to make the promotion on
 	 * @param move the move that was made
 	 *****************************************************************/
-	public void promotion(final IChessBoard board, 
+	public void promotion(final IChessBoard board,
 			final Move move) {
 
 		// null the position and reset it was a new queen
 		board.unset(move.getToRow(), move.getToColumn());
-		board.set(new Queen(currentPlayer()), 
+		board.set(new Queen(currentPlayer()),
 				move.getToRow(), move.getToColumn());
 	}
 
 	/*****************************************************************
 	 * Promote a pawn to another piece.
-	 * 
+	 *
 	 * @param board the IChessBoard to make the promotion on
 	 * @param move the move that was made
 	 * @param piece the piece to promote to
 	 *****************************************************************/
-	public void promotion(final IChessBoard board, 
+	public void promotion(final IChessBoard board,
 			final Move move, final IChessPiece piece) {
 
 		// reset the piece
@@ -423,7 +429,7 @@ public final class ChessModel implements IChessModel {
 
 	/*****************************************************************
 	 * Changes piece positions on the board.
-	 * 
+	 *
 	 * @param board
 	 *            the IChessBoard to change
 	 * @param move
@@ -440,23 +446,23 @@ public final class ChessModel implements IChessModel {
 
 	/*****************************************************************
 	 * Sets the current enPassantPossition.
-	 * 
+	 *
 	 * @param attR the attacking row
 	 * @param attC the attacking column
 	 * @param toR the row they must be moving to
 	 * @param toC the column they must be moving to
 	 * @param right if they need to attack from the right or left
 	 *****************************************************************/
-	private void setEnPassantPosition(final int attR, final int attC, 
+	private void setEnPassantPosition(final int attR, final int attC,
 			final int toR, final int toC, final boolean right) {
 
 		// set the enPassantPosition to have 4 digits ordered:
 		// attR, attC, toR, toC
 		if (right) {
-			enPassantPositionR = attR + "" + attC + "" + toR 
+			enPassantPositionR = attR + "" + attC + "" + toR
 					+ "" + toC;
 		} else {
-			enPassantPositionL = attR + "" + attC + "" + toR 
+			enPassantPositionL = attR + "" + attC + "" + toR
 					+ "" + toC;
 		}
 	}
@@ -471,9 +477,9 @@ public final class ChessModel implements IChessModel {
 	}
 
 	/*****************************************************************
-	 * Get the enPassantPosition that the pawn must be in to move 
+	 * Get the enPassantPosition that the pawn must be in to move
 	 * en passant.
-	 * 
+	 *
 	 * @param right if they are attacking from the right
 	 * @return the current enPassantPosition
 	 *****************************************************************/
@@ -487,7 +493,7 @@ public final class ChessModel implements IChessModel {
 
 	/*****************************************************************
 	 * Finds the king's position.
-	 * 
+	 *
 	 * @param board the IChessBoard to check for king's position
 	 * @return the kings position
 	 *****************************************************************/
@@ -498,7 +504,7 @@ public final class ChessModel implements IChessModel {
 		for (int i = 0; i < board.numRows(); i++) {
 			for (int j = 0; j < board.numColumns(); j++) {
 
-				// it is the piece we want if it is not null, 
+				// it is the piece we want if it is not null,
 				// if it is a King object and if it is owned by the
 				// current player
 				if (pieceAt(board, i, j) != null && pieceAt(board,
@@ -517,7 +523,7 @@ public final class ChessModel implements IChessModel {
 
 	/*****************************************************************
 	 * Checks to see if the current player is in check.
-	 * 
+	 *
 	 * @param board the IChessBoard to check for check
 	 * @return true if the board is in check, else false
 	 *****************************************************************/
@@ -534,9 +540,9 @@ public final class ChessModel implements IChessModel {
 		for (int i = 0; i < board.numRows(); i++) {
 			for (int j = 0; j < board.numColumns(); j++) {
 				if (pieceAt(board, i, j) != null
-						&& pieceAt(board, i, j).player() 
+						&& pieceAt(board, i, j).player()
 						!= currentPlayer()) {
-					Move move = new Move(i, j, 
+					Move move = new Move(i, j,
 							kingsRow, kingsColumn);
 					// if the move is legal, the king is in check
 					if (pieceAt(board, i, j).isValidMove(
@@ -553,7 +559,7 @@ public final class ChessModel implements IChessModel {
 
 	/*****************************************************************
 	 * Checks the board for a checkmate.
-	 * 
+	 *
 	 * @param board
 	 *            the IChessBoard to check for checkmate
 	 * @return true if the board is in checkmate, else false
@@ -571,7 +577,7 @@ public final class ChessModel implements IChessModel {
 
 	/*****************************************************************
 	 * Checks the board for legal moves by the current player.
-	 * 
+	 *
 	 * @param board
 	 *            the IChessBoard to check for legal moves
 	 * @return false if the current player has a legal move, else true
@@ -585,26 +591,33 @@ public final class ChessModel implements IChessModel {
 				// get the piece and continue if it is owned by the
 				// current player
 				IChessPiece piece = pieceAt(board, i, j);
-				if (piece != null && piece.player() 
+				if (piece != null && piece.player()
 						== currentPlayer()) {
 
 					// check every board position and see if piece
 					// can move there
-					for (int m = 0; m < board.numRows(); m++) {
-						for (int n = 0; n < board.numColumns(); n++) {
-							Move move = new Move(i, j, m, n);
+					for (int m = 0; m < board.numRows();
+							m++) {
+						for (int n = 0; n < board.
+								numColumns();
+								n++) {
+							Move move = new Move(i,
+									j, m, n);
 
 							// check if the move is legal
-							if (piece.isValidMove(move, board, this)) {
+							if (piece.isValidMove(move,
+									board, this)) {
 
 								// create a new board that is a
 								// copy of the current board
 								// and make the move
-								IChessBoard fakeBoard = new 
+								IChessBoard fakeBoard
+								= new 
 										ChessBoard();
 								fakeBoard.setBoard(board
 										.copyBoard());
-								boardChange(fakeBoard, move);
+								boardChange(fakeBoard,
+										move);
 
 								// if they are not in check 
 								// after the move,
@@ -625,7 +638,7 @@ public final class ChessModel implements IChessModel {
 
 	/*****************************************************************
 	 * Checks if a board is in stalemate.
-	 * 
+	 *
 	 * @param board the IChessBoard to check for stalemate
 	 * @return true if the board is in stalemate, else false
 	 *****************************************************************/
@@ -638,14 +651,15 @@ public final class ChessModel implements IChessModel {
 			int sumOfPieces = 0;
 			for (int m = 0; m < board.numRows(); m++) {
 				for (int n = 0; n < board.numColumns(); n++) {
-					IChessPiece piece = pieceAt(board, m, n);
+					IChessPiece piece = pieceAt(
+							board, m, n);
 					if (piece != null) {
 						sumOfPieces++;
 					}
 				}
 			}
 			if (sumOfPieces == 2) {
-				return true; 
+				return true;
 			} else {
 				return checkForNoLegalMoves(board);
 			}
@@ -655,7 +669,7 @@ public final class ChessModel implements IChessModel {
 
 	/*****************************************************************
 	 * Returns the current player.
-	 * 
+	 *
 	 * @return the current player whose turn it is
 	 *****************************************************************/
 	@Override
@@ -670,7 +684,7 @@ public final class ChessModel implements IChessModel {
 
 	/*****************************************************************
 	 * Gets an IChessPiece at a row,column position in a given board.
-	 * 
+	 *
 	 * @param board the IChessBoard to get the piece from
 	 * @param row the row of the board to get the piece from
 	 * @param column the column of the board to get the piece from
@@ -684,7 +698,7 @@ public final class ChessModel implements IChessModel {
 
 	/*****************************************************************
 	 * Checks if a move is an en passant move.
-	 * 
+	 *
 	 * @param move
 	 *            the move to check for en passant
 	 * @return true if the move is en passant, else false
@@ -696,7 +710,7 @@ public final class ChessModel implements IChessModel {
 
 	/*****************************************************************
 	 * Returns the piece in the white graveyard.
-	 * 
+	 *
 	 * @param index the index of the piece in the list
 	 * @return the piece at the provided index
 	 *****************************************************************/
@@ -706,7 +720,7 @@ public final class ChessModel implements IChessModel {
 
 	/*****************************************************************
 	 * Returns the piece in the black graveyard.
-	 * 
+	 *
 	 * @param index the index of the piece in the list
 	 * @return the piece at the provided index
 	 *****************************************************************/
@@ -716,7 +730,7 @@ public final class ChessModel implements IChessModel {
 
 	/*****************************************************************
 	 * Get array of the graveyard.
-	 * 
+	 *
 	 * @return the black graveyard arraylist
 	 *****************************************************************/
 	public ArrayList<IChessPiece> getBlackGrave() {
@@ -725,7 +739,7 @@ public final class ChessModel implements IChessModel {
 
 	/*****************************************************************
 	 * Get array of the graveyard.
-	 * 
+	 *
 	 * @return the white graveyard arraylist
 	 *****************************************************************/
 	public ArrayList<IChessPiece> getWhiteGrave() {
