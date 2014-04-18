@@ -130,9 +130,12 @@ public final class ChessGame {
 			moveStack.pop();
 
 			//Graveyard remove
+
+
 			if (model.countBlacks(board) > MAGIC16) {
 				model.getBlackGrave().remove(model.
 						getBlackGrave().size() - MAGIC1);
+
 			}
 
 			if (model.countWhites(board) > MAGIC16) {
