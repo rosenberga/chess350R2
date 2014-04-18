@@ -1,6 +1,7 @@
 package model;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 
 /*****************************************************************
  * Represents a chess model for a standard game of chess. Contains 
@@ -673,7 +674,4 @@ public final class ChessModel implements IChessModel,Serializable {
    	public final ArrayList<IChessPiece> getWhiteGrave() {
    		return wGrave;
    	}
-}
-
-
 }

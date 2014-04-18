@@ -1,5 +1,7 @@
 package model;
 
+import java.util.ArrayList;
+
 /*****************************************************************
  * Objects implementing this interface represent the state of a chess game.
  * Notice that this interface is designed to maintain the game state only,

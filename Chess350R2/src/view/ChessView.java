@@ -1,6 +1,7 @@
 package view;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Frame;
 import java.awt.GridLayout;
@@ -10,6 +11,7 @@ import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.IOException;
 import java.io.Serializable;
+
 import javax.sound.sampled.AudioFormat;
 import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
@@ -17,7 +19,9 @@ import javax.sound.sampled.Clip;
 import javax.sound.sampled.DataLine;
 import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.UnsupportedAudioFileException;
+import javax.swing.BorderFactory;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
 import javax.swing.JMenuBar;
@@ -70,7 +74,7 @@ public class ChessView implements IChessView, Serializable {
 	/** Picture of last space. */
 	private static final String LAST = "last.png";
 	/** Ratio to use when sizing the frame. */
-	private static final double RATIO = 0.83;
+	private static final double RATIO = 0.72;
 
 	/** Number of columns. */
 	private int cols;

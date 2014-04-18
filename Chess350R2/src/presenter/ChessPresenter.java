@@ -19,6 +19,7 @@ import javax.swing.JButton;
 
 import model.ChessGame;
 import model.ComputerPlayer;
+import model.IChessPiece;
 import model.Move;
 import model.Player;
 import view.AboutDialog;
