@@ -80,6 +80,8 @@ public final class ChessModel implements IChessModel {
 
 	/*****************************************************************
 	 * Counts black pieces in the graveyard and board.
+	 * 
+	 * @param board the IChessBoard to check for black pieces
 	 * @return number of black pieces
 	 *****************************************************************/
 	public int countBlacks(final IChessBoard board) {
@@ -99,8 +101,8 @@ public final class ChessModel implements IChessModel {
 	}
 
 	/*****************************************************************
-	 * Counts white pieces in the graveyard and bouard
-	 *
+	 * Counts white pieces in the graveyard and board.
+	 * @param board the iChessBoard to check for white pieces
 	 * @return countW
 	 *****************************************************************/
 	public int countWhites(final IChessBoard board) {

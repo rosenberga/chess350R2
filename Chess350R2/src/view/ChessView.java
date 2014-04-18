@@ -3,7 +3,6 @@ package view;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
-import java.awt.Frame;
 import java.awt.GridLayout;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
@@ -11,8 +10,6 @@ import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.IOException;
 import java.io.Serializable;
-import java.util.ArrayList;
-
 import javax.sound.sampled.AudioFormat;
 import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
@@ -31,8 +28,6 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JOptionPane;
 
-import model.IChessPiece;
-
 /*****************************************************************
  * The view class.
  *
@@ -41,7 +36,7 @@ import model.IChessPiece;
  *****************************************************************/
 public class ChessView implements IChessView, Serializable {
 
-	/** SerialUID */
+	/** SerialUID long. */
 	private static final long serialVersionUID = -8519417649667845070L;
 
 	/** Number of colors in the game. */
@@ -243,7 +238,7 @@ public class ChessView implements IChessView, Serializable {
 	 * @return showLast
 	 *            returns showLast
 	 *****************************************************************/
-	public boolean isShowLast() {
+	public final boolean isShowLast() {
 		return showLast;
 	}
 
@@ -643,12 +638,12 @@ public class ChessView implements IChessView, Serializable {
 	}
 
 	@Override
-	public JMenuItem getMusicItem() {
+	public final JMenuItem getMusicItem() {
 		return musicItem;
 	}
 
 	@Override
-	public void playMusic() {
+	public final void playMusic() {
 		setUpAudio();
 		try {
 			audioClip.open(audioStream);
@@ -661,7 +656,7 @@ public class ChessView implements IChessView, Serializable {
 	}
 
 	@Override
-	public void stopMusic() {
+	public final void stopMusic() {
 		audioClip.close();
 		try {
 			audioStream.close();
@@ -678,7 +673,7 @@ public class ChessView implements IChessView, Serializable {
 	 * @param pieceID
 	 *            array of places to update
 	 *****************************************************************/
-	public void updateWhiteGrave(final int index,
+	public final void updateWhiteGrave(final int index,
 			final int[] pieceID) {
 		ImageIcon icon;
 		try {
@@ -698,7 +693,7 @@ public class ChessView implements IChessView, Serializable {
 	 * @param pieceID
 	 *            array of places to update
 	 *****************************************************************/
-public void updateBlackGrave(final int index, final int[] pieceID) {
+	public final void updateBlackGrave(final int index, final int[] pieceID) {
 		ImageIcon icon;
 		try {
 			icon = pieceImages[pieceID[OWNER]][pieceID[TYPE]];
@@ -710,7 +705,7 @@ public void updateBlackGrave(final int index, final int[] pieceID) {
 	}
 
     @Override
-    public void clearGraves() {
+    public final void clearGraves() {
         for(int i = 0; i < graveWhitePieces.length; i++) {
             graveWhitePieces[i].setIcon(new ImageIcon("piece-1-1.png"));
             graveBlackPieces[i].setIcon(new ImageIcon("piece-1-1.png"));

@@ -1,7 +1,5 @@
 package model;
 
-import java.io.Serializable;
-
 /*****************************************************************
  * Describes a piece for a game of chess (King, Queen, Rook, etc).
  *
