@@ -9,7 +9,7 @@ import java.io.Serializable;
  * @author Zachary Kurmas
  */
 
-public final class Move implements Serializable{
+public final class Move implements Serializable {
 
 	/** The row and column the piece is moving from and moving to. */
 	private int fromRow, fromColumn, toRow, toColumn;

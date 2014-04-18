@@ -20,6 +20,12 @@ public interface IChessModel {
     *****************************************************************/
    boolean isComplete(IChessBoard board);
 
+   /*****************************************************************
+    * Checks a board for the number of black pieces.
+    *
+    * @param board the board to check
+    * @return number of black pieces
+    *****************************************************************/
    int countBlacks(IChessBoard board);
    int countWhites(IChessBoard board);
   
@@ -134,7 +140,6 @@ public interface IChessModel {
     /*****************************************************************
      * Get array of the graveyard.
      * 
-     * @param index of piece space
      * @return an ArrayList of lost black pieces
      *****************************************************************/
    	ArrayList<IChessPiece> getBlackGrave();
@@ -142,7 +147,6 @@ public interface IChessModel {
     /*****************************************************************
      * Get array of the graveyard.
      * 
-     * @param index of piece space
      * @return an ArrayList of lost white pieces
      *****************************************************************/
    	ArrayList<IChessPiece> getWhiteGrave();

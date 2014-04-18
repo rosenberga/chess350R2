@@ -160,10 +160,11 @@ public class ChessView implements IChessView, Serializable {
 	/** Panel for the graveyard. */
 	private JPanel gpanel2;
 	
+	/** Number of Pieces of a color. */
 	private static final int NUM_P = 16;
-	
+	/** Number of Rows in our grid. */
 	private static final int EIGHT = 8;
-	
+	/** Number of cols in our grave grid. */
 	private static final int TWO = 2;
 
 	/*****************************************************************
@@ -195,6 +196,9 @@ public class ChessView implements IChessView, Serializable {
 		newGame();
 	}
 
+	 /*****************************************************************
+     * All code needed to start playing music
+     *****************************************************************/
 	private void setUpAudio() {
 		audioFile = new File(SONG);
 		try {

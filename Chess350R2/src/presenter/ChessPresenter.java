@@ -2,8 +2,6 @@ package presenter;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -12,11 +10,7 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
-import java.util.Random;
-import java.util.concurrent.TimeUnit;
-
 import javax.swing.JButton;
-
 import model.ChessGame;
 import model.ComputerPlayer;
 import model.IChessPiece;
@@ -247,8 +241,6 @@ public class ChessPresenter implements IChessPresenter, Serializable {
     /*****************************************************************
 	 * Saves the board state to a file.
 	 * @throws IOException
-	 *
-	 *
 	 *****************************************************************/
 	private void saveGame() throws IOException {
 		try {
@@ -271,7 +263,7 @@ public class ChessPresenter implements IChessPresenter, Serializable {
 	 *
 	 *
 	 *****************************************************************/
-	public void loadGame(String fileLocation)
+	public final void loadGame(final String fileLocation)
 			throws IOException, ClassNotFoundException {
 		try {
 			view.close();
@@ -525,7 +517,7 @@ public class ChessPresenter implements IChessPresenter, Serializable {
 	/*****************************************************************
 	 * Calls for the action.
 	 *****************************************************************/
-	public void reboundGraves() {
+	public final void reboundGraves() {
 		//if (game.getModel().getWhiteGrave().size() > 0) {
 			for (int i = 0; i < game.getModel().
 					getWhiteGrave().size(); i++) {
@@ -548,7 +540,7 @@ public class ChessPresenter implements IChessPresenter, Serializable {
 	 * Sends the white piece.
 	 * @return int[] returns an array of ints.
 	 *****************************************************************/
-	public int[] sendWhitePiece(IChessPiece toSend) {
+	public final int[] sendWhitePiece(final IChessPiece toSend) {
 		int[] pieceNum = new int[PIECE_INFO];
 		Player p;
 		try {
@@ -593,7 +585,7 @@ public class ChessPresenter implements IChessPresenter, Serializable {
 	 * Sends the black piece.
 	 * @return int[] returns an array of ints.
 	 *****************************************************************/
-	public int[] sendBlackPiece(IChessPiece toSend) {
+	public final int[] sendBlackPiece(final IChessPiece toSend) {
 		int[] pieceNum = new int[PIECE_INFO];
 		Player p = toSend.player();
 		try {
@@ -633,8 +625,10 @@ public class ChessPresenter implements IChessPresenter, Serializable {
 
 		return pieceNum;
 	}
-
-	private void updateGraves(){
+    /*****************************************************************
+     * Updates graves when an undo is done
+     *****************************************************************/
+	private void updateGraves() {
 	    view.clearGraves();
 	    reboundGraves();
 	}

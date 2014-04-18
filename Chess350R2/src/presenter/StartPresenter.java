@@ -25,7 +25,7 @@ public class StartPresenter {
 		ss.addActionListeners(new ActionListener() {
 			@Override
 			public void actionPerformed(final ActionEvent e) {
-				if(e.getSource() == ss.getTwoPlayer()) {
+				if (e.getSource() == ss.getTwoPlayer()) {
 					ss.setVisible(false);
 					IChessView v = new ChessView(g.
 							getBoard().numRows(),
