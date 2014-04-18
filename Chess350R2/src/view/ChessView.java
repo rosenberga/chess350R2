@@ -630,6 +630,18 @@ public class ChessView implements IChessView, Serializable {
 		}
 	}
 	
+	//Removes the most recently added image from the White grave.
+	public void popFromWhiteGrave()
+	{
+		
+	}
+	
+	//removes the most recently added image from the black grave.
+	public void popFromBlackGrave()
+	{
+		
+	}
+	
 	public void updateBlackGrave(final int index, final int[] pieceID) {
 		ImageIcon icon;
 		try {
