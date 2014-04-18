@@ -29,12 +29,11 @@ import view.SettingsDialog;
 
 /*****************************************************************
  * A Presenter of information to the Model and View.
- * 
  * @author Adam Rosenberg
  * @version 1.0
  *****************************************************************/
 public class ChessPresenter implements IChessPresenter, Serializable {
-
+	
 	/** The standard row number. */
 	private IChessView view;
 	/** The standard row number. */
@@ -83,7 +82,9 @@ public class ChessPresenter implements IChessPresenter, Serializable {
 	private static final int ROW = 0;
 	/** The standard row number. */
 	private static final int COL = 1;
+	/** 1v1 or 1vCPU? */
 	private boolean onePlayer;
+	/** Offensive or defensive CPU or neither? */
 	private int cpuStyle;
 	private static final int RANDOM = 0;
 	private static final int ATTACK = 1;
@@ -91,11 +92,15 @@ public class ChessPresenter implements IChessPresenter, Serializable {
 
 	/*****************************************************************
 	 * A constructor for the Presenter.
-	 * 
+	 *
 	 * @param g
 	 *            the game variable
 	 * @param v
 	 *            the view variable
+	 * @param single
+	 *            CPU or two humans
+	 * @param style
+	 *            CPU's playstyle
 	 *****************************************************************/
 	public ChessPresenter(final ChessGame g, final IChessView v,
 			final boolean single, final int style) {
@@ -125,11 +130,18 @@ public class ChessPresenter implements IChessPresenter, Serializable {
 						firstClick(pos);
 					} else {
 						firstClick = true;
-						if (game.getBoard().pieceAt(pos[ROW], pos[COL]) == null) {
+						if (game.getBoard().pieceAt(
+								pos[ROW],
+								pos[COL])
+								== null) {
 							legalMove(pos, this);
 						} else {
-							if (game.getBoard().pieceAt(pos[ROW], pos[COL])
-									.player() != game.getModel()
+							if (game.getBoard()
+									.pieceAt
+									(pos[ROW],
+									pos[COL])
+									.player() 
+									!= game.getModel()
 									.currentPlayer()) {
 								legalMove(pos, this);
 							} else {
@@ -186,16 +198,27 @@ public class ChessPresenter implements IChessPresenter, Serializable {
 			}
 		});
 	}
-	
-	private void playMusic(){
+
+    /*****************************************************************
+	 * Plays background music.
+	 *
+	 *
+	 *****************************************************************/
+	private void playMusic() {
 		view.playMusic();
 	}
-	private void stopMusic(){
+
+    /*****************************************************************
+	 * Stops background music.
+	 *
+	 *
+	 *****************************************************************/
+	private void stopMusic() {
 		view.stopMusic();
 	}
 
     /*****************************************************************
-	 * Saves the board state to a file
+	 * Saves the board state to a file.
 	 * @throws IOException
 	 *
 	 *
@@ -213,15 +236,16 @@ public class ChessPresenter implements IChessPresenter, Serializable {
 			e.printStackTrace();
 		}
 	}
-	
+
 	/*****************************************************************
-	 * Loads a game state from a file
+	 * Loads a game state from a file.
 	 * @throws IOException
 	 * @throws ClassNotFoundException
 	 *
 	 *
 	 *****************************************************************/
-	public void loadGame(String fileLocation) throws IOException, ClassNotFoundException {
+	public void loadGame(String fileLocation) 
+			throws IOException, ClassNotFoundException {
 		try {
 			view.close();
 			stopMusic();
@@ -232,16 +256,17 @@ public class ChessPresenter implements IChessPresenter, Serializable {
 			ChessGame cg = (ChessGame) data[0];
 			boolean one = (boolean) data[1];
 			int cpu = (int) data[2];
-			IChessView view = new ChessView(cg.getBoard().numRows(),cg.getBoard().numColumns());
+			IChessView view = new ChessView(cg.getBoard().numRows(), 
+					cg.getBoard().numColumns());
 			new ChessPresenter(cg,view,one,cpu);;			
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		}
 	}
-    
+
 	/*****************************************************************
 	 * Calls for the action.
-	 * 
+	 *
 	 * @param pos
 	 *            the array for position of the piece
 	 * @param e
