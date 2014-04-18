@@ -1,7 +1,8 @@
 package model;
 
-import java.io.Serializable;
 import java.util.ArrayList;
+
+//import javazoom.jl.player.AudioDevice;
 
 /*****************************************************************
  * Represents a chess model for a standard game of chess. Contains 
@@ -12,7 +13,7 @@ import java.util.ArrayList;
  * @author Adam Rosenberg
  * @version 1.0
  *****************************************************************/
-public final class ChessModel implements IChessModel,Serializable {
+public final class ChessModel implements IChessModel {
 
 	/** whether or not the player can move en passant. */
 	private boolean enPassant;
@@ -27,25 +28,28 @@ public final class ChessModel implements IChessModel,Serializable {
 
 	/** the number of turns played so far. */
 	private int turns;
-	
+
 	/** Column King must be in to Castle one way. */
 	private static final int CAST1 = 2;
-	
+
 	/** Column King must be in to Castle another way. */
 	private static final int CAST2 = 6;
-	
+
 	/** Column Rook must be in to Castle one way. */
 	private static final int CAST1FROM = 0;
-	
+
 	/** Column Rook must be in to Castle another way. */
 	private static final int CAST2FROM = 7;
-	
+
 	/** Column King is moving to one way. */
 	private static final int CAST1TO = 3;
-	
+
 	/** Column King is moving to another way. */
 	private static final int CAST2TO = 5;
 	
+	/** The magic number 8. */
+	private static final int MAGIC8 = 8;
+
 	/** White's Graveyard. */
 	private ArrayList<IChessPiece> wGrave;
 
@@ -64,7 +68,7 @@ public final class ChessModel implements IChessModel,Serializable {
 		wGrave = new ArrayList<IChessPiece>();
 		bGrave = new ArrayList<IChessPiece>();
 	}
-	
+
 	/*****************************************************************
 	 * Checks whether the board is en passant.
 	 * 
@@ -73,44 +77,50 @@ public final class ChessModel implements IChessModel,Serializable {
 	public boolean getEnPassant() {
 		return enPassant;
 	}
-	
+
 	/*****************************************************************
-	 * Counts black pieces in the graveyard and board
+	 * Counts black pieces in the graveyard and board.
 	 * 
-	 * @return enPassant
+	 * @param board the board used to count pieces on
+	 * @return number of black pieces
 	 *****************************************************************/
-	public int countBlacks(IChessBoard board) {
+	public int countBlacks(final IChessBoard board) {
 		int countB = 0;
 		countB = (bGrave.size());
-		for(int i = 0; i < 8; ++i) {
-			for(int j = 0; j < 8; ++j){
+		for (int i = 0; i < MAGIC8; ++i) {
+			for (int j = 0; j < MAGIC8; ++j) {
 				if (pieceAt(board, i, j) != null) {
-				if(pieceAt(board, i, j).player() == Player.BLACK)
-					++countB;}
+					if (pieceAt(board, i, j).player() == Player.BLACK) {
+						++countB;
+					}
+				}
 			}
 		}
-		
+
 		return countB;
 	}
-	
+
 	/*****************************************************************
 	 * Checks whether the board is en passant.
 	 * 
-	 * @return enPassant
+	 * @param board the board used to count piece on.
+	 * @return number of white pieces
 	 *****************************************************************/
-	public int countWhites(IChessBoard board) {
+	public int countWhites(final IChessBoard board) {
 		int countW = 0;
 		countW = (wGrave.size());
-		for(int i = 0; i < 8; ++i) {
-			for(int j = 0; j < 8; ++j){
-				if(pieceAt(board, i, j) != null) {if(pieceAt(board, i, j).player() == Player.WHITE)
-					++countW;}
+		for (int i = 0; i < MAGIC8; ++i) {
+			for (int j = 0; j < MAGIC8; ++j) {
+				if (pieceAt(board, i, j) != null) {
+					if (pieceAt(board, i, j).player() == Player.WHITE) {
+						++countW;
+					}
+				}
 			}
 		}
-		
+
 		return countW;
 	}
-	
 
 	/*****************************************************************
 	 * Determines whether or not a player's move was en passant 
@@ -207,7 +217,7 @@ public final class ChessModel implements IChessModel,Serializable {
 		// first check to see if the move is legal for the piece
 		if (pieceAt(board, move.getFromRow(), 
 				move.getFromColumn()).isValidMove(move,
-				board, this)) {
+						board, this)) {
 
 			// if it is, create a new board
 			// and make the move
@@ -219,7 +229,14 @@ public final class ChessModel implements IChessModel,Serializable {
 		}
 		return false;
 	}
-	
+
+	/*****************************************************************
+	 * Checks if the game is complete.
+	 * 
+	 * @param move the move to make
+	 * @param board the board to make the move on
+	 * @param cs the stack to put boards on
+	 *****************************************************************/
 	public void move(final Move move, final IChessBoard board,
 			final ChessStack cs) {
 		IChessBoard b = new ChessBoard();
@@ -244,23 +261,26 @@ public final class ChessModel implements IChessModel,Serializable {
 					// a piece will be taken and 
 					// must be sent to the graveyard
 					if (turns % 2 == 0) { // white is taking black
-						bGrave.add(board.pieceAt(move.getToRow(), move.getToColumn()));
+						bGrave.add(board.pieceAt(move.getToRow(),
+								move.getToColumn()));
 					} else {
-						wGrave.add(board.pieceAt(move.getToRow(), move.getToColumn()));
+						wGrave.add(board.pieceAt(move.getToRow(),
+								move.getToColumn()));
 					}
 				}
 			}
 		}
-		
+
 		// make the move on the board
 		boardChange(board, move);
-		
+
+
 		// check if the pawn moved en passant so
 		// the opponents piece can be removed
-		
+
 		// if getEnPassant(move) is true, then they moved in passant
 		if (getEnPassant(move)) {
-			
+
 			// get the pawn's position that was taken
 			// and reset it
 			int col = move.getToColumn();
@@ -270,56 +290,56 @@ public final class ChessModel implements IChessModel,Serializable {
 
 		// if pawn just moved two spaces, set en passant to true
 
-			// pawn must have moved two spaces forward
-			// and a pawn of the different color must be
-			// to the right or to the left
-			if (pieceAt(board, move.getToRow(), move.getToColumn())
-					.type().equals("Pawn") && Math.abs(
-							move.getToRow() - move.getFromRow(
-									)) == 2) {
-				int direction;
-				if (currentPlayer() == Player.WHITE) {
-					direction = -1;
-				} else {
-					direction = 1;
-				}
-				if (move.getToColumn() - 1 >= 0) {
-					IChessPiece pawn = pieceAt(board, move.getToRow(), 
-							move.getToColumn() - 1);
-					if (pawn != null && pawn.type()
-							.equals("Pawn")
-							&& pawn.player() != currentPlayer()) {
-
-						// if the next player can move en passant
-						// set en pasant to true
-						// and determine where they must move from
-						// and move to
-						setEnPassant(true);
-						setEnPassantPosition(move.getToRow(),
-								move.getToColumn() - 1, move
-									.getFromRow() + direction,
-										move.getFromColumn(), true);
-					}
-				}
-				if (move.getToColumn() + 1 < board.numColumns()) {
-					IChessPiece pawn = pieceAt(board, move.getToRow(), 
-							move.getToColumn() + 1);
-					if (pawn != null && pawn.type()
-							.equals("Pawn")
-							&& pawn.player() != currentPlayer()) {
-						setEnPassant(true);
-						setEnPassantPosition(move.getToRow(), move
-								.getToColumn() + 1, move.getFromRow()
-									+ direction, move.getFromColumn(),
-										false);
-					}
-				}
+		// pawn must have moved two spaces forward
+		// and a pawn of the different color must be
+		// to the right or to the left
+		if (pieceAt(board, move.getToRow(), move.getToColumn())
+				.type().equals("Pawn") && Math.abs(
+						move.getToRow() - move.getFromRow(
+								)) == 2) {
+			int direction;
+			if (currentPlayer() == Player.WHITE) {
+				direction = -1;
 			} else {
-
-				// else the next player can not move en passant
-				setEnPassant(false);
-				zeroEnPassantPosition();
+				direction = 1;
 			}
+			if (move.getToColumn() - 1 >= 0) {
+				IChessPiece pawn = pieceAt(board, move.getToRow(), 
+						move.getToColumn() - 1);
+				if (pawn != null && pawn.type()
+						.equals("Pawn")
+						&& pawn.player() != currentPlayer()) {
+
+					// if the next player can move en passant
+					// set en pasant to true
+					// and determine where they must move from
+					// and move to
+					setEnPassant(true);
+					setEnPassantPosition(move.getToRow(),
+							move.getToColumn() - 1, move
+							.getFromRow() + direction,
+							move.getFromColumn(), true);
+				}
+			}
+			if (move.getToColumn() + 1 < board.numColumns()) {
+				IChessPiece pawn = pieceAt(board, move.getToRow(), 
+						move.getToColumn() + 1);
+				if (pawn != null && pawn.type()
+						.equals("Pawn")
+						&& pawn.player() != currentPlayer()) {
+					setEnPassant(true);
+					setEnPassantPosition(move.getToRow(), move
+							.getToColumn() + 1, move.getFromRow()
+							+ direction, move.getFromColumn(),
+							false);
+				}
+			}
+		} else {
+
+			// else the next player can not move en passant
+			setEnPassant(false);
+			zeroEnPassantPosition();
+		}
 
 		// check for castling
 		// piece must be a king and moving two to the left or right
@@ -328,7 +348,7 @@ public final class ChessModel implements IChessModel,Serializable {
 				&& (Math.abs(move.getToColumn()
 						- move.getFromColumn()) == 2)) {
 			Move m = null;
-			
+
 			// if they castled, determine where the rook should move
 			if (move.getToColumn() == CAST1) {
 				m = new Move(move.getFromRow(), CAST1FROM, 
@@ -347,7 +367,7 @@ public final class ChessModel implements IChessModel,Serializable {
 		if (pieceAt(board, move.getToRow(), move.getToColumn()).type()
 				.equals("Pawn")
 				&& (move.getToRow() == 0
-					|| move.getToRow() == board.numRows() - 1)) {
+				|| move.getToRow() == board.numRows() - 1)) {
 			// do promotion
 			// model makes it a queen,
 			// but will later ask for user input to make 
@@ -357,7 +377,7 @@ public final class ChessModel implements IChessModel,Serializable {
 
 		// set the piece to moved and increase turn by 1
 		pieceAt(board, move.getToRow(), move.getToColumn())
-			.setMoved(true);
+		.setMoved(true);
 		setTurns(1);
 	}
 
@@ -375,7 +395,7 @@ public final class ChessModel implements IChessModel,Serializable {
 		board.set(new Queen(currentPlayer()), 
 				move.getToRow(), move.getToColumn());
 	}
-    
+
 	/*****************************************************************
 	 * Promote a pawn to another piece.
 	 * 
@@ -385,7 +405,7 @@ public final class ChessModel implements IChessModel,Serializable {
 	 *****************************************************************/
 	public void promotion(final IChessBoard board, 
 			final Move move, final IChessPiece piece) {
-		
+
 		// reset the piece
 		if (piece instanceof Queen) {
 			board.set(new Queen(currentPlayer()),
@@ -441,8 +461,8 @@ public final class ChessModel implements IChessModel,Serializable {
 					+ "" + toC;
 		}
 	}
-	
-	
+
+
 	/*****************************************************************
 	 *Resets out enPassantPosition right and left.
 	 *****************************************************************/
@@ -465,7 +485,7 @@ public final class ChessModel implements IChessModel,Serializable {
 		return enPassantPositionL;
 	}
 
-	
+
 	/*****************************************************************
 	 * Finds the king's position.
 	 * 
@@ -474,18 +494,18 @@ public final class ChessModel implements IChessModel,Serializable {
 	 *****************************************************************/
 	public int[] getKingsPos(final IChessBoard board) {
 		int[] kingsP = new int[2];
-		
+
 		// find the current color's king
 		for (int i = 0; i < board.numRows(); i++) {
 			for (int j = 0; j < board.numColumns(); j++) {
-						
+
 				// it is the piece we want if it is not null, 
 				// if it is a King object and if it is owned by the
 				// current player
 				if (pieceAt(board, i, j) != null && pieceAt(board,
 						i, j).type().equals("King") && pieceAt(board,
 								i, j).player() == currentPlayer()) {
-							
+
 					// set the row, column and break
 					kingsP[0] = i;
 					kingsP[1] = j;
@@ -502,13 +522,13 @@ public final class ChessModel implements IChessModel,Serializable {
 	 * @param board the IChessBoard to check for check
 	 * @return true if the board is in check, else false
 	 *****************************************************************/
-	
+
 	@Override
 	public boolean inCheck(final IChessBoard board) {
 		int[] kingsP = getKingsPos(board);
 		int kingsColumn = kingsP[1];
 		int kingsRow = kingsP[0];
-		
+
 
 		// loop through the board and see if an opponents piece
 		// can make a legal move to the king's current position
@@ -516,14 +536,14 @@ public final class ChessModel implements IChessModel,Serializable {
 			for (int j = 0; j < board.numColumns(); j++) {
 				if (pieceAt(board, i, j) != null
 						&& pieceAt(board, i, j).player() 
-							!= currentPlayer()) {
-						Move move = new Move(i, j, 
-								kingsRow, kingsColumn);
-						// if the move is legal, the king is in check
-						if (pieceAt(board, i, j).isValidMove(
-								move, board, this)) {
-							return true;
-						}
+						!= currentPlayer()) {
+					Move move = new Move(i, j, 
+							kingsRow, kingsColumn);
+					// if the move is legal, the king is in check
+					if (pieceAt(board, i, j).isValidMove(
+							move, board, this)) {
+						return true;
+					}
 				}
 			}
 		}
@@ -586,7 +606,7 @@ public final class ChessModel implements IChessModel,Serializable {
 								fakeBoard.setBoard(board
 										.copyBoard());
 								boardChange(fakeBoard, move);
-								
+
 								// if they are not in check 
 								// after the move,
 								// it is a legal move
@@ -674,7 +694,7 @@ public final class ChessModel implements IChessModel,Serializable {
 	public boolean enPassant(final Move move) {
 		return getEnPassant(move);
 	}
-	
+
 	/*****************************************************************
 	 * Returns the piece in the white graveyard.
 	 * 
@@ -694,22 +714,22 @@ public final class ChessModel implements IChessModel,Serializable {
 	public IChessPiece getBlackGravePiece(final int index) {
 		return bGrave.get(index);
 	}
-	
-    /*****************************************************************
-     * Get array of the graveyard.
-     * 
-     * @param index of piece space
-     *****************************************************************/
-   	public final ArrayList<IChessPiece> getBlackGrave() {
-   		return bGrave;
-   	}
-   	
-    /*****************************************************************
-     * Get array of the graveyard.
-     * 
-     * @param index of piece space
-     *****************************************************************/
-   	public final ArrayList<IChessPiece> getWhiteGrave() {
-   		return wGrave;
-   	}
+
+	/*****************************************************************
+	 * Get array of the graveyard.
+	 * 
+	 * @return the black graveyard arraylist
+	 *****************************************************************/
+	public ArrayList<IChessPiece> getBlackGrave() {
+		return bGrave;
+	}
+
+	/*****************************************************************
+	 * Get array of the graveyard.
+	 * 
+	 * @return the white graveyard arraylist
+	 *****************************************************************/
+	public ArrayList<IChessPiece> getWhiteGrave() {
+		return wGrave;
+	}
 }

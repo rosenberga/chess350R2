@@ -1,24 +1,52 @@
 package model;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Random;
 
-public class ComputerPlayer implements Serializable{
+/*****************************************************************
+ * The class containing logic for the computer player.
+ * @author Adam Rosenberg
+ * @version 1.0
+ *****************************************************************/
+public class ComputerPlayer {
 
-	private final int KING_RANK = 0;
-	private final int QUEEN_RANK = 1;
-	private final int ROOK_RANK = 2;
-	private final int KNIGHT_RANK = 4;
-	private final int BISHOP_RANK = 6;
-	private final int PAWN_RANK = 8;
-	private final int NUM_PIECES = 16;
-	private final int ROW_TO_FRONT = 10;
+	/** Magic Number 3. */
+	private static final int MAGIC3 = 3;
+	/** Magic Number 10. */
+	private static final int MAGIC10 = 10;
+	/** Piece rank. */
+	private static final int KING_RANK = 0;
+	/** Piece rank. */
+	private static final int QUEEN_RANK = 1;
+	/** Piece rank. */
+	private static final int ROOK_RANK = 2;
+	/** Piece rank. */
+	private static final int KNIGHT_RANK = 4;
+	/** Piece rank. */
+	private static final int BISHOP_RANK = 6;
+	/** Piece rank. */
+	private static final int PAWN_RANK = 8;
+	/** Piece rank. */
+	private static final int NUM_PIECES = 16;
+	/** Piece rank. */
+	private static final int ROW_TO_FRONT = 10;
+	
 
+	/*****************************************************************
+	 * A Constructor for the ComputerPlayer Class.
+	 * 
+	 *****************************************************************/
 	public ComputerPlayer() {
 
 	}
 
+	/*****************************************************************
+	 * Gets a random move for the computer.
+	 * 
+	 * @return the move to make
+	 * @param model the model to use
+	 * @param board the board to use
+	 *****************************************************************/
 	public final Move getRandomMove(final IChessModel model,
 			final IChessBoard board) {
 
@@ -33,15 +61,16 @@ public class ComputerPlayer implements Serializable{
 		ArrayList<IChessPiece> field = new ArrayList<IChessPiece>(); // pieces
 																		// owned
 																		// by
-																		// computer
+																	// computer
 		for (int i = 0; i < board.numRows(); i++) {
 			for (int j = 0; j < board.numColumns(); j++) {
 				if (board.pieceAt(i, j) != null) {
 					if (board.pieceAt(i, j).player() == model.currentPlayer()) {
 						field.add(board.pieceAt(i, j)); // adding pieces owned
 														// by computer
-						from[count] = i * 10 + j; // getting coordinates and
-													// storing into single int
+						from[count] = i * MAGIC10 + j; 
+						// getting coordinates and
+						// storing into single int
 						count++;
 					}
 				}
@@ -52,8 +81,8 @@ public class ComputerPlayer implements Serializable{
 
 		while (true) {
 			int index = r.nextInt(field.size() - 1);
-			fc = from[index] % 10;
-			fr = (from[index] - fc) / 10;
+			fc = from[index] % MAGIC10;
+			fr = (from[index] - fc) / MAGIC10;
 			ArrayList<Move> available = new ArrayList<Move>(); // all available
 																// moves by
 																// selected
@@ -99,7 +128,9 @@ public class ComputerPlayer implements Serializable{
 											.currentPlayer()) {
 										if (model.isValidMove(new Move(i, j, k,
 												l), board)) {
-											String s = ""+i+""+j+""+k+""+l;
+											String s =
+													"" + i + "" 
+											+ j + "" + k + "" + l;
 											legal.add(s);
 										}
 									}
@@ -114,16 +145,23 @@ public class ComputerPlayer implements Serializable{
 			Random r = new Random();
 			int index = r.nextInt(legal.size());
 			String positions = legal.get(index);
-			int fr = Integer.parseInt(positions.charAt(0)+"");
-			int fc = Integer.parseInt(positions.charAt(1)+"");
-			int tr = Integer.parseInt(positions.charAt(2)+"");
-			int tc = Integer.parseInt(positions.charAt(3)+"");
-			return new Move(fr,fc,tr,tc);
+			int fr = Integer.parseInt(positions.charAt(0) + "");
+			int fc = Integer.parseInt(positions.charAt(1) + "");
+			int tr = Integer.parseInt(positions.charAt(2) + "");
+			int tc = Integer.parseInt(positions.charAt(MAGIC3) + "");
+			return new Move(fr, fc, tr, tc);
 		} else {
 			return getRandomMove(model, board);
 		}
 	}
 
+	/*****************************************************************
+	 * Gets a defensive move for the computer.
+	 * 
+	 * @return the move to make
+	 * @param model the model to use
+	 * @param board the board to use
+	 *****************************************************************/
 	public final Move getDefensiveMove(final IChessModel model,
 			final IChessBoard board) {
 
@@ -202,7 +240,8 @@ public class ComputerPlayer implements Serializable{
 									// now we must find a place where it can
 									// move to
 									for (int r = 0; r < board.numRows(); r++) {
-										for (int c = 0; c < board.numColumns(); c++) {
+										for (int c = 0; c < board.
+												numColumns(); c++) {
 											m = new Move(tr, tc, r, c);
 											if (model.isValidMove(m, board)) {
 												return m;
